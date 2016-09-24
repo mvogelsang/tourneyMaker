@@ -80,3 +80,17 @@ C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\Microsof
 C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.dll
 C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.pdb
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\csc.exe.config
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\csc.rsp
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\csi.exe
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\csi.rsp
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\System.AppContext.dll
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\vbc.exe.config
+C:\Users\Travis\Source\Repos\tourneyMaker\TourneyMaker\TourneyMaker\bin\roslyn\vbc.rsp
