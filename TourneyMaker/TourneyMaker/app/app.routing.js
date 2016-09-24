@@ -23,3 +23,4 @@ var TourneyMaker;
         $locationProvider.html5Mode(true);
     });
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=app.routing.js.map
