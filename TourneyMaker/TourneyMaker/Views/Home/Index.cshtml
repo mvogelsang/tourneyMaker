@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <title>Tourney Maker</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <base href="/" />
+
+    <meta name="description" content="" />
+</head>
+<body>
+    <header>
+        <nav class="nav navbar-default">
+            <div class="nav-header">
+                <a href="/home" class="navbar-brand">Tourney Maker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                @* These href's need to make the ones in the app.routing.ts file for each specific page you want to navigate to *@
+                <li><a href="/home">Home</a></li>
+                <li><a href="/second-page">Second Page</a></li>
+                <li><a href="/third-page">Third Page</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="/create"><i class="fa fa-edit fa-lg"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    <ng-view></ng-view>
+</body>
+</html>
+
