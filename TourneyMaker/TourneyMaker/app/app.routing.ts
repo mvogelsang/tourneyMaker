@@ -1,6 +1,7 @@
 ﻿module TourneyMaker {
     app.config(function ($routeProvider, $locationProvider) {
         $routeProvider
+            //the template and controlller will be loaded based on what is in the URL (ie: the argument in 'when')
             .when('/home', {
                 templateUrl: 'app/home/home.tpl.html',
                 controller: HomeController,
