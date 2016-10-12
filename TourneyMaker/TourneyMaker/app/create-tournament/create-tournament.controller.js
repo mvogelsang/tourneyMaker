@@ -1,16 +1,16 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var CreateTournamentController = (function () {
-        function CreateTournamentController($scope) {
+        function CreateTournamentController($scope, $location) {
             this.$scope = $scope;
+            this.$location = $location;
         }
-        CreateTournamentController.prototype.foo = function () {
-            //do something
+        CreateTournamentController.prototype.cancel = function () {
+            this.$location.path('/dashboard');
         };
-        CreateTournamentController.$inject = ["$scope"];
+        CreateTournamentController.$inject = ["$scope", "$location"];
         return CreateTournamentController;
     }());
     TourneyMaker.CreateTournamentController = CreateTournamentController;
     TourneyMaker.app.controller("CreateTournamentController", CreateTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=create-tournament.controller.js.map

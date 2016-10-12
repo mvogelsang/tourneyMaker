@@ -1,5 +1,5 @@
 ﻿module TourneyMaker {
-    app.config(function ($routeProvider, $locationProvider) {
+    app.config(function ($routeProvider) {
         $routeProvider
             //the template and controlller will be loaded based on what is in the URL (ie: the argument in 'when')
             .when('/home', {
@@ -7,21 +7,28 @@
                 controller: HomeController,
                 controllerAs: 'vm'
             })
-            //Just temp pages to showcase the routing system
-            .when('/second-page', {
-                template: '<div class="jumbotron"><h3>Second Page</h3></div>'
+            //this will use :{id} to denote a specific users dashboard when we start getting data and shit
+            .when('/dashboard', {
+                templateUrl: 'app/dashboard/dashboard.tpl.html',
+                controller: DashboardController,
+                controllerAs: 'vm'
             })
-            .when('/third-page', {
-                template: '<div class="jumbotron"><h3>Third Page</h3></div>'
-            })
-            .when('/create', {
+            .when('/create-tournament', {
                 templateUrl: 'app/create-tournament/create-tournament.tpl.html',
                 controller: CreateTournamentController,
                 controllerAs: 'vm'
             })
+            .when('/edit-tournament:{id}', {
+                templateUrl: 'app/create-tournament/create-tournament.tpl.html',
+                controller: CreateTournamentController,
+                controllerAs: 'vm'
+            })
+            //again, this will use :{id}
+            .when('/view-tournament', {
+                templateUrl: 'app/view-tournament/view-tournament.tpl.html',
+                controller: ViewTournamentController,
+                controllerAs: 'vm'
+            })
             .otherwise({ redirectTo: '/home' });
-
-        //removes the #/ from the URL to prettify it
-        $locationProvider.html5Mode(true);
     });
 }

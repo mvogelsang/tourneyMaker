@@ -1,26 +1,32 @@
 var TourneyMaker;
 (function (TourneyMaker) {
-    TourneyMaker.app.config(function ($routeProvider, $locationProvider) {
+    TourneyMaker.app.config(function ($routeProvider) {
         $routeProvider
             .when('/home', {
             templateUrl: 'app/home/home.tpl.html',
             controller: TourneyMaker.HomeController,
             controllerAs: 'vm'
         })
-            .when('/second-page', {
-            template: '<div class="jumbotron"><h3>Second Page</h3></div>'
+            .when('/dashboard', {
+            templateUrl: 'app/dashboard/dashboard.tpl.html',
+            controller: TourneyMaker.DashboardController,
+            controllerAs: 'vm'
         })
-            .when('/third-page', {
-            template: '<div class="jumbotron"><h3>Third Page</h3></div>'
-        })
-            .when('/create', {
+            .when('/create-tournament', {
             templateUrl: 'app/create-tournament/create-tournament.tpl.html',
             controller: TourneyMaker.CreateTournamentController,
             controllerAs: 'vm'
         })
+            .when('/edit-tournament:{id}', {
+            templateUrl: 'app/create-tournament/create-tournament.tpl.html',
+            controller: TourneyMaker.CreateTournamentController,
+            controllerAs: 'vm'
+        })
+            .when('/view-tournament', {
+            templateUrl: 'app/view-tournament/view-tournament.tpl.html',
+            controller: TourneyMaker.ViewTournamentController,
+            controllerAs: 'vm'
+        })
             .otherwise({ redirectTo: '/home' });
-        //removes the #/ from the URL to prettify it
-        $locationProvider.html5Mode(true);
     });
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=app.routing.js.map

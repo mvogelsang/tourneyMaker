@@ -1,0 +1,233 @@
+﻿<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="header">Participant</li>
+            <li>
+                <a href="" ng-click="vm.setActiveTournaments()">Active Tournaments</a>
+            </li>
+            <li>
+                <a href="" ng-click="vm.setCompletedTournaments()">Completed Tournaments</a>
+            </li>
+            <li class="header">Profile</li>
+            <li>
+                <a href="" ng-click="vm.setProfile()">View/Update Profile</a>
+            </li>
+            <li class="header">Management</li>
+            <li>
+                <a href="" ng-click="vm.setTournamentManagement()">Tournament Management</a>
+            </li>
+        </ul>
+    </section>
+</aside>
+
+<div class="container-fluid content-wrapper">
+    <div ng-show="vm.isActiveTournaments">
+        <h3 class="content-header">Active Tournaments</h3>
+        <br />
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Active</div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Round</th>
+                            <th>Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="clickable" ng-click="vm.viewTournament()">
+                            <td>Tourney1</td>
+                            <td>May 1 2016</td>
+                            <td>Semifinal</td>
+                            <td>Info</td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>Tourney2</td>
+                            <td>May 3 2016</td>
+                            <td>Quaterfinal</td>
+                            <td>Info</td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>Tourney3</td>
+                            <td>May 5 2016</td>
+                            <td>Final</td>
+                            <td>Info</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div ng-show="vm.isCompletedTournaments">
+        <h3 class="content-header">Completed Tournaments</h3>
+        <br />
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">Completed</div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="clickable">
+                            <td>Tourney7</td>
+                            <td>May 1 2011</td>
+                            <td>Info</td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>Tourney8</td>
+                            <td>May 3 2012</td>
+                            <td>Info</td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>Tourney0</td>
+                            <td>May 5 2014</td>
+                            <td>Info</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="vm.isProfile">
+        <h3 class="content-header">John Doe's Profile</h3>
+        <br />
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Basic Info</h4>
+                </div>
+                <div class="panel-body">
+                    <div ng-form="vm.profileForm">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input class="form-control" type="text" ng-model="vm.name" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-at"></i></span>
+                                <input class="form-control" type="email" ng-model="vm.email" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Timezone</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                <input class="form-control" type="text" ng-model="vm.timezone" required />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <div class="input-group">
+                                <textarea class="form-control" rows="5" cols="100"  ng-model="vm.bio" style="resize:none"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h4>Trophy Case</h4>
+                </div>
+                <div class="panel-body">
+                    Trophies or some sort of awards, idk
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="vm.isTournamentManagement">
+        <div class="content-header">
+            <a href="#/create-tournament" class="btn btn-success pull-right" style="margin-top: 15px"><i class="fa fa-plus"></i>&nbsp; New Tournament</a>
+            <h3>Tournament Management</h3>
+        </div>
+        <br />
+
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4>Hosting</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="clickable">
+                                <td>Tourney7</td>
+                                <td>May 1 2011</td>
+                                <td>Info</td>
+                            </tr>
+                            <tr class="clickable">
+                                <td>Tourney8</td>
+                                <td>May 3 2012</td>
+                                <td>Info</td>
+                            </tr>
+                            <tr class="clickable">
+                                <td>Tourney0</td>
+                                <td>May 5 2014</td>
+                                <td>Info</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h4>Managing</h4>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="clickable">
+                                <td>Tourney7</td>
+                                <td>May 1 2011</td>
+                                <td>Info</td>
+                            </tr>
+                            <tr class="clickable">
+                                <td>Tourney8</td>
+                                <td>May 3 2012</td>
+                                <td>Info</td>
+                            </tr>
+                            <tr class="clickable">
+                                <td>Tourney0</td>
+                                <td>May 5 2014</td>
+                                <td>Info</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

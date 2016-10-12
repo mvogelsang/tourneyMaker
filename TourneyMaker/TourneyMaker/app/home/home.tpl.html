@@ -1,6 +1,62 @@
 ﻿<!-- Controller doesn't need to be added on each page because it is referenced in the app.routing.ts file when this particular page is loaded -->
-<div>
-    <div class="jumbotron">
-        <h3>Home Page</h3>
+<div class="container">
+    <div class="row" style="margin-top:75px">
+        <div class="col-md-10 col-md-offset-1">
+            <h2 class="text-center">Welcome to Tourney Maker</h2>
+            <h4 class="text-center">
+                Tourney Maker is an application that allows you to create, manage, and participate in tournaments!
+            </h4>
+        </div>
+    </div>
+    <br/>
+    <div class="row" style="margin-top:25px">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel">
+                <div class="panel-body">
+                    <h3 class="text-center page-header" style="margin-top:0px">
+                        Create An Account
+                    </h3>
+                    <div ng-form="vm.registerForm" class="col-lg-10 col-lg-offset-1">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input class="form-control" type="text" placeholder="Name" ng-model="vm.name" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-at"></i></span>
+                                <input class="form-control" type="email" placeholder="Email" ng-model="vm.email" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                <input class="form-control" type="password" placeholder="Password" ng-model="vm.password" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                <input class="form-control" type="password" placeholder="Retype Password" ng-model="vm.rePassword" required ng-change="vm.validatePassword(vm.registerForm)"/>
+                            </div>
+                        </div>
+                        <div class="text-danger" ng-show="vm.validPass">
+                            Passwords do not match
+                        </div>
+
+                        <br />
+                        <div>
+                            <div class="pull-right">
+                                <a href="#/dashboard" class="btn btn-default">Sign in</a>
+                            </div>
+                            <div>
+                                <button class="btn btn-success" ng-click="vm.createAccount(vm.registerForm); lpc.isLoggedIn = true;">Create Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

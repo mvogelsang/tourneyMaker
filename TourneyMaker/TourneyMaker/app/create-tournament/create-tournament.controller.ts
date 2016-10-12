@@ -2,13 +2,14 @@
 
     export class CreateTournamentController {
 
-        public static $inject = ["$scope"];
+        public static $inject = ["$scope", "$location"];
 
-        constructor(private $scope: ng.IScope) {
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService) {
 
         }
-        foo(): void {
-            //do something
+
+        private cancel(): void {
+            this.$location.path('/dashboard');
         }
     }
     app.controller("CreateTournamentController", CreateTournamentController);

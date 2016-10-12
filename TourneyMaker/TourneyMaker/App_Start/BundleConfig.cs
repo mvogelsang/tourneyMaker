@@ -17,7 +17,10 @@ namespace TourneyMaker
                 "~/app/app.module.js",
                 "~/app/app.routing.js",
                 "~/app/home/home.controller.js",
-                "~/app/create-tournament/create-tournament.controller.js"
+                "~/app/dashboard/dashboard.controller.js",
+                "~/app/create-tournament/create-tournament.controller.js",
+                "~/app/view-tournament/view-tournament.controller.js",
+                "~/app/public-profile/public-profile.controller.js"
                 ));
 
 
@@ -34,12 +37,15 @@ namespace TourneyMaker
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/admin-lte/js/app.js",
                       "~/Scripts/respond.js"));
 
             //Any specific css you would like to add should go after app.css
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/bootstrap.slate.css",
+                      //"~/Content/bootstrap.slate.css",
+                      "~/admin-lte/css/AdminLTE.css",
+                      "~/admin-lte/css/skins/skin-blue.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/app.css"
                       ));
