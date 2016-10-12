@@ -16,9 +16,13 @@ var TourneyMaker;
                 resolve: {}
             });
         };
+        ViewTournamentController.prototype.close = function () {
+            this.$location.path('/dashboard');
+        };
         ViewTournamentController.$inject = ["$scope", "$location", "$uibModal"];
         return ViewTournamentController;
     }());
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=view-tournament.controller.js.map

@@ -44,3 +44,4 @@ var TourneyMaker;
     TourneyMaker.DashboardController = DashboardController;
     TourneyMaker.app.controller("DashboardController", DashboardController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=dashboard.controller.js.map

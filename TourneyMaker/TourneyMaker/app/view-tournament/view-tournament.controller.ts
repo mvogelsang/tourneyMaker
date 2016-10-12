@@ -18,6 +18,10 @@
             });
         }
 
+        private close(): void {
+            this.$location.path('/dashboard');
+        }
+
     }
 
     app.controller("ViewTournamentController", ViewTournamentController);
