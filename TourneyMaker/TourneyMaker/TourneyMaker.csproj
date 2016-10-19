@@ -235,11 +235,15 @@
     <Content Include="admin-lte\css\skins\_all-skins.min.css" />
     <Content Include="admin-lte\js\app.js" />
     <Content Include="admin-lte\js\app.min.js" />
-    <Content Include="app\create-tournament\create-tournament.tpl.html" />
+    <Content Include="app\dashboard\create-tournament\create-tournament.tpl.html" />
+    <Content Include="app\dashboard\active-tournaments\active-tournaments.tpl.html" />
+    <Content Include="app\dashboard\completed-tournaments\completed-tournaments.tpl.html" />
     <Content Include="app\dashboard\dashboard.tpl.html" />
+    <Content Include="app\dashboard\profile\profile.tpl.html" />
+    <Content Include="app\dashboard\tournament-management\tournament-management.tpl.html" />
     <Content Include="app\home\home.tpl.html" />
     <Content Include="app\public-profile\public-profile.tpl.html" />
-    <Content Include="app\view-tournament\view-tournament.tpl.html" />
+    <Content Include="app\dashboard\view-tournament\view-tournament.tpl.html" />
     <Content Include="Content\app.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -359,12 +363,13 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
-    <TypeScriptCompile Include="app\create-tournament\create-tournament.controller.ts" />
+    <TypeScriptCompile Include="app\dashboard\active-tournaments\active-tournaments.controller.ts" />
+    <TypeScriptCompile Include="app\dashboard\create-tournament\create-tournament.controller.ts" />
     <TypeScriptCompile Include="app\dashboard\dashboard.controller.ts" />
     <TypeScriptCompile Include="app\home\home.controller.ts" />
     <TypeScriptCompile Include="app\landing-page\landing-page.controller.ts" />
     <TypeScriptCompile Include="app\public-profile\public-profile.controller.ts" />
-    <TypeScriptCompile Include="app\view-tournament\view-tournament.controller.ts" />
+    <TypeScriptCompile Include="app\dashboard\view-tournament\view-tournament.controller.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

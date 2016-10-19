@@ -12,10 +12,7 @@ var TourneyMaker;
         }
         //dashboard navigation
         DashboardController.prototype.setActiveTournaments = function () {
-            this.isActiveTournaments = true;
-            this.isCompletedTournaments = false;
-            this.isProfile = false;
-            this.isTournamentManagement = false;
+            this.$location.path('/dashboard/1/active-tournaments');
         };
         DashboardController.prototype.setCompletedTournaments = function () {
             this.isActiveTournaments = false;
@@ -44,4 +41,3 @@ var TourneyMaker;
     TourneyMaker.DashboardController = DashboardController;
     TourneyMaker.app.controller("DashboardController", DashboardController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=dashboard.controller.js.map

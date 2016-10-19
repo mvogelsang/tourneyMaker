@@ -3,7 +3,7 @@
 }
 
 <!DOCTYPE html>
-<html ng-app="app" >
+<html ng-app="app">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,7 +18,7 @@
 
     <meta name="description" content="" />
 </head>
-<body class="skin-blue">
+<body class="skin-blue" ng-controller="LandingPageController as lpc">
 
     <header class="main-header">
         <a href="#/dashboard" class="logo">Tourney Maker</a>
@@ -37,12 +37,34 @@
                         <a href="" style="pointer-events:none">John Doe</a>
                     </li>
                     <li>
-                        <a href="#/logout">Logout</a>
+                        <a href="#/home" ng-click="lpc.isLoggedIn = false;">Logout</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
+
+    <aside class="main-sidebar" ng-show="lpc.isLoggedIn">
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="header">Participant</li>
+                <li>
+                    <a href="" ng-click="lpc.setActiveTourmaments()">Active Tournaments</a>
+                </li>
+                <li>
+                    <a href="" ng-click="lpc.setCompletedTourmaments()">Completed Tournaments</a>
+                </li>
+                <li class="header">Profile</li>
+                <li>
+                    <a href="" ng-click="lpc.setProfile()">View/Update Profile</a>
+                </li>
+                <li class="header">Management</li>
+                <li>
+                    <a href="" ng-click="lpc.setTournamentManagement()">Tournament Management</a>
+                </li>
+            </ul>
+        </section>
+    </aside>
 
     @* This is where our application lives *@
     <ng-view></ng-view>

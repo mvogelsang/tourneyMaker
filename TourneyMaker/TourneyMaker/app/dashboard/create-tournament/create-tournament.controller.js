@@ -6,7 +6,7 @@ var TourneyMaker;
             this.$location = $location;
         }
         CreateTournamentController.prototype.cancel = function () {
-            this.$location.path('/dashboard');
+            this.$location.path('/dashboard/1/tournament-management');
         };
         CreateTournamentController.$inject = ["$scope", "$location"];
         return CreateTournamentController;
@@ -14,4 +14,3 @@ var TourneyMaker;
     TourneyMaker.CreateTournamentController = CreateTournamentController;
     TourneyMaker.app.controller("CreateTournamentController", CreateTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=create-tournament.controller.js.map

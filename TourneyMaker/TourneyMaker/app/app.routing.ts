@@ -7,25 +7,44 @@
                 controller: HomeController,
                 controllerAs: 'vm'
             })
-            //this will use :{id} to denote a specific users dashboard when we start getting data and shit
-            .when('/dashboard', {
+            .when('/dashboard/:id', {
                 templateUrl: 'app/dashboard/dashboard.tpl.html',
                 controller: DashboardController,
                 controllerAs: 'vm'
             })
-            .when('/create-tournament', {
-                templateUrl: 'app/create-tournament/create-tournament.tpl.html',
+            .when('/dashboard/:id/active-tournaments', {
+                templateUrl: 'app/dashboard/active-tournaments/active-tournaments.tpl.html',
+                controller: ActiveTournamentsController,
+                controllerAs: 'vm'
+            })
+            .when('/dashboard/:id/completed-tournaments', {
+                templateUrl: 'app/dashboard/completed-tournaments/completed-tournaments.tpl.html',
+                controller: DashboardController,
+                controllerAs: 'vm'
+            })
+            .when('/dashboard/:id/profile', {
+                templateUrl: 'app/dashboard/profile/profile.tpl.html',
+                controller: DashboardController,
+                controllerAs: 'vm'
+            })
+            .when('/dashboard/:id/tournament-management', {
+                templateUrl: 'app/dashboard/tournament-management/tournament-management.tpl.html',
+                controller: DashboardController,
+                controllerAs: 'vm'
+            })
+            .when('/dashboard/:id/create-tournament', {
+                templateUrl: 'app/dashboard/create-tournament/create-tournament.tpl.html',
                 controller: CreateTournamentController,
                 controllerAs: 'vm'
             })
-            .when('/edit-tournament:{id}', {
-                templateUrl: 'app/create-tournament/create-tournament.tpl.html',
+            //same as create tournament but we will check if $routeParams are present, if so, we'll load data to be edited
+            .when('/dashboard/:id/edit-tournament/:id', {
+                templateUrl: 'app/dashboard/create-tournament/create-tournament.tpl.html',
                 controller: CreateTournamentController,
                 controllerAs: 'vm'
             })
-            //again, this will use :{id}
-            .when('/view-tournament', {
-                templateUrl: 'app/view-tournament/view-tournament.tpl.html',
+            .when('/dashboard/:id/view-tournament/:id', {
+                templateUrl: 'app/dashboard/view-tournament/view-tournament.tpl.html',
                 controller: ViewTournamentController,
                 controllerAs: 'vm'
             })

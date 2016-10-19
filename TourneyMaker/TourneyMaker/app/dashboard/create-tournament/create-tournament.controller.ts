@@ -9,7 +9,7 @@
         }
 
         private cancel(): void {
-            this.$location.path('/dashboard');
+            this.$location.path('/dashboard/1/tournament-management');
         }
     }
     app.controller("CreateTournamentController", CreateTournamentController);

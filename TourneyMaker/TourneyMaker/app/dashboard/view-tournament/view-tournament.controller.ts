@@ -19,7 +19,7 @@
         }
 
         private close(): void {
-            this.$location.path('/dashboard');
+            this.$location.path('/dashboard/1/active-tournaments');
         }
 
     }

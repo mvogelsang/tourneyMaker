@@ -15,10 +15,7 @@
 
         //dashboard navigation
         private setActiveTournaments(): void {
-            this.isActiveTournaments = true;
-            this.isCompletedTournaments = false;
-            this.isProfile = false;
-            this.isTournamentManagement = false;
+            this.$location.path('/dashboard/1/active-tournaments');
         }
 
         private setCompletedTournaments(): void {

@@ -44,4 +44,3 @@ var TourneyMaker;
     //assigning this controller to the application, it is being assigned to the particular page in the routing file
     TourneyMaker.app.controller("HomeController", HomeController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=home.controller.js.map
