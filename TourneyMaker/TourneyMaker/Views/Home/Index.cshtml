@@ -18,26 +18,57 @@
 
     <meta name="description" content="" />
 </head>
-<body>
-    <header>
-        <nav class="nav navbar-default">
-            <div class="nav-header">
-                <a href="/home" class="navbar-brand">Tourney Maker</a>
+<body class="skin-blue" ng-controller="LandingPageController as lpc">
+
+    <header class="main-header">
+        <a href="#/dashboard" class="logo">Tourney Maker</a>
+        <nav class="nav navbar navbar-static-top">
+
+            <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only"></span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href=""><i class="fa fa-bell-o"></i></a>
+                    </li>
+                    <li>
+                        <a href="" style="pointer-events:none">John Doe</a>
+                    </li>
+                    <li>
+                        <a href="#/home" ng-click="lpc.isLoggedIn = false;">Logout</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav">
-                @* These href's need to make the ones in the app.routing.ts file for each specific page you want to navigate to *@
-                <li><a href="/home">Home</a></li>
-                <li><a href="/second-page">Second Page</a></li>
-                <li><a href="/third-page">Third Page</a></li>
-            </ul>
-            <ul class="nav navbar-nav pull-right">
-                <li><a href="/create"><i class="fa fa-edit fa-lg"></i></a></li>
-            </ul>
         </nav>
     </header>
 
+    <aside class="main-sidebar" ng-show="lpc.isLoggedIn">
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="header">Participant</li>
+                <li>
+                    <a href="" ng-click="lpc.setActiveTourmaments()">Active Tournaments</a>
+                </li>
+                <li>
+                    <a href="" ng-click="lpc.setCompletedTourmaments()">Completed Tournaments</a>
+                </li>
+                <li class="header">Profile</li>
+                <li>
+                    <a href="" ng-click="lpc.setProfile()">View/Update Profile</a>
+                </li>
+                <li class="header">Management</li>
+                <li>
+                    <a href="" ng-click="lpc.setTournamentManagement()">Tournament Management</a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+
     @* This is where our application lives *@
     <ng-view></ng-view>
+
 </body>
 </html>
 

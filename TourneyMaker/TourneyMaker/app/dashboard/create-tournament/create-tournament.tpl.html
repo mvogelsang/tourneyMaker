@@ -1,0 +1,43 @@
+﻿<div class="container-fluid content-wrapper" ng-form="vm.createTournamentForm">
+    <div class="page-header">
+        <div class="pull-right">
+            <button class="btn btn-success" ng-disabled="vm.createTournamentForm.$invalid">Publish</button>
+            <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+        </div>
+        <h3>Create Tournament</h3>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" type="text" ng-model="vm.name" required />
+        </div>
+        <div class="form-group">
+            <label>Date</label>
+            <input class="form-control" type="date" ng-model="vm.date" required />
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <select class="form-control" ng-model="vm.type" required>
+                <option>Single Elimination</option>
+                <option>Double Elimination</option>
+                <option>Round Robin</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Number of Participants</label>
+            <input class="form-control" type="text" ng-model="vm.numberOfParticipants" required />
+        </div>
+        <div class="form-group">
+            <p class="text-muted text-sm pull-right">Please enter only one email per line</p>
+            <label>Participants Email</label>
+            
+            <textarea class="form-control" rows="8" cols="100" ng-model="vm.participantsEmail" style="resize:none"></textarea>
+        </div>
+        <p class="text-warning">
+            <span class="fa fa-info-circle fa-lg"></span> When you publish the tournament, a mass email will be sent to all those you have included. If the participant already has an account they will be able to view the bracket, if not, they will be prompted to make an account.
+        </p>
+    </div>
+    <div class="col-md-8">
+        Maybe a mock up of what the tournament is looking like in real time as the user fills out info? Idk. Else we can just center the form.
+    </div>
+</div>

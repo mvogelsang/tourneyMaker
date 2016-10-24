@@ -16,8 +16,16 @@ namespace TourneyMaker
                 //This is where we will place all of our own angular files, note: add the js file generated from typescript
                 "~/app/app.module.js",
                 "~/app/app.routing.js",
+                "~/app/landing-page/landing-page.controller.js",
                 "~/app/home/home.controller.js",
-                "~/app/create-tournament/create-tournament.controller.js"
+                "~/app/dashboard/dashboard.controller.js",
+                "~/app/dashboard/active-tournaments/active-tournaments.controller.js",
+                "~/app/dashboard/completed-tournaments/completed-tournaments.controller.js",
+                "~/app/dashboard/profile/profile.controller.js",
+                "~/app/dashboard/tournament-management/tournament-management.controller.js",
+                "~/app/dashboard/create-tournament/create-tournament.controller.js",
+                "~/app/dashboard/view-tournament/view-tournament.controller.js",
+                "~/app/public-profile/public-profile.controller.js"
                 ));
 
 
@@ -34,12 +42,15 @@ namespace TourneyMaker
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+                      "~/admin-lte/js/app.js",
                       "~/Scripts/respond.js"));
 
             //Any specific css you would like to add should go after app.css
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/bootstrap.slate.css",
+                      //"~/Content/bootstrap.slate.css",
+                      "~/admin-lte/css/AdminLTE.css",
+                      "~/admin-lte/css/skins/skin-blue.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/app.css"
                       ));
