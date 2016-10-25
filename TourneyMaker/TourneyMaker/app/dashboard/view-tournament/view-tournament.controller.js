@@ -5,6 +5,22 @@ var TourneyMaker;
             this.$scope = $scope;
             this.$location = $location;
             this.$uibModal = $uibModal;
+            this.isEditingScore = false;
+            this.score = 2;
+            this.matchups = [
+                [
+                    { name: 'John', score: 2 },
+                    { name: 'Matt', score: 4, winner: true }
+                ],
+                [
+                    { name: 'Kyle', score: 1 },
+                    { name: 'Travis', score: 7, winner: true }
+                ],
+                [
+                    { name: 'Joe', score: 5, winner: true },
+                    { name: 'Hyde', score: 4 }
+                ],
+            ];
         }
         ViewTournamentController.prototype.openProfile = function () {
             this.$uibModal.open({
@@ -18,6 +34,14 @@ var TourneyMaker;
         };
         ViewTournamentController.prototype.close = function () {
             this.$location.path('/dashboard/1/active-tournaments');
+        };
+        ViewTournamentController.prototype.edit = function () {
+            if (this.isEditingScore) {
+                this.isEditingScore = false;
+            }
+            else {
+                this.isEditingScore = true;
+            }
         };
         ViewTournamentController.$inject = ["$scope", "$location", "$uibModal"];
         return ViewTournamentController;

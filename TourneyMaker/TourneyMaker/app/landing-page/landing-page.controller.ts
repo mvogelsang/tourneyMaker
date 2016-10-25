@@ -2,7 +2,7 @@
     export class LandingPageController {
 
         //will be set 
-        private isLoggedIn: boolean = false;
+        private isLoggedIn: boolean = false;  
 
         public static $inject = ["$location"]
 
@@ -18,6 +18,7 @@
         //the 1 will be replaced by the users id
         setActiveTourmaments(): void {
             this.$location.path('dashboard/1/active-tournaments');
+            
         }
 
         setCompletedTourmaments(): void {

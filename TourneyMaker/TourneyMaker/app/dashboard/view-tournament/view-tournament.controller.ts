@@ -1,6 +1,26 @@
 ﻿module TourneyMaker {
     export class ViewTournamentController {
 
+        private isEditingScore: boolean = false;
+        private score: number = 2;
+
+
+        private matchups = [
+            [
+                { name: 'John', score: 2},
+                { name: 'Matt', score: 4, winner: true }
+            ],
+            [
+                { name: 'Kyle', score: 1 },
+                { name: 'Travis', score: 7, winner:true }
+            ],
+            [
+                { name: 'Joe', score: 5, winner: true },
+                { name: 'Hyde', score: 4 }
+            ],
+        ];
+
+
         public static $inject = ["$scope", "$location", "$uibModal"];
 
         constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal) {
@@ -21,6 +41,16 @@
         private close(): void {
             this.$location.path('/dashboard/1/active-tournaments');
         }
+
+        private edit(): void {
+            if (this.isEditingScore) {
+                this.isEditingScore = false;
+            }
+            else {
+                this.isEditingScore = true;
+            }
+        }
+
 
     }
 
