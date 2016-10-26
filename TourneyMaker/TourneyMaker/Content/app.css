@@ -6,3 +6,15 @@
 .clickable {
     cursor: pointer;
 }
+
+.matchup-hover:hover{
+    outline: solid;
+    outline-color: #eee;
+    outline-width: 2px;
+}
+
+.winner {
+    outline:solid;
+    outline-color: #5cb85c;
+    outline-width: 2px;
+}

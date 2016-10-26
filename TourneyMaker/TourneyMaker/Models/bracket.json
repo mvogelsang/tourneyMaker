@@ -1,0 +1,100 @@
+﻿{
+  "rounds": [
+    {
+      "matchups": [
+        {
+          "players": [
+            {
+              "name": "John",
+              "score": 5
+            },
+            {
+              "name": "Matt",
+              "score": 4
+            }
+          ]
+        },
+        {
+          "players": [
+            {
+              "name": "Kate",
+              "score": 8
+            },
+            {
+              "name": "Marie",
+              "score": 3
+            }
+          ]
+        },
+        {
+          "players": [
+            {
+              "name": "Kyle",
+              "score": 0
+            },
+            {
+              "name": "Hyde",
+              "score": 4
+            }
+          ]
+        },
+        {
+          "players": [
+            {
+              "name": "George",
+              "score": 6
+            },
+            {
+              "name": "Mike",
+              "score": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchups": [
+        {
+          "players": [
+            {
+              "name": "John",
+              "score": 3
+            },
+            {
+              "name": "Kate",
+              "score": 4
+            }
+          ]
+        },
+        {
+          "players": [
+            {
+              "name": "George",
+              "score": 7
+            },
+            {
+              "name": "Hyde",
+              "score": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "matchups": [
+        {
+          "players": [
+            {
+              "name": "George",
+              "score": null
+            },
+            {
+              "name": "Kate",
+              "score": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -51,7 +51,7 @@
                                 <a href="#/dashboard/1/active-tournaments" class="btn btn-default" ng-click="lpc.isLoggedIn = true">Sign in</a>
                             </div>
                             <div>
-                                <button class="btn btn-success" ng-click="vm.createAccount(vm.registerForm); lpc.isLoggedIn = true">Create Account</button>
+                                <button class="btn btn-success" ng-click="vm.createAccount(vm.registerForm); lpc.isLoggedIn = true" ng-disabled="vm.registerForm.$invalid">Create Account</button>
                             </div>
                         </div>
                     </div>

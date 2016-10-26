@@ -23,7 +23,7 @@ module TourneyMaker {
             if (form.$valid) {
                 //POST to database
                 //GET userID and append to dashboard (/dashboard:{userId})
-                this.$location.path('/dashboard');
+                this.$location.path('/dashboard/1/active-tournaments');
             }
             else {
                 return;
