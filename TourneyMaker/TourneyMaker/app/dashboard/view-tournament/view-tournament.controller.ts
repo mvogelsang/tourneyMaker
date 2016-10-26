@@ -2,29 +2,21 @@
     export class ViewTournamentController {
 
         private isEditingScore: boolean = false;
-        private score: number = 2;
+
+        private offset: number = 50;
+
+        private bracket;
 
 
-        private matchups = [
-            [
-                { name: 'John', score: 2},
-                { name: 'Matt', score: 4, winner: true }
-            ],
-            [
-                { name: 'Kyle', score: 1 },
-                { name: 'Travis', score: 7, winner:true }
-            ],
-            [
-                { name: 'Joe', score: 5, winner: true },
-                { name: 'Hyde', score: 4 }
-            ],
-        ];
+        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log"];
 
-
-        public static $inject = ["$scope", "$location", "$uibModal"];
-
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal) {
-
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService) {
+            bracketService.getBracket().then((data): any => {
+                this.bracket = data.data;
+            }).catch((error): any => {
+                this.$log.error("There was an error loading bracket");
+                this.$log.error(error);
+            });
         }
 
         private openProfile(): void {

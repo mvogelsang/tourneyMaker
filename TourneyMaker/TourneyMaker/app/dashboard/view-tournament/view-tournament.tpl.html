@@ -2,38 +2,71 @@
     <div class="page-header">
         <div class="pull-right">
             <button class="btn btn-success" ng-click="vm.isEditingScore = false" ng-if="vm.isEditingScore">Save Scores</button>
+            <button class="btn btn-primary" ng-click="vm.isEditingScore = true" ng-if="!vm.isEditingScore">Update Scores</button>
             <button class="btn btn-default" ng-click="vm.close()">Close</button>
         </div>
         <h3>View Tournament 1</h3>
-    </div>
-    
-    <button class="btn btn-success" ng-click="vm.openProfile()">Pretend I am someones profile</button>
-    
+    </div>  
 
     <!-- Bracket -->
-    <br />
-    <br />
     <div>
-        <div class="col-md-2">
-            <table class="table table-bordered clickable matchup-hover" ng-repeat="matchup in vm.matchups">
-                <tbody ng-click="vm.isEditingScore = true">
-                    <tr ng-class="{'winner' : matchup[0].winner == true}">
-                        
-                        <td>{{matchup[0].name}}</td>
-                        <td>
-                            <input ng-if="vm.isEditingScore" ng-model="matchup[0].score" style="width:inherit; height:inherit;"/>
-                            <div ng-if="!vm.isEditingScore">{{matchup[0].score}}</div>
-                        </td>
-                    </tr>
-                    <tr ng-class="{'winner' : matchup[1].winner == true}">
-                        <td>{{matchup[1].name}}</td>
-                        <td>
-                            <input ng-if="vm.isEditingScore" ng-model="matchup[1].score" style="width:auto; height:auto;" />
-                            <div ng-if="!vm.isEditingScore">{{matchup[1].score}}</div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        
+
+        <div class="col-md-2" style="margin-right:75px;" ng-repeat="round in vm.bracket.rounds">
+
+            <div ng-if="(vm.bracket.rounds.length - $index) != 1 && (vm.bracket.rounds.length - $index) != 2">
+                <h4 class="text-center">Round {{$index + 1}}</h4>
+            </div>
+            <div ng-if="(vm.bracket.rounds.length - $index) == 2">
+                <h4 class="text-center">Semi Final</h4>
+            </div>
+            <div ng-if="(vm.bracket.rounds.length - $index) == 1">
+                <h4 class="text-center">Final</h4>
+            </div>
+            <br />
+
+            <div style="margin-top:{{vm.offset * $index}}px"></div>
+
+            <div ng-repeat="matchup in round.matchups">
+
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr style="height:42px;" ng-class="{'winner' : matchup.players[0].score > matchup.players[1].score}">
+                            <td class="clickable" ng-click="vm.openProfile()">{{matchup.players[0].name}}</td>
+                            <td>
+                                <div class="text-center">
+                                    <input ng-model="matchup.players[0].score" class="form-control" ng-if="vm.isEditingScore" style="width:40px; height:25px; margin:0;"/>
+                                    <div ng-if="!vm.isEditingScore">
+                                        <div ng-if="matchup.players[0].score == null">
+                                            ??
+                                        </div>
+                                        <div>
+                                            {{matchup.players[0].score}}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height:42px;" ng-class="{'winner' : matchup.players[1].score > matchup.players[0].score}">
+                            <td class="clickable" ng-click="vm.openProfile()">{{matchup.players[1].name}}</td>
+                            <td>
+                                <div class="text-center">
+                                    <input ng-model="matchup.players[1].score" class="form-control" ng-if="vm.isEditingScore" style="width:40px; height:25px;"/>
+                                    <div ng-if="!vm.isEditingScore">
+                                        <div ng-if="matchup.players[1].score == null">
+                                            ??
+                                        </div>
+                                        <div>
+                                            {{matchup.players[1].score}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>

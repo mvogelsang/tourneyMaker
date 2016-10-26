@@ -298,6 +298,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Models\bracket.json" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\brackets.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
@@ -371,6 +372,7 @@
     <TypeScriptCompile Include="app\landing-page\landing-page.controller.ts" />
     <TypeScriptCompile Include="app\public-profile\public-profile.controller.ts" />
     <TypeScriptCompile Include="app\dashboard\view-tournament\view-tournament.controller.ts" />
+    <TypeScriptCompile Include="app\services\bracket.service.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

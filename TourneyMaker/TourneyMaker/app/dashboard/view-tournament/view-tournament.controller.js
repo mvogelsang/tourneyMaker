@@ -1,26 +1,21 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var ViewTournamentController = (function () {
-        function ViewTournamentController($scope, $location, $uibModal) {
+        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log) {
+            var _this = this;
             this.$scope = $scope;
             this.$location = $location;
             this.$uibModal = $uibModal;
+            this.bracketService = bracketService;
+            this.$log = $log;
             this.isEditingScore = false;
-            this.score = 2;
-            this.matchups = [
-                [
-                    { name: 'John', score: 2 },
-                    { name: 'Matt', score: 4, winner: true }
-                ],
-                [
-                    { name: 'Kyle', score: 1 },
-                    { name: 'Travis', score: 7, winner: true }
-                ],
-                [
-                    { name: 'Joe', score: 5, winner: true },
-                    { name: 'Hyde', score: 4 }
-                ],
-            ];
+            this.offset = 50;
+            bracketService.getBracket().then(function (data) {
+                _this.bracket = data.data;
+            }).catch(function (error) {
+                _this.$log.error("There was an error loading bracket");
+                _this.$log.error(error);
+            });
         }
         ViewTournamentController.prototype.openProfile = function () {
             this.$uibModal.open({
@@ -43,7 +38,7 @@ var TourneyMaker;
                 this.isEditingScore = true;
             }
         };
-        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal"];
+        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log"];
         return ViewTournamentController;
     }());
     TourneyMaker.ViewTournamentController = ViewTournamentController;
