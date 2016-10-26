@@ -30,5 +30,11 @@ USER
   - _LOSSES_ - user's total match losses
 
 ## Tournament Related Controller API  
+ - vm.createTournament( _args_ )  
+  - takes args from _create tournament_ page and creates the correct DB entities
+ - vm.deleteTournament( TID, loginCookie )
+  - removes all entries with TID from PARTICIPATION and USER table
+ - vm.addManager(TID, UID/username, loginCookie)
 
 ## Tournament Rendering Algorithm
+for now, simple stacked boxes will be rendered. Eventually we will be settle on a method for rendering them in a correctly shaped manner with lines drawn in between.
