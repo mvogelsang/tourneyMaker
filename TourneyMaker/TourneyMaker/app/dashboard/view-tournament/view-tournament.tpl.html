@@ -32,7 +32,7 @@
                 <table class="table table-bordered">
                     <tbody>
                         <tr style="height:42px;" ng-class="{'winner' : matchup.players[0].score > matchup.players[1].score}">
-                            <td class="clickable" ng-click="vm.openProfile()">{{matchup.players[0].name}}</td>
+                            <td class="clickable" ng-click="vm.openProfile(matchup.players[0])">{{matchup.players[0].name}}</td>
                             <td>
                                 <div class="text-center">
                                     <input ng-model="matchup.players[0].score" class="form-control" ng-if="vm.isEditingScore" style="width:40px; height:25px; margin:0;"/>
@@ -49,7 +49,7 @@
                             </td>
                         </tr>
                         <tr style="height:42px;" ng-class="{'winner' : matchup.players[1].score > matchup.players[0].score}">
-                            <td class="clickable" ng-click="vm.openProfile()">{{matchup.players[1].name}}</td>
+                            <td class="clickable" ng-click="vm.openProfile(matchup.players[1])">{{matchup.players[1].name}}</td>
                             <td>
                                 <div class="text-center">
                                     <input ng-model="matchup.players[1].score" class="form-control" ng-if="vm.isEditingScore" style="width:40px; height:25px;"/>

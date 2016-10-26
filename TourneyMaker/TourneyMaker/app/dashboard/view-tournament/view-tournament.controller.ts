@@ -19,14 +19,16 @@
             });
         }
 
-        private openProfile(): void {
+        private openProfile(profile): void {
             this.$uibModal.open({
                 animation: true,
                 templateUrl: 'app/public-profile/public-profile.tpl.html',
                 controller: 'PublicProfileController',
                 controllerAs: 'vm',
                 //pass in all information we need to display a profile
-                resolve: {}
+                resolve: {
+                    profile: () => profile
+                }
             });
         }
 

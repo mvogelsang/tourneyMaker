@@ -17,14 +17,16 @@ var TourneyMaker;
                 _this.$log.error(error);
             });
         }
-        ViewTournamentController.prototype.openProfile = function () {
+        ViewTournamentController.prototype.openProfile = function (profile) {
             this.$uibModal.open({
                 animation: true,
                 templateUrl: 'app/public-profile/public-profile.tpl.html',
                 controller: 'PublicProfileController',
                 controllerAs: 'vm',
                 //pass in all information we need to display a profile
-                resolve: {}
+                resolve: {
+                    profile: function () { return profile; }
+                }
             });
         };
         ViewTournamentController.prototype.close = function () {
