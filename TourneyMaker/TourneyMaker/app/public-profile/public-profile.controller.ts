@@ -1,9 +1,12 @@
 ﻿module TourneyMaker {
     export class PublicProfileController {
-        public static $inject = ["$uibModalInstance"];
 
-        constructor(private $uibModalInstance) {
+        private profileObj;
 
+        public static $inject = ["$uibModalInstance", "profile"];
+
+        constructor(private $uibModalInstance, private profile) {
+            this.profileObj = profile;
         }
 
         private close(): void {

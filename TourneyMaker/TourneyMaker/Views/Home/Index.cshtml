@@ -21,11 +21,11 @@
 <body class="skin-blue" ng-controller="LandingPageController as lpc">
 
     <header class="main-header">
-        <a href="#/dashboard" class="logo">Tourney Maker</a>
+        <a href="#/dashboard" class="logo">TourneyMaker</a>
         <nav class="nav navbar navbar-static-top">
 
-            <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only"></span>
+            <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button" ng-show="lpc.isLoggedIn">
+                <span class="sr-only">Toggle Navigation</span>
             </a>
 
             <div class="navbar-custom-menu">
@@ -44,22 +44,22 @@
         </nav>
     </header>
 
-    <aside class="main-sidebar" ng-show="lpc.isLoggedIn">
+    <aside class="main-sidebar" ng-show="lpc.isLoggedIn" style="height:auto">
         <section class="sidebar">
             <ul class="sidebar-menu">
                 <li class="header">Participant</li>
-                <li>
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/1/active-tournaments'}">
                     <a href="" ng-click="lpc.setActiveTourmaments()">Active Tournaments</a>
                 </li>
-                <li>
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/1/completed-tournaments'}">
                     <a href="" ng-click="lpc.setCompletedTourmaments()">Completed Tournaments</a>
                 </li>
                 <li class="header">Profile</li>
-                <li>
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/1/profile'}">
                     <a href="" ng-click="lpc.setProfile()">View/Update Profile</a>
                 </li>
                 <li class="header">Management</li>
-                <li>
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/1/tournament-management'}">
                     <a href="" ng-click="lpc.setTournamentManagement()">Tournament Management</a>
                 </li>
             </ul>

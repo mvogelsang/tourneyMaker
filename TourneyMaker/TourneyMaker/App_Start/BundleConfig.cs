@@ -16,6 +16,8 @@ namespace TourneyMaker
                 //This is where we will place all of our own angular files, note: add the js file generated from typescript
                 "~/app/app.module.js",
                 "~/app/app.routing.js",
+
+                //controllers
                 "~/app/landing-page/landing-page.controller.js",
                 "~/app/home/home.controller.js",
                 "~/app/dashboard/dashboard.controller.js",
@@ -25,12 +27,16 @@ namespace TourneyMaker
                 "~/app/dashboard/tournament-management/tournament-management.controller.js",
                 "~/app/dashboard/create-tournament/create-tournament.controller.js",
                 "~/app/dashboard/view-tournament/view-tournament.controller.js",
-                "~/app/public-profile/public-profile.controller.js"
+                "~/app/public-profile/public-profile.controller.js",
+
+                //services
+                "~/app/services/bracket.service.js"
                 ));
 
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/brackets.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
