@@ -7,26 +7,29 @@ var TourneyMaker;
         function HomeController($scope, $location) {
             this.$scope = $scope;
             this.$location = $location;
-            this.validPass = false;
+            this.validPassError = false;
         }
-        HomeController.prototype.createAccount = function (form) {
+        HomeController.prototype.createAccount = function (form, isLoggedIn) {
             if (form.$valid) {
                 //POST to database
                 //GET userID and append to dashboard (/dashboard:{userId})
                 this.$location.path('/dashboard/1/active-tournaments');
             }
             else {
+                form.username.$setDirty();
+                form.email.$setDirty();
+                form.password.$setDirty();
                 return;
             }
         };
         //change to validate all inputs
         HomeController.prototype.validatePassword = function (form) {
             if (this.password === this.rePassword) {
-                this.validPass = false;
+                this.validPassError = false;
                 return true;
             }
             else {
-                this.validPass = true;
+                this.validPassError = true;
                 form.$valid = false;
                 return false;
             }

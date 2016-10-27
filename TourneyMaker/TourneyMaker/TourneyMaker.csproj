@@ -264,6 +264,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-messages.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -299,6 +301,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Models\bracket.json" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\brackets.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
@@ -368,6 +371,7 @@
     <TypeScriptCompile Include="app\dashboard\active-tournaments\active-tournaments.controller.ts" />
     <TypeScriptCompile Include="app\dashboard\create-tournament\create-tournament.controller.ts" />
     <TypeScriptCompile Include="app\dashboard\dashboard.controller.ts" />
+    <TypeScriptCompile Include="app\dashboard\profile\profile.controller.ts" />
     <TypeScriptCompile Include="app\home\home.controller.ts" />
     <TypeScriptCompile Include="app\landing-page\landing-page.controller.ts" />
     <TypeScriptCompile Include="app\public-profile\public-profile.controller.ts" />

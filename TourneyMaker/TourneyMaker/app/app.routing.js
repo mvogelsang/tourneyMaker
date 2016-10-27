@@ -2,11 +2,7 @@ var TourneyMaker;
 (function (TourneyMaker) {
     TourneyMaker.app.config(function ($routeProvider) {
         $routeProvider
-            .when('/home', {
-            templateUrl: 'app/home/home.tpl.html',
-            controller: TourneyMaker.HomeController,
-            controllerAs: 'vm'
-        })
+            .when('/home', {})
             .when('/dashboard/:id', {
             templateUrl: 'app/dashboard/dashboard.tpl.html',
             controller: TourneyMaker.DashboardController,
@@ -24,7 +20,7 @@ var TourneyMaker;
         })
             .when('/dashboard/:id/profile', {
             templateUrl: 'app/dashboard/profile/profile.tpl.html',
-            controller: TourneyMaker.DashboardController,
+            controller: TourneyMaker.ProfileController,
             controllerAs: 'vm'
         })
             .when('/dashboard/:id/tournament-management', {

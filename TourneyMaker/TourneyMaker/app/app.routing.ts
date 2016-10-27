@@ -3,9 +3,10 @@
         $routeProvider
             //the template and controlller will be loaded based on what is in the URL (ie: the argument in 'when')
             .when('/home', {
-                templateUrl: 'app/home/home.tpl.html',
-                controller: HomeController,
-                controllerAs: 'vm'
+                //moved the home into the view so we can store user data in the wrapper controller 'lpc'
+                //templateUrl: 'app/home/home.tpl.html',
+                //controller: HomeController,
+                //controllerAs: 'vm'
             })
             .when('/dashboard/:id', {
                 templateUrl: 'app/dashboard/dashboard.tpl.html',
@@ -24,7 +25,7 @@
             })
             .when('/dashboard/:id/profile', {
                 templateUrl: 'app/dashboard/profile/profile.tpl.html',
-                controller: DashboardController,
+                controller: ProfileController,
                 controllerAs: 'vm'
             })
             .when('/dashboard/:id/tournament-management', {

@@ -20,38 +20,75 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input class="form-control" type="text" placeholder="Name" ng-model="vm.name" required/>
+                                <input name="username" class="form-control" type="text" placeholder="Username" ng-model="vm.username" required ng-maxlength="12" ng-pattern="/^[a-zA-Z0-9]*$/"/>
+                            </div>
+                            <div ng-messages="vm.registerForm.username.$error" ng-if="vm.registerForm.username.$dirty" class="pull-right text-danger">
+                                <div ng-message="required">
+                                    Please enter a username.
+                                </div>
+                                <div ng-message="maxlength">
+                                    Your username must be shorter than 12 characters.
+                                </div>
+                                <div ng-message="pattern">
+                                    Username cannot contain special characters.
+                                </div>
                             </div>
                         </div>
+                        <br />
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-at"></i></span>
-                                <input class="form-control" type="email" placeholder="Email" ng-model="vm.email" required/>
+                                <input name="email" class="form-control" type="email" placeholder="Email" ng-model="vm.email" required/>
+                            </div>
+                            <div ng-messages="vm.registerForm.email.$error" ng-if="vm.registerForm.email.$dirty" class="pull-right text-danger">
+                                <div ng-message="required">
+                                    Please enter an email.
+                                </div>
+                                <div ng-message="email">
+                                    Please enter a valid email.
+                                </div>
                             </div>
                         </div>
+                        <br />
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                <input class="form-control" type="password" placeholder="Password" ng-model="vm.password" required/>
+                                <input name="password" class="form-control" type="password" placeholder="Password" ng-model="vm.password" required ng-minlength="8" ng-maxlength="20", ng-pattern="/^[a-zA-Z0-9]*$/"/>
+                            </div>
+                            <div ng-messages="vm.registerForm.password.$error" ng-if="vm.registerForm.password.$dirty" class="pull-right text-danger">
+                                <div ng-message="required">
+                                    Please enter a password.
+                                </div>
+                                <div ng-message="minlength">
+                                    Your password must be longer than 8 characters.
+                                </div>
+                                <div ng-message="maxlength">
+                                    Your password must be shorter than 20 characters.
+                                </div>
+                                <div ng-message="pattern">
+                                    Password cannot contain special characters.
+                                </div>
                             </div>
                         </div>
+                        <br />
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-key"></i></span>
                                 <input class="form-control" type="password" placeholder="Retype Password" ng-model="vm.rePassword" required ng-change="vm.validatePassword(vm.registerForm)"/>
                             </div>
+                            <div class="pull-right text-danger" ng-show="vm.validPassError">
+                                Passwords do not match
+                            </div>
                         </div>
-                        <div class="text-danger" ng-show="vm.validPass">
-                            Passwords do not match
-                        </div>
+                        
 
                         <br />
                         <div>
-                            <div class="pull-right">
-                                <a href="#/dashboard/1/active-tournaments" class="btn btn-default" ng-click="lpc.isLoggedIn = true">Sign in</a>
-                            </div>
-                            <div>
-                                <button class="btn btn-success" ng-click="vm.createAccount(vm.registerForm); lpc.isLoggedIn = true" ng-disabled="vm.registerForm.$invalid">Create Account</button>
+                            <!--<div class="pull-right">
+                                <a href="#/dashboard/1/active-tournaments" class="btn btn-default">Sign in</a>
+                            </div>-->
+                            <div class="text-center">
+                                <button class="btn btn-success btn-lg" ng-click="vm.createAccount(vm.registerForm, lpc.isLoggedIn);">Create Account</button>
                             </div>
                         </div>
                     </div>
