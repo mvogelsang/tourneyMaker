@@ -31,7 +31,8 @@ namespace TourneyMaker
                 "~/app/public-profile/public-profile.controller.js",
 
                 //services
-                "~/app/services/bracket.service.js"
+                "~/app/services/bracket.service.js",
+                "~/app/services/user.service.js"
                 ));
 
 

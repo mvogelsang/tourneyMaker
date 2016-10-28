@@ -1,5 +1,5 @@
 ﻿<div class="content-wrapper">
-    <h3 class="content-header">John Doe's Profile</h3>
+    <h3 class="content-header">{{lpc.user.username}}'s Profile</h3>
     <br />
     <div class="col-md-6">
         <div class="panel panel-default">
@@ -7,22 +7,22 @@
                 <h4>Basic Info</h4>
             </div>
             <div class="panel-body">
-                <div ng-form="vm.profileForm">
+                <div ng-form="lpc.profileForm">
                     <div class="form-group">
                         <div class="pull-right text-sm text-muted">You cannot change your username</div>
                         <label>Username</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input class="form-control" type="text" ng-model="vm.username" readonly />
+                            <input class="form-control" type="text" ng-model="lpc.user.username" readonly />
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-at"></i></span>
-                            <input name="email" class="form-control" type="email" ng-model="vm.email" required />
+                            <input name="email" class="form-control" type="email" ng-model="lpc.user.email" required />
                         </div>
-                        <div ng-messages="vm.profileForm.email.$error" ng-if="vm.profileForm.email.$dirty" class="pull-right text-danger">
+                        <div ng-messages="lpc.profileForm.email.$error" ng-if="lpc.profileForm.email.$dirty" class="pull-right text-danger">
                             <div ng-message="required">
                                 Please enter an email.
                             </div>
@@ -35,7 +35,7 @@
                         <label>Full Name</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input class="form-control" type="text" ng-model="vm.name" />
+                            <input class="form-control" type="text" ng-model="lpc.user.name" />
                         </div>
                     </div>
                     <!--<div class="form-group">
@@ -48,12 +48,12 @@
                     <div class="form-group">
                         <label>Bio</label>
                         <div class="input-group">
-                            <textarea class="form-control" rows="5" cols="100" ng-model="vm.bio" style="resize:none"></textarea>
+                            <textarea class="form-control" rows="5" cols="100" ng-model="lpc.user.bio" style="resize:none"></textarea>
                         </div>
                     </div>
 
-                    <div class="pull-right" ng-if="vm.profileForm.$dirty">
-                        <button class="btn btn-success" ng-disabled="vm.profileForm.$invalid">Save</button>
+                    <div class="pull-right" ng-if="lpc.profileForm.$dirty">
+                        <button class="btn btn-success" ng-disabled="lpc.profileForm.$invalid">Save</button>
                         <button class="btn btn-default">Cancel</button>
                     </div>
 

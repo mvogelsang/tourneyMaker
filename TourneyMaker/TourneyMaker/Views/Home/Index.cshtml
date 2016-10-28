@@ -35,7 +35,7 @@
                         <a href=""><i class="fa fa-bell-o"></i></a>
                     </li>
                     <li>
-                        <a href="" style="pointer-events:none">John Doe</a>
+                        <a href="" style="pointer-events:none">{{lpc.user.username}}</a>
                     </li>
                     <li>
                         <a href="#/home" ng-click="lpc.isLoggedIn = false;">Logout</a>
@@ -46,7 +46,7 @@
                 <ul class="nav navbar-nav" ng-if="!lpc.isLoggedIn">
                    <li class="dropdown user user-menu">
                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Login</a>
-                       <ul class="dropdown-menu">
+                       <ul class="dropdown-menu" ng-form="lpc.loginForm">
                            <li>
                                <h4 class="content-header">
                                    Login to your account
@@ -56,19 +56,22 @@
                                <div class="form-group">
                                    <div class="input-group">
                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                       <input name="username" class="form-control" type="text" placeholder="Username" ng-model="lpc.usernameLogin" />
+                                       <input name="username" class="form-control" type="text" placeholder="Username" ng-model="lpc.usernameLogin" required/>
                                    </div>
                                </div>
 
                                <div>
                                    <div class="input-group">
                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                       <input name="password" class="form-control" type="password" placeholder="Password" ng-model="lpc.passwordLogin" />
+                                       <input name="password" class="form-control" type="password" placeholder="Password" ng-model="lpc.passwordLogin" required/>
                                    </div>
+                               </div>
+                               <div class="checkbox">
+                                   <label><input type="checkbox" value=""/>Remember Me</label>
                                </div>
                            </li>
                            <li class="user-footer">
-                               <button class="btn btn-primary" ng-click="lpc.setActiveTourmaments(); lpc.isLoggedIn = true">Login</button>
+                               <button class="btn btn-primary" ng-click="lpc.login(lpc.usernameLogin, lpc.passwordLogin, lpc.loginForm)">Login</button>
                            </li>
                        </ul>
                    </li>

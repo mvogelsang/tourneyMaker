@@ -2,11 +2,16 @@
     export class LandingPageController {
 
         //will be set 
-        private isLoggedIn: boolean = false;  
+        private isLoggedIn: boolean = false; 
+        private usernameLogin: string;
+        private passwordLogin: string; 
 
-        public static $inject = ["$scope", "$location"]
+        private user: User;
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService) {
+
+        public static $inject = ["$scope", "$location", "UserService", "$log"]
+
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private userService: UserService, private $log: ng.ILogService) {
 
             if (this.$location.absUrl() == "http://localhost:58494/#/home") {
                 this.isLoggedIn = false;
@@ -26,25 +31,48 @@
                         this.isLoggedIn = true;
                     }
                 }
+                });
+
+            this.userService.getUser().then((data): any => {
+                this.user = data.data;
+            }).catch((error): any => {
+                this.$log.error("There was an error loading profile data.");
+                this.$log.error(error);
+                alert("There was an error loading profile data.");
             });
+
+        }
+
+        login(username: string, password: string, form: ng.IFormController): void {
+            if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
+                this.setActiveTourmaments();
+                this.isLoggedIn = true;
+                this.usernameLogin = "";
+                this.passwordLogin = "";
+            }
+            else {
+                this.usernameLogin = "";
+                this.passwordLogin = "";
+                return;
+            }
         }
 
         //the 1 will be replaced by the users id
         setActiveTourmaments(): void {
-            this.$location.path('dashboard/1/active-tournaments');
+            this.$location.path('dashboard/' + this.user.uid + '/active-tournaments');
             
         }
 
         setCompletedTourmaments(): void {
-            this.$location.path('dashboard/1/completed-tournaments');
+            this.$location.path('dashboard/' + this.user.uid + '/completed-tournaments');
         }
 
         setProfile(): void {
-            this.$location.path('dashboard/1/profile');
+            this.$location.path('dashboard/' + this.user.uid + '/profile');
         }
 
         setTournamentManagement(): void {
-            this.$location.path('dashboard/1/tournament-management');
+            this.$location.path('dashboard/' + this.user.uid + '/tournament-management');
         }
 
         private username: string;
@@ -58,7 +86,7 @@
             if (form.$valid) {
                 //POST to database
                 //GET userID and append to dashboard (/dashboard:{userId})
-                this.$location.path('/dashboard/1/active-tournaments');
+                this.$location.path('/dashboard/' + this.user.uid + '/active-tournaments');
             }
             else {
                 form.username.$setDirty();
