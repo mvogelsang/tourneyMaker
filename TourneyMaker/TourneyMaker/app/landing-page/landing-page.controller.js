@@ -93,3 +93,4 @@ var TourneyMaker;
     TourneyMaker.LandingPageController = LandingPageController;
     TourneyMaker.app.controller("LandingPageController", LandingPageController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=landing-page.controller.js.map

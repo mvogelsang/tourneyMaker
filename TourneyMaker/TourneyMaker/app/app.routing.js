@@ -46,3 +46,4 @@ var TourneyMaker;
             .otherwise({ redirectTo: '/home' });
     });
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=app.routing.js.map
