@@ -12,6 +12,7 @@ namespace TourneyMaker
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-route.js",
                 "~/Scripts/angular-messages.js",
+                "~/Scripts/angular-cookies.js",
                 "~/Scripts/angular-ui/ui-bootstrap.js",
                 "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                 //This is where we will place all of our own angular files, note: add the js file generated from typescript

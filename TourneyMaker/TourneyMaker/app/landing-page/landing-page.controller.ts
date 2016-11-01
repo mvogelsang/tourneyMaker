@@ -9,29 +9,26 @@
         private user: User;
 
 
-        public static $inject = ["$scope", "$location", "UserService", "$log"]
+        public static $inject = ["$scope", "$location", "UserService", "$log", "$cookies"]
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private userService: UserService, private $log: ng.ILogService) {
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private userService: UserService, private $log: ng.ILogService, private $cookies) {
 
-            if (this.$location.absUrl() == "http://localhost:58494/#/home") {
-                this.isLoggedIn = false;
-            }
-            else {
-                this.isLoggedIn = true;
-            }
+            //if (this.$location.absUrl() == "http://localhost:58494/#/") {
+            //    this.isLoggedIn = false;
+            //}
+            //else {
+            //    this.isLoggedIn = true;
+            //}
 
-            $scope.$watch(() => {
-                return this.$location.absUrl();
-            }, (newValue, oldValue) => {
-                if (newValue != oldValue) {
-                    if (newValue == "http://localhost:58494/#/home") {
-                        this.isLoggedIn = false;
-                    }
-                    else {
-                        this.isLoggedIn = true;
-                    }
-                }
-                });
+            //$scope.$watch(() => {
+            //    return this.$cookies;
+            //}, (newValue, oldValue) => {
+            //    if (newValue != oldValue) {
+            //        if (this.$cookies) {
+            //            this.isLoggedIn = false;
+            //        }
+            //    }
+            //});
 
             this.userService.getUser().then((data): any => {
                 this.user = data.data;
@@ -43,18 +40,31 @@
 
         }
 
-        login(username: string, password: string, form: ng.IFormController): void {
+        login(username: string, password: string): void {
             if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
                 this.setActiveTourmaments();
-                this.isLoggedIn = true;
+                //this.isLoggedIn = true;
                 this.usernameLogin = "";
                 this.passwordLogin = "";
+
+                //post to DB, get result (success/failure), if success set cookie with uid
+                this.$cookies.put("uid", this.user.uid);
+
+
+                if (this.$cookies) {
+                    this.isLoggedIn = true;
+                }
             }
             else {
                 this.usernameLogin = "";
                 this.passwordLogin = "";
                 return;
             }
+        }
+
+        logout(): void {
+            this.$cookies.remove('uid');
+            this.isLoggedIn = false;
         }
 
         //the 1 will be replaced by the users id

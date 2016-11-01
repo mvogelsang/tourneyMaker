@@ -1,33 +1,31 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var LandingPageController = (function () {
-        function LandingPageController($scope, $location, userService, $log) {
+        function LandingPageController($scope, $location, userService, $log, $cookies) {
+            //if (this.$location.absUrl() == "http://localhost:58494/#/") {
+            //    this.isLoggedIn = false;
+            //}
+            //else {
+            //    this.isLoggedIn = true;
+            //}
             var _this = this;
             this.$scope = $scope;
             this.$location = $location;
             this.userService = userService;
             this.$log = $log;
+            this.$cookies = $cookies;
             //will be set 
             this.isLoggedIn = false;
             this.validPassError = false;
-            if (this.$location.absUrl() == "http://localhost:58494/#/home") {
-                this.isLoggedIn = false;
-            }
-            else {
-                this.isLoggedIn = true;
-            }
-            $scope.$watch(function () {
-                return _this.$location.absUrl();
-            }, function (newValue, oldValue) {
-                if (newValue != oldValue) {
-                    if (newValue == "http://localhost:58494/#/home") {
-                        _this.isLoggedIn = false;
-                    }
-                    else {
-                        _this.isLoggedIn = true;
-                    }
-                }
-            });
+            //$scope.$watch(() => {
+            //    return this.$cookies;
+            //}, (newValue, oldValue) => {
+            //    if (newValue != oldValue) {
+            //        if (this.$cookies) {
+            //            this.isLoggedIn = false;
+            //        }
+            //    }
+            //});
             this.userService.getUser().then(function (data) {
                 _this.user = data.data;
             }).catch(function (error) {
@@ -36,18 +34,27 @@ var TourneyMaker;
                 alert("There was an error loading profile data.");
             });
         }
-        LandingPageController.prototype.login = function (username, password, form) {
+        LandingPageController.prototype.login = function (username, password) {
             if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
                 this.setActiveTourmaments();
-                this.isLoggedIn = true;
+                //this.isLoggedIn = true;
                 this.usernameLogin = "";
                 this.passwordLogin = "";
+                //post to DB, get result (success/failure), if success set cookie with uid
+                this.$cookies.put("uid", this.user.uid);
+                if (this.$cookies) {
+                    this.isLoggedIn = true;
+                }
             }
             else {
                 this.usernameLogin = "";
                 this.passwordLogin = "";
                 return;
             }
+        };
+        LandingPageController.prototype.logout = function () {
+            this.$cookies.remove('uid');
+            this.isLoggedIn = false;
         };
         //the 1 will be replaced by the users id
         LandingPageController.prototype.setActiveTourmaments = function () {
@@ -87,10 +94,9 @@ var TourneyMaker;
                 return false;
             }
         };
-        LandingPageController.$inject = ["$scope", "$location", "UserService", "$log"];
+        LandingPageController.$inject = ["$scope", "$location", "UserService", "$log", "$cookies"];
         return LandingPageController;
     }());
     TourneyMaker.LandingPageController = LandingPageController;
     TourneyMaker.app.controller("LandingPageController", LandingPageController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=landing-page.controller.js.map
