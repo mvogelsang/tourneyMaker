@@ -128,7 +128,7 @@
                 controller: ViewTournamentController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', '$location' function ($q, $cookies, $location) {
+                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
 
                         if (uid) {
