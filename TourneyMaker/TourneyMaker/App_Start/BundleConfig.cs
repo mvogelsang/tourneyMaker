@@ -11,6 +11,7 @@ namespace TourneyMaker
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-route.js",
+                "~/Scripts/angular-messages.js",
                 "~/Scripts/angular-ui/ui-bootstrap.js",
                 "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                 //This is where we will place all of our own angular files, note: add the js file generated from typescript
@@ -30,7 +31,8 @@ namespace TourneyMaker
                 "~/app/public-profile/public-profile.controller.js",
 
                 //services
-                "~/app/services/bracket.service.js"
+                "~/app/services/bracket.service.js",
+                "~/app/services/user.service.js"
                 ));
 
 

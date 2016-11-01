@@ -3,12 +3,12 @@ module TourneyMaker {
     //class houses the entire controller, export makes it public
     export class HomeController {
 
-        private name: string;
+        private username: string;
         private email: string;
         private password: string;
         private rePassword: string;
 
-        private validPass: boolean = false;
+        private validPassError: boolean = false;
 
 
         //inject any dependencies such as any services we might need for this particular page
@@ -19,13 +19,17 @@ module TourneyMaker {
 
         }
 
-        private createAccount(form: ng.IFormController): void {
+        private createAccount(form, isLoggedIn): void {
             if (form.$valid) {
                 //POST to database
                 //GET userID and append to dashboard (/dashboard:{userId})
                 this.$location.path('/dashboard/1/active-tournaments');
             }
             else {
+                form.username.$setDirty();
+                form.email.$setDirty();
+                form.password.$setDirty();
+
                 return;
             }
 
@@ -35,11 +39,11 @@ module TourneyMaker {
         //change to validate all inputs
         private validatePassword(form: ng.IFormController): boolean {
             if (this.password === this.rePassword) {
-                this.validPass = false;
+                this.validPassError = false;
                 return true;     
             }
             else {
-                this.validPass = true;
+                this.validPassError = true;
                 form.$valid = false;
                 return false;
             }
