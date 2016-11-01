@@ -13,12 +13,13 @@ var TourneyMaker;
             controller: TourneyMaker.ActiveTournamentsController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', function ($q, $cookies) {
+                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -29,12 +30,13 @@ var TourneyMaker;
             controller: TourneyMaker.DashboardController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', function ($q, $cookies) {
+                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -45,12 +47,13 @@ var TourneyMaker;
             controller: TourneyMaker.ProfileController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', function ($q, $cookies) {
+                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -61,12 +64,13 @@ var TourneyMaker;
             controller: TourneyMaker.DashboardController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', function ($q, $cookies) {
+                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -77,12 +81,13 @@ var TourneyMaker;
             controller: TourneyMaker.CreateTournamentController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', function ($q, $cookies) {
+                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -93,12 +98,13 @@ var TourneyMaker;
             controller: TourneyMaker.CreateTournamentController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', function ($q, $cookies) {
+                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -109,12 +115,13 @@ var TourneyMaker;
             controller: TourneyMaker.ViewTournamentController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', function ($q, $cookies) {
+                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]

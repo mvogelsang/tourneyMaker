@@ -18,14 +18,16 @@
                 controller: ActiveTournamentsController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q','$cookies', function ($q, $cookies) {
+                    auth: ['$q','$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
 
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
+                            
                         }
                     }]
                 }
@@ -35,13 +37,14 @@
                 controller: DashboardController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', function ($q, $cookies) {
+                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
 
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -52,13 +55,14 @@
                 controller: ProfileController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', function ($q, $cookies) {
+                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
 
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -69,13 +73,14 @@
                 controller: DashboardController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', function ($q, $cookies) {
+                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
 
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -86,13 +91,14 @@
                 controller: CreateTournamentController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', function ($q, $cookies) {
+                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
 
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -104,13 +110,14 @@
                 controller: CreateTournamentController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', function ($q, $cookies) {
+                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
 
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -121,13 +128,14 @@
                 controller: ViewTournamentController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', function ($q, $cookies) {
+                    auth: ['$q', '$cookies', '$location' function ($q, $cookies, $location) {
                         var uid = $cookies.get('uid');
 
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
