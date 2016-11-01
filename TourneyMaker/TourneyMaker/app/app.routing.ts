@@ -1,5 +1,6 @@
 ﻿module TourneyMaker {
     app.config(function ($routeProvider) {
+
         $routeProvider
             //the template and controlller will be loaded based on what is in the URL (ie: the argument in 'when')
             .when('/', {
@@ -18,8 +19,8 @@
                 controller: ActiveTournamentsController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q','$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                    auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService: AuthService) {
+                        var uid = AuthService.getUid();
 
                         if (uid) {
                             return $q.when(uid);
@@ -37,8 +38,8 @@
                 controller: DashboardController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                    auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService: AuthService) {
+                        var uid = AuthService.getUid();
 
                         if (uid) {
                             return $q.when(uid);
@@ -55,8 +56,8 @@
                 controller: ProfileController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                    auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService: AuthService) {
+                        var uid = AuthService.getUid();
 
                         if (uid) {
                             return $q.when(uid);
@@ -73,8 +74,8 @@
                 controller: DashboardController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                    auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService: AuthService) {
+                        var uid = AuthService.getUid();
 
                         if (uid) {
                             return $q.when(uid);
@@ -91,8 +92,8 @@
                 controller: CreateTournamentController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                    auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService: AuthService) {
+                        var uid = AuthService.getUid();
 
                         if (uid) {
                             return $q.when(uid);
@@ -110,8 +111,8 @@
                 controller: CreateTournamentController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                    auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService: AuthService) {
+                        var uid = AuthService.getUid();
 
                         if (uid) {
                             return $q.when(uid);
@@ -128,8 +129,8 @@
                 controller: ViewTournamentController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                    auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService: AuthService) {
+                        var uid = AuthService.getUid();
 
                         if (uid) {
                             return $q.when(uid);

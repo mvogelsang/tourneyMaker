@@ -9,9 +9,9 @@
         private user: User;
 
 
-        public static $inject = ["$scope", "$location", "UserService", "$log", "$cookies"]
+        public static $inject = ["$scope", "$location", "UserService", "$log", "$cookies", "AuthService"]
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private userService: UserService, private $log: ng.ILogService, private $cookies) {
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private userService: UserService, private $log: ng.ILogService, private $cookies, private authService: AuthService) {
 
             //if (this.$location.absUrl() == "http://localhost:58494/#/") {
             //    this.isLoggedIn = false;
@@ -30,13 +30,19 @@
             //    }
             //});
 
+            if (authService.getUid()) {
+                this.isLoggedIn = true;
+            }
+
+
+
             this.userService.getUser().then((data): any => {
                 this.user = data.data;
             }).catch((error): any => {
                 this.$log.error("There was an error loading profile data.");
                 this.$log.error(error);
                 alert("There was an error loading profile data.");
-            });
+                });
 
         }
 
@@ -49,11 +55,12 @@
 
                 //post to DB, get result (success/failure), if success set cookie with uid
                 this.$cookies.put("uid", this.user.uid);
+                this.isLoggedIn = true;
 
 
-                if (this.$cookies) {
-                    this.isLoggedIn = true;
-                }
+                //if (this.$cookies) {
+                //    this.isLoggedIn = true;
+                //}
             }
             else {
                 this.usernameLogin = "";

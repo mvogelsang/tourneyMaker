@@ -13,8 +13,8 @@ var TourneyMaker;
             controller: TourneyMaker.ActiveTournamentsController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService) {
+                        var uid = AuthService.getUid();
                         if (uid) {
                             return $q.when(uid);
                         }
@@ -30,8 +30,8 @@ var TourneyMaker;
             controller: TourneyMaker.DashboardController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService) {
+                        var uid = AuthService.getUid();
                         if (uid) {
                             return $q.when(uid);
                         }
@@ -47,8 +47,8 @@ var TourneyMaker;
             controller: TourneyMaker.ProfileController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService) {
+                        var uid = AuthService.getUid();
                         if (uid) {
                             return $q.when(uid);
                         }
@@ -64,8 +64,8 @@ var TourneyMaker;
             controller: TourneyMaker.DashboardController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService) {
+                        var uid = AuthService.getUid();
                         if (uid) {
                             return $q.when(uid);
                         }
@@ -81,8 +81,8 @@ var TourneyMaker;
             controller: TourneyMaker.CreateTournamentController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService) {
+                        var uid = AuthService.getUid();
                         if (uid) {
                             return $q.when(uid);
                         }
@@ -98,8 +98,8 @@ var TourneyMaker;
             controller: TourneyMaker.CreateTournamentController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService) {
+                        var uid = AuthService.getUid();
                         if (uid) {
                             return $q.when(uid);
                         }
@@ -115,8 +115,8 @@ var TourneyMaker;
             controller: TourneyMaker.ViewTournamentController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$cookies', '$location', function ($q, $cookies, $location) {
-                        var uid = $cookies.get('uid');
+                auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService) {
+                        var uid = AuthService.getUid();
                         if (uid) {
                             return $q.when(uid);
                         }

@@ -1,7 +1,7 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var LandingPageController = (function () {
-        function LandingPageController($scope, $location, userService, $log, $cookies) {
+        function LandingPageController($scope, $location, userService, $log, $cookies, authService) {
             //if (this.$location.absUrl() == "http://localhost:58494/#/") {
             //    this.isLoggedIn = false;
             //}
@@ -14,6 +14,7 @@ var TourneyMaker;
             this.userService = userService;
             this.$log = $log;
             this.$cookies = $cookies;
+            this.authService = authService;
             //will be set 
             this.isLoggedIn = false;
             this.validPassError = false;
@@ -26,6 +27,9 @@ var TourneyMaker;
             //        }
             //    }
             //});
+            if (authService.getUid()) {
+                this.isLoggedIn = true;
+            }
             this.userService.getUser().then(function (data) {
                 _this.user = data.data;
             }).catch(function (error) {
@@ -42,9 +46,7 @@ var TourneyMaker;
                 this.passwordLogin = "";
                 //post to DB, get result (success/failure), if success set cookie with uid
                 this.$cookies.put("uid", this.user.uid);
-                if (this.$cookies) {
-                    this.isLoggedIn = true;
-                }
+                this.isLoggedIn = true;
             }
             else {
                 this.usernameLogin = "";
@@ -94,7 +96,7 @@ var TourneyMaker;
                 return false;
             }
         };
-        LandingPageController.$inject = ["$scope", "$location", "UserService", "$log", "$cookies"];
+        LandingPageController.$inject = ["$scope", "$location", "UserService", "$log", "$cookies", "AuthService"];
         return LandingPageController;
     }());
     TourneyMaker.LandingPageController = LandingPageController;

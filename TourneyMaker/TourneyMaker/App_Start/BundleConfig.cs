@@ -18,6 +18,8 @@ namespace TourneyMaker
                 //This is where we will place all of our own angular files, note: add the js file generated from typescript
                 "~/app/app.module.js",
                 "~/app/app.routing.js",
+                "~/app/app.run.js",
+
 
                 //controllers
                 "~/app/landing-page/landing-page.controller.js",
@@ -33,7 +35,8 @@ namespace TourneyMaker
 
                 //services
                 "~/app/services/bracket.service.js",
-                "~/app/services/user.service.js"
+                "~/app/services/user.service.js",
+                "~/app/services/auth.service.js"
                 ));
 
 
