@@ -37,4 +37,20 @@ USER
  - vm.addManager(TID, UID/username, loginCookie)
 
 ## Tournament Rendering Algorithm
-for now, simple stacked boxes will be rendered. Eventually we will be settle on a method for rendering them in a correctly shaped manner with lines drawn in between.
+~~for now, simple stacked boxes will be rendered. Eventually we will be settle on a method for rendering them in a correctly shaped manner with lines drawn in between.~~
+
+## Acceptance Testing  
+
+### Installation and Setup
+1. Enable the ubuntu subsystem on windows 10 and get it set up for general development. (see the link [here](http://iamnotmyself.com/2016/07/01/running-ghost-on-ubuntu-on-windows/). Follow all the steps except those involving ghost. This will get npm set up on the subsystem as well)
+
+2. make a folder in your subsystem home directory for the repo for convenience  
+`cd ~`  
+`mkdir repos`  
+`cd repos`  
+`git clone https://github.com/mvogelsang/tourneyMaker.git`
+
+
+## MISC
+C# calls out to stored procedures
+clicking team user brings up clicked name's profile
