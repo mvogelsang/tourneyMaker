@@ -13,13 +13,13 @@ var TourneyMaker;
             controller: TourneyMaker.ActiveTournamentsController,
             controllerAs: 'vm',
             resolve: {
-                auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService) {
+                auth: ['$q', '$location', 'AuthService', '$cookies', function ($q, $location, AuthService, $cookies) {
                         var uid = AuthService.getUid();
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
-                            $location.path('/');
+                            //$location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]

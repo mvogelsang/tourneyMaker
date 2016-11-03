@@ -30,12 +30,6 @@
             //    }
             //});
 
-            if (authService.getUid()) {
-                this.isLoggedIn = true;
-            }
-
-
-
             this.userService.getUser().then((data): any => {
                 this.user = data.data;
             }).catch((error): any => {
@@ -44,17 +38,23 @@
                 alert("There was an error loading profile data.");
                 });
 
+            if (authService.getUid()) {
+                this.isLoggedIn = true;
+                this.setActiveTourmaments();
+            }
+
         }
 
         login(username: string, password: string): void {
             if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
-                this.setActiveTourmaments();
+                //this.setActiveTourmaments();
                 //this.isLoggedIn = true;
                 this.usernameLogin = "";
                 this.passwordLogin = "";
 
                 //post to DB, get result (success/failure), if success set cookie with uid
-                this.$cookies.put("uid", this.user.uid);
+                //this.$cookies.put("uid", this.user.uid);
+                this.authService.login();
                 this.isLoggedIn = true;
 
 
@@ -74,22 +74,21 @@
             this.isLoggedIn = false;
         }
 
-        //the 1 will be replaced by the users id
         setActiveTourmaments(): void {
-            this.$location.path('dashboard/' + this.user.uid + '/active-tournaments');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/active-tournaments');
             
         }
 
         setCompletedTourmaments(): void {
-            this.$location.path('dashboard/' + this.user.uid + '/completed-tournaments');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/completed-tournaments');
         }
 
         setProfile(): void {
-            this.$location.path('dashboard/' + this.user.uid + '/profile');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/profile');
         }
 
         setTournamentManagement(): void {
-            this.$location.path('dashboard/' + this.user.uid + '/tournament-management');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/tournament-management');
         }
 
         private username: string;

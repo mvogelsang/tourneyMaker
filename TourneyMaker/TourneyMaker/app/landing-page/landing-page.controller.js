@@ -27,9 +27,6 @@ var TourneyMaker;
             //        }
             //    }
             //});
-            if (authService.getUid()) {
-                this.isLoggedIn = true;
-            }
             this.userService.getUser().then(function (data) {
                 _this.user = data.data;
             }).catch(function (error) {
@@ -37,15 +34,20 @@ var TourneyMaker;
                 _this.$log.error(error);
                 alert("There was an error loading profile data.");
             });
+            if (authService.getUid()) {
+                this.isLoggedIn = true;
+                this.setActiveTourmaments();
+            }
         }
         LandingPageController.prototype.login = function (username, password) {
             if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
-                this.setActiveTourmaments();
+                //this.setActiveTourmaments();
                 //this.isLoggedIn = true;
                 this.usernameLogin = "";
                 this.passwordLogin = "";
                 //post to DB, get result (success/failure), if success set cookie with uid
-                this.$cookies.put("uid", this.user.uid);
+                //this.$cookies.put("uid", this.user.uid);
+                this.authService.login();
                 this.isLoggedIn = true;
             }
             else {
@@ -58,18 +60,17 @@ var TourneyMaker;
             this.$cookies.remove('uid');
             this.isLoggedIn = false;
         };
-        //the 1 will be replaced by the users id
         LandingPageController.prototype.setActiveTourmaments = function () {
-            this.$location.path('dashboard/' + this.user.uid + '/active-tournaments');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/active-tournaments');
         };
         LandingPageController.prototype.setCompletedTourmaments = function () {
-            this.$location.path('dashboard/' + this.user.uid + '/completed-tournaments');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/completed-tournaments');
         };
         LandingPageController.prototype.setProfile = function () {
-            this.$location.path('dashboard/' + this.user.uid + '/profile');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/profile');
         };
         LandingPageController.prototype.setTournamentManagement = function () {
-            this.$location.path('dashboard/' + this.user.uid + '/tournament-management');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/tournament-management');
         };
         LandingPageController.prototype.createAccount = function (form, isLoggedIn) {
             if (form.$valid) {

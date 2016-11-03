@@ -19,14 +19,14 @@
                 controller: ActiveTournamentsController,
                 controllerAs: 'vm',
                 resolve: {
-                    auth: ['$q', '$location', 'AuthService', function ($q, $location, AuthService: AuthService) {
+                    auth: ['$q', '$location', 'AuthService', '$cookies', function ($q, $location, AuthService: AuthService, $cookies) {
                         var uid = AuthService.getUid();
 
                         if (uid) {
                             return $q.when(uid);
                         }
                         else {
-                            $location.path('/');
+                            //$location.path('/');
                             return $q.reject({ authenticated: false });
                             
                         }
