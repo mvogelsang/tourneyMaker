@@ -377,6 +377,7 @@
     <TypeScriptCompile Include="app\dashboard\create-tournament\create-tournament.controller.ts" />
     <TypeScriptCompile Include="app\dashboard\dashboard.controller.ts" />
     <TypeScriptCompile Include="app\dashboard\profile\profile.controller.ts" />
+    <TypeScriptCompile Include="app\dashboard\tournament-management\tournament-management.controller.ts" />
     <TypeScriptCompile Include="app\home\home.controller.ts" />
     <TypeScriptCompile Include="app\landing-page\landing-page.controller.ts" />
     <TypeScriptCompile Include="app\models\Doubles.ts" />

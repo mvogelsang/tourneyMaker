@@ -40,7 +40,7 @@
 
             if (authService.getUid()) {
                 this.isLoggedIn = true;
-                this.setActiveTourmaments();
+                //this.setActiveTourmaments();
             }
 
         }

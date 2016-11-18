@@ -2,7 +2,7 @@
     <div class="page-header">
         <div class="pull-right">
             <button class="btn btn-success" ng-disabled="vm.createTournamentForm.$invalid">Publish</button>
-            <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+            <a ng-href="#/dashboard/{{lpc.user.uid}}/tournament-management" class="btn btn-default" >Cancel</a>
         </div>
         <h3>Create Tournament</h3>
     </div>

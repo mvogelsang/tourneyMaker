@@ -36,7 +36,6 @@ var TourneyMaker;
             });
             if (authService.getUid()) {
                 this.isLoggedIn = true;
-                this.setActiveTourmaments();
             }
         }
         LandingPageController.prototype.login = function (username, password) {
