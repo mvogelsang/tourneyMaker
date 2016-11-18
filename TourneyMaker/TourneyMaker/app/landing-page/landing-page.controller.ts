@@ -9,29 +9,26 @@
         private user: User;
 
 
-        public static $inject = ["$scope", "$location", "UserService", "$log"]
+        public static $inject = ["$scope", "$location", "UserService", "$log", "$cookies", "AuthService"]
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private userService: UserService, private $log: ng.ILogService) {
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private userService: UserService, private $log: ng.ILogService, private $cookies, private authService: AuthService) {
 
-            if (this.$location.absUrl() == "http://localhost:58494/#/home") {
-                this.isLoggedIn = false;
-            }
-            else {
-                this.isLoggedIn = true;
-            }
+            //if (this.$location.absUrl() == "http://localhost:58494/#/") {
+            //    this.isLoggedIn = false;
+            //}
+            //else {
+            //    this.isLoggedIn = true;
+            //}
 
-            $scope.$watch(() => {
-                return this.$location.absUrl();
-            }, (newValue, oldValue) => {
-                if (newValue != oldValue) {
-                    if (newValue == "http://localhost:58494/#/home") {
-                        this.isLoggedIn = false;
-                    }
-                    else {
-                        this.isLoggedIn = true;
-                    }
-                }
-                });
+            //$scope.$watch(() => {
+            //    return this.$cookies;
+            //}, (newValue, oldValue) => {
+            //    if (newValue != oldValue) {
+            //        if (this.$cookies) {
+            //            this.isLoggedIn = false;
+            //        }
+            //    }
+            //});
 
             this.userService.getUser().then((data): any => {
                 this.user = data.data;
@@ -39,16 +36,31 @@
                 this.$log.error("There was an error loading profile data.");
                 this.$log.error(error);
                 alert("There was an error loading profile data.");
-            });
+                });
+
+            if (authService.getUid()) {
+                this.isLoggedIn = true;
+                //this.setActiveTourmaments();
+            }
 
         }
 
-        login(username: string, password: string, form: ng.IFormController): void {
+        login(username: string, password: string): void {
             if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
-                this.setActiveTourmaments();
-                this.isLoggedIn = true;
+                //this.setActiveTourmaments();
+                //this.isLoggedIn = true;
                 this.usernameLogin = "";
                 this.passwordLogin = "";
+
+                //post to DB, get result (success/failure), if success set cookie with uid
+                //this.$cookies.put("uid", this.user.uid);
+                this.authService.login();
+                this.isLoggedIn = true;
+
+
+                //if (this.$cookies) {
+                //    this.isLoggedIn = true;
+                //}
             }
             else {
                 this.usernameLogin = "";
@@ -57,22 +69,26 @@
             }
         }
 
-        //the 1 will be replaced by the users id
+        logout(): void {
+            this.$cookies.remove('uid');
+            this.isLoggedIn = false;
+        }
+
         setActiveTourmaments(): void {
-            this.$location.path('dashboard/' + this.user.uid + '/active-tournaments');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/active-tournaments');
             
         }
 
         setCompletedTourmaments(): void {
-            this.$location.path('dashboard/' + this.user.uid + '/completed-tournaments');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/completed-tournaments');
         }
 
         setProfile(): void {
-            this.$location.path('dashboard/' + this.user.uid + '/profile');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/profile');
         }
 
         setTournamentManagement(): void {
-            this.$location.path('dashboard/' + this.user.uid + '/tournament-management');
+            this.$location.path('dashboard/' + this.authService.getUid() + '/tournament-management');
         }
 
         private username: string;
