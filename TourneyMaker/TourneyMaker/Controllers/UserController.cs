@@ -10,12 +10,13 @@ namespace TourneyMaker.Controllers
 {
     public class UserController : Controller
     {
+        [HttpPost]
         // GET: User
-        public string RegisterUser(string _data)
+        public string RegisterUser(UserInfo _data)
         {
             UserManager um = new UserManager();
-            UserInfo data = JsonConvert.DeserializeObject<UserInfo>(_data);
-            if(um.Register(data.username, data.password, data.email))
+            //UserInfo data = JsonConvert.DeserializeObject<UserInfo>(_data);
+            if(um.Register(_data.username, _data.password, _data.email))
             {
                 return JsonConvert.SerializeObject(um);
             }
@@ -25,11 +26,12 @@ namespace TourneyMaker.Controllers
             }
         }
 
-        public string LoginUser(string _data)
+        [HttpPost]
+        public string LoginUser(UserInfo _data)
         {
             UserManager um = new UserManager();
-            UserInfo data = JsonConvert.DeserializeObject<UserInfo>(_data);
-            um.Login(data.username, data.password);
+            //UserInfo data = JsonConvert.DeserializeObject<UserInfo>(_data);
+            um.Login(_data.username, _data.password);
             return JsonConvert.SerializeObject(um);
         }
 

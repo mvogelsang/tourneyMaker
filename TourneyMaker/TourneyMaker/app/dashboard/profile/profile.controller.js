@@ -8,7 +8,7 @@ var TourneyMaker;
             this.$log = $log;
             this.$routeParams = $routeParams;
             //get user based of routeParams not like what is happening below
-            this.userService.getUser().then(function (data) {
+            this.userService.getUser(this.user).then(function (data) {
                 _this.user = data.data;
             }).catch(function (error) {
                 _this.$log.error("There was an error loading profile data.");
@@ -22,4 +22,3 @@ var TourneyMaker;
     TourneyMaker.ProfileController = ProfileController;
     TourneyMaker.app.controller('ProfileController', ProfileController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=profile.controller.js.map

@@ -7,7 +7,7 @@
 
         constructor(private $scope: ng.IScope, private userService: UserService, private $log: ng.ILogService, private $routeParams) {
             //get user based of routeParams not like what is happening below
-            this.userService.getUser().then((data): any => {
+            this.userService.getUser(this.user).then((data): any => {
                 this.user = data.data;
             }).catch((error): any => {
                 this.$log.error("There was an error loading profile data.");

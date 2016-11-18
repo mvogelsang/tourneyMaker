@@ -13,15 +13,15 @@
         }
 
 
-        login(): ng.IPromise<any> {
+        login(user): ng.IPromise<any> {
 
             var defer = this.$q.defer();
 
             //http POST
             //success
-            this.userService.getUser().then((data): any => {
+            this.userService.getUser(user).then((data): any => {
                 this.user = data.data;
-                this.$cookies.put('uid', this.user.uid);
+                this.$cookies.put('uid', this.user.username);
                 this.uid = this.$cookies.get('uid');
                 this.$location.path('dashboard/' + this.getUid() + '/active-tournaments');
                 
