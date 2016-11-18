@@ -78,6 +78,9 @@ var TourneyMaker;
         LandingPageController.prototype.setTournamentManagement = function () {
             this.$location.path('dashboard/' + this.authService.getUid() + '/tournament-management');
         };
+        LandingPageController.prototype.setCreateTournament = function () {
+            this.$location.path('dashboard/' + this.authService.getUid() + '/create-tournament');
+        };
         LandingPageController.prototype.createAccount = function (form, isLoggedIn) {
             var _this = this;
             this.user.username = this.username;

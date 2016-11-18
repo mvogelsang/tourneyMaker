@@ -99,6 +99,10 @@
             this.$location.path('dashboard/' + this.authService.getUid() + '/tournament-management');
         }
 
+        setCreateTournament(): void {
+            this.$location.path('dashboard/' + this.authService.getUid() + '/create-tournament');
+        }
+
         private username: string;
         private email: string;
         private password: string;
