@@ -21,6 +21,7 @@ var TourneyMaker;
                 password: "",
                 email: ""
             };
+            this.registerError = false;
             this.validPassError = false;
             //$scope.$watch(() => {
             //    return this.$cookies;
@@ -95,6 +96,7 @@ var TourneyMaker;
                     }).catch(function (error) {
                     });
                 }).catch(function (error) {
+                    _this.registerError = true;
                 });
             }
             else {

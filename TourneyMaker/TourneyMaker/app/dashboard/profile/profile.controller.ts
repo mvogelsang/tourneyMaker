@@ -1,7 +1,11 @@
 ﻿module TourneyMaker {
     export class ProfileController {
 
-        private user: User;
+        private user = {
+            username: "",
+            email: "john01@gmail.com",
+            bio: "I like to participate in tournaments."
+        }
 
         public static $inject = ["$scope", "UserService", "$log", "$routeParams"];
 
@@ -14,6 +18,8 @@
             //    this.$log.error(error);
             //    alert("There was an error loading profile data.");
             //});
+
+            this.user.username = this.$routeParams.id;
         }
     }
 

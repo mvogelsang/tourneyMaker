@@ -12,6 +12,8 @@
             email: ""
         };
 
+        private registerError: boolean = false;
+
 
         public static $inject = ["$scope", "$location", "UserService", "$log", "$cookies", "AuthService"]
 
@@ -127,7 +129,7 @@
 
                     });
                 }).catch((error) => {
-
+                    this.registerError = true;
                 });
 
             }
