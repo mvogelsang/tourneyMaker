@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "acceptance-test": "chimp --path=. --chai",
+    "acceptance-test-cli": "chimp  --browser=phantomjs --path=. --chai"
+  }
+}
