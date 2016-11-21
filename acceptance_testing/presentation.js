@@ -20,11 +20,15 @@ module.exports = function(){
 
        this.Then(/^the test user should be able to view a tournament$/, function () {
          // Write code here that turns the phrase above into concrete actions
-         return 'pending';
+         browser.click('tr.clickable>td');
+         browser.pause(1000);
        });
 
        this.Then(/^the test user should be able to view a user's profile$/, function () {
          // Write code here that turns the phrase above into concrete actions
-         return 'pending';
+         browser.click('tbody>tr>td.clickable');
+         browser.pause(1000);
+         browser.click('div.pull-right>button');
+         browser.pause(500);
        });
 }
