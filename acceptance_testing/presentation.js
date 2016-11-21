@@ -1,6 +1,7 @@
 module.exports = function(){
        this.Given(/^I have visited the local site$/, function () {
          browser.url('http://localhost:58494/');
+         browser.windowHandleMaximize(browser.windowHandle());
        });
 
        this.Given(/^the generic test user logs in$/, function () {
