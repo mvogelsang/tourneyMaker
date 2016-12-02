@@ -19,7 +19,7 @@ var TourneyMaker;
                             return $q.when(uid);
                         }
                         else {
-                            //$location.path('/');
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
