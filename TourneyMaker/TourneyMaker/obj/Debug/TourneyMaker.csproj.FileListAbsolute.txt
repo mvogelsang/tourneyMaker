@@ -343,7 +343,6 @@ C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\bin\Microsoft.Web.Infras
 C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\bin\Microsoft.Web.Infrastructure.xml
 C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.dll
 C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.pdb
-C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.csprojResolveAssemblyReference.cache
 C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.csprojResolveAssemblyReference.cache
 C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\ApplicationInsights.config
 C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\TourneyMaker.dll.config

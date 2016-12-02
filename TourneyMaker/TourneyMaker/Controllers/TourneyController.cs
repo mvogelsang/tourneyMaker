@@ -8,10 +8,6 @@ namespace TourneyMaker.Controllers
 {
     public class TourneyController : Controller
     {
-        // GET: Tourney
-        public ActionResult Index()
-        {
-            return View();
-        }
+           
     }
 }

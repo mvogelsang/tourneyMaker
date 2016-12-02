@@ -14,14 +14,11 @@ namespace TourneyMaker.Models
         public TourneyManager()
         {
             //Functions
-                //GetActiveTourneys
-                //GetCompletedTourneys
-                //GetHostedTourneys
+                //GetAllTourneys
                 //CreateNewTourey
-                //ViewTournament
         }
 
-        public TournamentList GetActiveTourneys(string username)
+        public TournamentList GetAllTourneys(string username)
         {
             TournamentList tl = new TournamentList();
             //get list from DB
@@ -29,57 +26,7 @@ namespace TourneyMaker.Models
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.getActive", conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                Tournament temp = new Tournament(dr);
-                tl.Add(temp);
-            }
-
-            return tl;
-        }
-
-        public TournamentList GetCompletedTourneys(string username)
-        {
-            TournamentList tl = new TournamentList();
-            //get list from DB
-            DataTable dt = new DataTable();
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.getCompleted", conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                Tournament temp = new Tournament(dr);
-                tl.Add(temp);
-            }
-
-            return tl;
-        }
-
-        public TournamentList GetHostedTourneys(string username)
-        {
-            TournamentList tl = new TournamentList();
-            //get list from DB
-            DataTable dt = new DataTable();
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.getHosted", conn);
+                SqlCommand cmd = new SqlCommand("dbo.getAllTourneys", conn);
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -110,27 +57,6 @@ namespace TourneyMaker.Models
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
             }
-
-            return t;
-        }
-
-        public Tournament ViewTournament(int tid)
-        {
-            Tournament t;
-            //get Tournamnet info from DB
-            DataTable dt = new DataTable();
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.viewTournament", conn);
-                cmd.Parameters.AddWithValue("@tid", tid);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-            t = new Tournament(dt.Rows[0]);
-
 
             return t;
         }
@@ -238,4 +164,15 @@ namespace TourneyMaker.Models
     {
         public MatchupList() { }
     }
+
+    public class Display
+    {
+
+    }
+
+    public class DisplayList : List<Display>
+    {
+
+    }
+
 }
