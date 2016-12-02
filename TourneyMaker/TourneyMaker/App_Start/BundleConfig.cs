@@ -58,7 +58,7 @@ namespace TourneyMaker
                       "~/Scripts/respond.js"));
 
             //Any specific css you would like to add should go after app.css
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/css1").Include(
                       "~/Content/bootstrap.css",
                       //"~/Content/bootstrap.slate.css",
                       "~/admin-lte/css/AdminLTE.css",
