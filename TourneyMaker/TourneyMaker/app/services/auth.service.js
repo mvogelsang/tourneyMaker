@@ -11,14 +11,14 @@ var TourneyMaker;
                 this.uid = this.$cookies.get('uid');
             }
         }
-        AuthService.prototype.login = function () {
+        AuthService.prototype.login = function (user) {
             var _this = this;
             var defer = this.$q.defer();
             //http POST
             //success
-            this.userService.getUser().then(function (data) {
+            this.userService.getUser(user).then(function (data) {
                 _this.user = data.data;
-                _this.$cookies.put('uid', _this.user.uid);
+                _this.$cookies.put('uid', _this.user.username);
                 _this.uid = _this.$cookies.get('uid');
                 _this.$location.path('dashboard/' + _this.getUid() + '/active-tournaments');
                 defer.resolve(_this.uid);
@@ -36,4 +36,3 @@ var TourneyMaker;
     TourneyMaker.AuthService = AuthService;
     TourneyMaker.app.service("AuthService", AuthService);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=auth.service.js.map

@@ -8,7 +8,6 @@ var TourneyMaker;
             //else {
             //    this.isLoggedIn = true;
             //}
-            var _this = this;
             this.$scope = $scope;
             this.$location = $location;
             this.userService = userService;
@@ -17,6 +16,12 @@ var TourneyMaker;
             this.authService = authService;
             //will be set 
             this.isLoggedIn = false;
+            this.user = {
+                username: "",
+                password: "",
+                email: ""
+            };
+            this.registerError = false;
             this.validPassError = false;
             //$scope.$watch(() => {
             //    return this.$cookies;
@@ -27,33 +32,36 @@ var TourneyMaker;
             //        }
             //    }
             //});
-            this.userService.getUser().then(function (data) {
-                _this.user = data.data;
-            }).catch(function (error) {
-                _this.$log.error("There was an error loading profile data.");
-                _this.$log.error(error);
-                alert("There was an error loading profile data.");
-            });
             if (authService.getUid()) {
                 this.isLoggedIn = true;
             }
         }
         LandingPageController.prototype.login = function (username, password) {
-            if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
-                //this.setActiveTourmaments();
-                //this.isLoggedIn = true;
-                this.usernameLogin = "";
-                this.passwordLogin = "";
-                //post to DB, get result (success/failure), if success set cookie with uid
-                //this.$cookies.put("uid", this.user.uid);
-                this.authService.login();
-                this.isLoggedIn = true;
-            }
-            else {
-                this.usernameLogin = "";
-                this.passwordLogin = "";
-                return;
-            }
+            this.user.username = this.usernameLogin;
+            this.user.password = this.passwordLogin;
+            this.authService.login(this.user);
+            //.then((data) => {
+            //    this.user = data.data;
+            //}).catch((error) => {
+            //handle unsuccessful login
+            //});
+            //if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
+            //this.setActiveTourmaments();
+            //this.isLoggedIn = true;
+            //this.usernameLogin = "";
+            //this.passwordLogin = "";
+            //post to DB, get result (success/failure), if success set cookie with uid
+            //this.$cookies.put("uid", this.user.uid);
+            //this.isLoggedIn = true;
+            //if (this.$cookies) {
+            //    this.isLoggedIn = true;
+            //}
+            //}
+            //else {
+            //    this.usernameLogin = "";
+            //    this.passwordLogin = "";
+            //    return;
+            //}
         };
         LandingPageController.prototype.logout = function () {
             this.$cookies.remove('uid');
@@ -71,11 +79,25 @@ var TourneyMaker;
         LandingPageController.prototype.setTournamentManagement = function () {
             this.$location.path('dashboard/' + this.authService.getUid() + '/tournament-management');
         };
+        LandingPageController.prototype.setCreateTournament = function () {
+            this.$location.path('dashboard/' + this.authService.getUid() + '/create-tournament');
+        };
         LandingPageController.prototype.createAccount = function (form, isLoggedIn) {
+            var _this = this;
+            this.user.username = this.username;
+            this.user.password = this.password;
+            this.user.email = this.email;
             if (form.$valid) {
                 //POST to database
                 //GET userID and append to dashboard (/dashboard:{userId})
-                this.$location.path('/dashboard/' + this.user.uid + '/active-tournaments');
+                this.userService.registerUser(this.user).then(function (data) {
+                    _this.authService.login(_this.user).then(function (data) {
+                        //login
+                    }).catch(function (error) {
+                    });
+                }).catch(function (error) {
+                    _this.registerError = true;
+                });
             }
             else {
                 form.username.$setDirty();
@@ -102,4 +124,3 @@ var TourneyMaker;
     TourneyMaker.LandingPageController = LandingPageController;
     TourneyMaker.app.controller("LandingPageController", LandingPageController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=landing-page.controller.js.map
