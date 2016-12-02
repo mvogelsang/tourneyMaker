@@ -1,65 +1,90 @@
 ﻿{
-  "matchups": [
+  "rounds": [
     {
-      "player1": "marsha",
-      "player2": "tim"
+      "top": [
+        {
+          "player1": "marsha",
+          "player2": "tim"
+        },
+        {
+          "player1": "kate",
+          "player2": "mark"
+        },
+        {
+          "player1": "lee",
+          "player2": "richard"
+        },
+        {
+          "player1": "jesus",
+          "player2": "christ"
+        }
+      ],
+      "bottom": [
+        {
+          "player1": "another",
+          "player2": "player"
+        },
+        {
+          "player1": "data2",
+          "player2": "data5"
+        },
+        {
+          "player1": "data4",
+          "player2": "data3"
+        },
+        {
+          "player1": "ellen",
+          "player2": "brad"
+        }
+      ]
     },
     {
-      "player1": "kate",
-      "player2": "walsh"
+      "top": [
+        {
+          "player1": "kate",
+          "player2": "tim"
+        },
+        {
+          "player1": "richard",
+          "player2": "jesus"
+        }
+      ],
+      "bottom": [
+        {
+          "player1": "data5",
+          "player2": "player"
+        },
+        {
+          "player1": "brad",
+          "player2": "data3"
+        }
+      ]
     },
     {
-      "player1": "betty",
-      "player2": "trav"
+      "top": [
+        {
+          "player1": "jesus",
+          "player2": "tim"
+        }
+      ],
+      "bottom": [
+        {
+          "player1": "data5",
+          "player2": "brad"
+        }
+      ]
     },
     {
-      "player1": "mike",
-      "player2": "kim"
-    },
-    {
-      "player1": "scott",
-      "player2": "tidle"
-    },
-    {
-      "player1": "bertha",
-      "player2": "don"
-    },
-    {
-      "player1": "harry",
-      "player2": "pete"
-    },
-    {
-      "player1": "fuckoff",
-      "player2": "ihatemakingfakedata"
-    },
-    {
-      "player1": "marsha",
-      "player2": "tim"
-    },
-    {
-      "player1": "kate",
-      "player2": "walsh"
-    },
-    {
-      "player1": "betty",
-      "player2": "trav"
-    },
-    {
-      "player1": "mike",
-      "player2": "kim"
-    },
-    {
-      "player1": "marsha",
-      "player2": "tim"
-    },
-    {
-      "player1": "kate",
-      "player2": "walsh"
-    },
-    {
-      "player1": "marsha",
-      "player2": "tim"
+      "top": [
+        {
+          "player1": "jesus",
+          "player2": "brad"
+        }
+      ],
+      "bottom": [
+      ]
     }
   ]
 }
-      
+    
+    

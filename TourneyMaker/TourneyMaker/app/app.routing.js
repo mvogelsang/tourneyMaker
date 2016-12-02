@@ -130,4 +130,3 @@ var TourneyMaker;
             .otherwise({ redirectTo: '/' });
     });
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=app.routing.js.map

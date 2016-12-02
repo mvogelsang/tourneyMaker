@@ -105,6 +105,7 @@
 
     @* This is where our application lives *@
     <ng-view ng-if="lpc.isLoggedIn"></ng-view>
+   
 
     <div ng-if="!lpc.isLoggedIn">
         <!-- Controller doesn't need to be added on each page because it is referenced in the app.routing.ts file when this particular page is loaded -->
