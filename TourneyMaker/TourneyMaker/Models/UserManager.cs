@@ -18,6 +18,29 @@ namespace TourneyMaker.Models
             isAuthorized = false;
         }
 
+        public UserInfo GetUser(string email)
+        {
+            UserInfo ui = new UserInfo();
+            //get info on user from DB based on username
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.getUser", conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        ui.password = dr["password"].ToString();
+                        ui.username = dr["username"].ToString();
+                    }
+                }
+            }
+            return ui;
+        }
+
         public bool Register(string username, string password, string email)
         {
             bool registered = false;
@@ -31,6 +54,7 @@ namespace TourneyMaker.Models
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                //Check if the email exists in the database, if it is already there, update the username and password if they are null.
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
