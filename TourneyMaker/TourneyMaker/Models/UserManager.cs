@@ -49,8 +49,8 @@ namespace TourneyMaker.Models
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.registerUser", conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@username", username ?? Convert.DBNull);
+                cmd.Parameters.AddWithValue("@password", password ?? Convert.DBNull);
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -70,8 +70,8 @@ namespace TourneyMaker.Models
             {
                 registered = true;
                 isAuthorized = true;
-                info.username = username;
-                info.password = password;
+                info.username = username ?? "";
+                info.password = password ?? "";
                 info.email = email;
                 //send email to user of success
             }

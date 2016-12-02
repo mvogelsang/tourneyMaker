@@ -11,40 +11,19 @@
     <!-- Bracket -->
     <div>
         
-        <div class="col-md-2" style="margin-right:50px;" ng-repeat="round in vm.bracket.rounds">
-
-            <div ng-if="(vm.bracket.rounds.length - $index) != 1 && (vm.bracket.rounds.length - $index) != 2">
-                <h4 class="text-center">Round {{$index + 1}}</h4>
-            </div>
-            <div ng-if="(vm.bracket.rounds.length - $index) == 2">
-                <h4 class="text-center">Semi Final</h4>
-            </div>
-            <div ng-if="(vm.bracket.rounds.length - $index) == 1">
-                <h4 class="text-center">Final</h4>
-            </div>
-            <br />
-
-            <div style="margin-top:{{vm.offset * ($index * $index/2)}}px"></div>
-
-            <div ng-repeat="matchup in round.matchups">
-
-                <div style="margin-top:{{vm.offset * ($parent.$index * $parent.$index/2)}}px"></div>
-
-                <table class="table table-bordered" ng-class="{'col2': $parent.$index == 1}">
-                    <tbody>
-                        <tr>
-                            <td class="clickable" ng-click="vm.openProfile(matchup.players[0])">{{matchup.player1}}</td>
-                           
-                        </tr>
-                        <tr>
-                            <td class="clickable" ng-click="vm.openProfile(matchup.players[1])">{{matchup.player2}}</td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
+        <div ng-repeat="matchup in vm.bracket.matchups">
+            <table class="table table-bordered" style="width: 100px">
+                <tbody>
+                    <tr>
+                        <td>{{matchup.player1}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{matchup.player2}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        
     </div>
 
 </div>
