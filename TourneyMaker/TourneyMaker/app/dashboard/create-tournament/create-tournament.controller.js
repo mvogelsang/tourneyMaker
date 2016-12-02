@@ -14,3 +14,4 @@ var TourneyMaker;
     TourneyMaker.CreateTournamentController = CreateTournamentController;
     TourneyMaker.app.controller("CreateTournamentController", CreateTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=create-tournament.controller.js.map
