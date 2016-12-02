@@ -18,6 +18,23 @@ namespace TourneyMaker.Models
                 //CreateNewTourey
         }
 
+        public void AddManager(string emails)
+        {
+            string[] ems = emails.Split(',');
+            foreach (string e in ems)
+            {
+                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.updateManager", conn);
+                    cmd.Parameters.AddWithValue("@email", e);
+                    //All level 1
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public TournamentList GetAllTourneys(string email)
         {
             TournamentList tl = new TournamentList();
@@ -54,9 +71,24 @@ namespace TourneyMaker.Models
                 cmd.Parameters.AddWithValue("@tname", t.tname);
                 cmd.Parameters.AddWithValue("@numParticipants", t.numParticipants);
                 cmd.Parameters.AddWithValue("@hostname", t.host.username);
-                cmd.Parameters.AddWithValue("@participants", t.commaDlParts);
+                //Set host as level 0 access
+                cmd.Parameters.AddWithValue("@type", 0);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
+            }
+
+            string[] parts = t.commaDlParts.Split(',');
+            foreach(string p in parts)
+            {
+                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.addParticipant", conn);
+                    cmd.Parameters.AddWithValue("@email", p);
+                    //All level 2
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
             }
 
             return t;
