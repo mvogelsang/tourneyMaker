@@ -1,80 +1,64 @@
 ﻿{
-  "rounds": [
+  "matchups": [
     {
-      "matchups": [
-        {
-          "player1": "marsha",
-          "player2": "tim"
-        },
-        {
-          "player1": "kate",
-          "player2": "walsh"
-        },
-        {
-          "player1": "betty",
-          "player2": "trav"
-        },
-        {
-          "player1": "mike",
-          "player2": "kim"
-        },
-        {
-          "player1": "scott",
-          "player2": "tidle"
-        },
-        {
-          "player1": "bertha",
-          "player2": "don"
-        },
-        {
-          "player1": "harry",
-          "player2": "pete"
-        },
-        {
-          "player1": "fuckoff",
-          "player2": "ihatemakingfakedata"
-        }
-      ]
+      "player1": "marsha",
+      "player2": "tim"
     },
     {
-      "matchups": [
-        {
-          "player1": "marsha",
-          "player2": "tim"
-        },
-        {
-          "player1": "kate",
-          "player2": "walsh"
-        },
-        {
-          "player1": "betty",
-          "player2": "trav"
-        },
-        {
-          "player1": "mike",
-          "player2": "kim"
-        }
-      ]
+      "player1": "kate",
+      "player2": "walsh"
     },
     {
-      "matchups": [
-        {
-          "player1": "marsha",
-          "player2": "tim"
-        },
-        {
-          "player1": "kate",
-          "player2": "walsh"
-        }
-      ]
+      "player1": "betty",
+      "player2": "trav"
     },
     {
-      "matchups": [
-        {
-          "player1": "marsha",
-          "player2": "tim"
-        }
-      ]
+      "player1": "mike",
+      "player2": "kim"
+    },
+    {
+      "player1": "scott",
+      "player2": "tidle"
+    },
+    {
+      "player1": "bertha",
+      "player2": "don"
+    },
+    {
+      "player1": "harry",
+      "player2": "pete"
+    },
+    {
+      "player1": "fuckoff",
+      "player2": "ihatemakingfakedata"
+    },
+    {
+      "player1": "marsha",
+      "player2": "tim"
+    },
+    {
+      "player1": "kate",
+      "player2": "walsh"
+    },
+    {
+      "player1": "betty",
+      "player2": "trav"
+    },
+    {
+      "player1": "mike",
+      "player2": "kim"
+    },
+    {
+      "player1": "marsha",
+      "player2": "tim"
+    },
+    {
+      "player1": "kate",
+      "player2": "walsh"
+    },
+    {
+      "player1": "marsha",
+      "player2": "tim"
     }
   ]
 }

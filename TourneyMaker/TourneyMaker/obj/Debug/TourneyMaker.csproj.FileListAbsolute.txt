@@ -344,3 +344,40 @@ C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\bin\Microsoft.Web.Infras
 C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.dll
 C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.pdb
 C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.csprojResolveAssemblyReference.cache
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.csprojResolveAssemblyReference.cache
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\ApplicationInsights.config
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\TourneyMaker.dll.config
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\TourneyMaker.dll
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\TourneyMaker.pdb
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Antlr3.Runtime.pdb
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.AI.Web.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Newtonsoft.Json.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Web.Infrastructure.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\System.Web.Helpers.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\System.Web.Mvc.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\System.Web.Optimization.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\System.Web.Razor.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\System.Web.WebPages.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\System.Web.WebPages.Razor.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\EntityFramework.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\EntityFramework.SqlServer.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.dll
+C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.pdb
