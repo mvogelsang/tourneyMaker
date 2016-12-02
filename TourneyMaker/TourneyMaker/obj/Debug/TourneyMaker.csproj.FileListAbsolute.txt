@@ -380,3 +380,4 @@ C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\M
 C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.dll
 C:\Users\Travis Klipa\Source\Repos\tourneyMaker2\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.pdb
+C:\Users\Mike\Source\Repos\TM\TourneyMaker\TourneyMaker\obj\Debug\TourneyMaker.csprojResolveAssemblyReference.cache

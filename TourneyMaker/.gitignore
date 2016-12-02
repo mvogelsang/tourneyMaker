@@ -8,6 +8,9 @@
 *.userosscache
 *.sln.docstates
 
+/.vs/config/applicationhost.config
+
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
