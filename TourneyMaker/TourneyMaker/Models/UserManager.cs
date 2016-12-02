@@ -10,7 +10,7 @@ namespace TourneyMaker.Models
 {
     public class UserManager
     {
-        UserInfo info;
+        public UserInfo info;
         bool isAuthorized;
         public UserManager()
         {
@@ -82,7 +82,6 @@ namespace TourneyMaker.Models
         public bool Login(string username, string password)
         {
             bool authorized = false;
-            int check = 0;
             string email = "";
             //Check database for username and password verification
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
@@ -103,14 +102,13 @@ namespace TourneyMaker.Models
                     {
                         //isAuthorized will be an int in the database that is set at 0 or 1
                         //this procedure will return both the int and the user's password and email
-                        check = Convert.ToInt32(dr["authorized"]);
                         password = dr["password"].ToString();
                         email = dr["email"].ToString();
                     }
                 }
 
             }
-            if (check == 1)
+            if (!string.IsNullOrEmpty(email))
             {
                 isAuthorized = true;
                 authorized = true;

@@ -18,7 +18,7 @@ namespace TourneyMaker.Controllers
             //UserInfo data = JsonConvert.DeserializeObject<UserInfo>(_data);
             if(um.Register(_data.username, _data.password, _data.email))
             {
-                return JsonConvert.SerializeObject(um);
+                return JsonConvert.SerializeObject(um.info);
             }
             else
             {
@@ -32,7 +32,7 @@ namespace TourneyMaker.Controllers
             UserManager um = new UserManager();
             //UserInfo data = JsonConvert.DeserializeObject<UserInfo>(_data);
             um.Login(_data.username, _data.password);
-            return JsonConvert.SerializeObject(um);
+            return JsonConvert.SerializeObject(um.info);
         }
 
     }
