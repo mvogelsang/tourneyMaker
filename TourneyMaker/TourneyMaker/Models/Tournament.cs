@@ -54,6 +54,7 @@ namespace TourneyMaker.Models
                 cmd.Parameters.AddWithValue("@tname", t.tname);
                 cmd.Parameters.AddWithValue("@numParticipants", t.numParticipants);
                 cmd.Parameters.AddWithValue("@hostname", t.host.username);
+                cmd.Parameters.AddWithValue("@participants", t.commaDlParts);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
             }
@@ -74,6 +75,7 @@ namespace TourneyMaker.Models
         public UserManager um { get; set; }
         public MatchupList ml { get; set; }
         public RoundsList rounds { get; set; }
+        public string commaDlParts { get; set; }
         private string temphost = "";
         private string tempmanagers = "";
         private string tempparticipants = "";

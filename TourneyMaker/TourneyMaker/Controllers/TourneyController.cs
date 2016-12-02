@@ -26,6 +26,5 @@ namespace TourneyMaker.Controllers
             TournamentList tl = tm.GetAllTourneys(_data.email);
             return JsonConvert.SerializeObject(tl);
         }
-
     }
 }
