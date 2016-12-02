@@ -7,8 +7,12 @@
 
         }
 
-        getUser(): ng.IPromise<any> {
-            return this.$http.get("Models/user.json");
+        getUser(user): ng.IPromise<any> {
+            return this.$http.post("User/LoginUser", user);
+        }
+
+        registerUser(user): ng.IPromise<any> {
+            return this.$http.post("User/RegisterUser", user);
         }
     }
 

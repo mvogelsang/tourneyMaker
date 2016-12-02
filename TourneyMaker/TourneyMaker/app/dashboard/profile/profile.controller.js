@@ -2,19 +2,24 @@ var TourneyMaker;
 (function (TourneyMaker) {
     var ProfileController = (function () {
         function ProfileController($scope, userService, $log, $routeParams) {
-            var _this = this;
+            //get user based of routeParams not like what is happening below
+            //this.userService.getUser(this.user).then((data): any => {
+            //    this.user = data.data;
+            //}).catch((error): any => {
+            //    this.$log.error("There was an error loading profile data.");
+            //    this.$log.error(error);
+            //    alert("There was an error loading profile data.");
+            //});
             this.$scope = $scope;
             this.userService = userService;
             this.$log = $log;
             this.$routeParams = $routeParams;
-            //get user based of routeParams not like what is happening below
-            this.userService.getUser().then(function (data) {
-                _this.user = data.data;
-            }).catch(function (error) {
-                _this.$log.error("There was an error loading profile data.");
-                _this.$log.error(error);
-                alert("There was an error loading profile data.");
-            });
+            this.user = {
+                username: "",
+                email: "john01@gmail.com",
+                bio: "I like to participate in tournaments."
+            };
+            this.user.username = this.$routeParams.id;
         }
         ProfileController.$inject = ["$scope", "UserService", "$log", "$routeParams"];
         return ProfileController;
@@ -22,4 +27,3 @@ var TourneyMaker;
     TourneyMaker.ProfileController = ProfileController;
     TourneyMaker.app.controller('ProfileController', ProfileController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=profile.controller.js.map

@@ -6,7 +6,13 @@
         private usernameLogin: string;
         private passwordLogin: string; 
 
-        private user: User;
+        private user = {
+            username: "",
+            password: "",
+            email: ""
+        };
+
+        private registerError: boolean = false;
 
 
         public static $inject = ["$scope", "$location", "UserService", "$log", "$cookies", "AuthService"]
@@ -30,14 +36,6 @@
             //    }
             //});
 
-            this.userService.getUser().then((data): any => {
-                this.user = data.data;
-            }).catch((error): any => {
-                this.$log.error("There was an error loading profile data.");
-                this.$log.error(error);
-                alert("There was an error loading profile data.");
-                });
-
             if (authService.getUid()) {
                 this.isLoggedIn = true;
                 //this.setActiveTourmaments();
@@ -46,27 +44,39 @@
         }
 
         login(username: string, password: string): void {
-            if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
+
+            this.user.username = this.usernameLogin;
+            this.user.password = this.passwordLogin;
+
+            this.authService.login(this.user);
+
+            //.then((data) => {
+            //    this.user = data.data;
+            //}).catch((error) => {
+                //handle unsuccessful login
+            //});
+
+            //if (this.usernameLogin === this.user.username && this.passwordLogin === this.user.password) {
                 //this.setActiveTourmaments();
                 //this.isLoggedIn = true;
-                this.usernameLogin = "";
-                this.passwordLogin = "";
+                //this.usernameLogin = "";
+                //this.passwordLogin = "";
 
                 //post to DB, get result (success/failure), if success set cookie with uid
                 //this.$cookies.put("uid", this.user.uid);
-                this.authService.login();
-                this.isLoggedIn = true;
+                
+                //this.isLoggedIn = true;
 
 
                 //if (this.$cookies) {
                 //    this.isLoggedIn = true;
                 //}
-            }
-            else {
-                this.usernameLogin = "";
-                this.passwordLogin = "";
-                return;
-            }
+            //}
+            //else {
+            //    this.usernameLogin = "";
+            //    this.passwordLogin = "";
+            //    return;
+            //}
         }
 
         logout(): void {
@@ -91,6 +101,10 @@
             this.$location.path('dashboard/' + this.authService.getUid() + '/tournament-management');
         }
 
+        setCreateTournament(): void {
+            this.$location.path('dashboard/' + this.authService.getUid() + '/create-tournament');
+        }
+
         private username: string;
         private email: string;
         private password: string;
@@ -99,10 +113,25 @@
         private validPassError: boolean = false;
 
         private createAccount(form, isLoggedIn): void {
+
+            this.user.username = this.username;
+            this.user.password = this.password;
+            this.user.email = this.email;
+
             if (form.$valid) {
                 //POST to database
                 //GET userID and append to dashboard (/dashboard:{userId})
-                this.$location.path('/dashboard/' + this.user.uid + '/active-tournaments');
+
+                this.userService.registerUser(this.user).then((data) => {
+                    this.authService.login(this.user).then((data) => {
+                        //login
+                    }).catch((error) => {
+
+                    });
+                }).catch((error) => {
+                    this.registerError = true;
+                });
+
             }
             else {
                 form.username.$setDirty();
