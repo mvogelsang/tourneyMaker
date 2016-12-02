@@ -37,9 +37,15 @@ var TourneyMaker;
             }
         }
         LandingPageController.prototype.login = function (username, password) {
+            var _this = this;
             this.user.username = this.usernameLogin;
             this.user.password = this.passwordLogin;
-            this.authService.login(this.user);
+            this.authService.login(this.user).then(function (data) {
+                _this.user = data.data;
+                _this.isLoggedIn = true;
+            }).catch(function (error) {
+                //error
+            });
             //.then((data) => {
             //    this.user = data.data;
             //}).catch((error) => {
@@ -93,6 +99,7 @@ var TourneyMaker;
                 this.userService.registerUser(this.user).then(function (data) {
                     _this.authService.login(_this.user).then(function (data) {
                         //login
+                        _this.isLoggedIn = true;
                     }).catch(function (error) {
                     });
                 }).catch(function (error) {
@@ -124,4 +131,3 @@ var TourneyMaker;
     TourneyMaker.LandingPageController = LandingPageController;
     TourneyMaker.app.controller("LandingPageController", LandingPageController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=landing-page.controller.js.map
