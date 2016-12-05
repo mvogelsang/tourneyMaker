@@ -1,7 +1,7 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var ProfileController = (function () {
-        function ProfileController($scope, userService, $log, $routeParams) {
+        function ProfileController($scope, userService, $log, $routeParams, authService) {
             //get user based of routeParams not like what is happening below
             //this.userService.getUser(this.user).then((data): any => {
             //    this.user = data.data;
@@ -14,17 +14,12 @@ var TourneyMaker;
             this.userService = userService;
             this.$log = $log;
             this.$routeParams = $routeParams;
-            this.user = {
-                username: "",
-                email: "john01@gmail.com",
-                bio: "I like to participate in tournaments."
-            };
-            this.user.username = this.$routeParams.id;
+            this.authService = authService;
+            this.user = this.authService.userLoggedIn;
         }
-        ProfileController.$inject = ["$scope", "UserService", "$log", "$routeParams"];
+        ProfileController.$inject = ["$scope", "UserService", "$log", "$routeParams", "AuthService"];
         return ProfileController;
     }());
     TourneyMaker.ProfileController = ProfileController;
     TourneyMaker.app.controller('ProfileController', ProfileController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=profile.controller.js.map

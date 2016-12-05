@@ -1,13 +1,14 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var ViewTournamentController = (function () {
-        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log) {
+        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService) {
             var _this = this;
             this.$scope = $scope;
             this.$location = $location;
             this.$uibModal = $uibModal;
             this.bracketService = bracketService;
             this.$log = $log;
+            this.authService = authService;
             this.isEditingScore = false;
             this.offset = 50;
             bracketService.getBracket().then(function (data) {
@@ -30,7 +31,7 @@ var TourneyMaker;
             });
         };
         ViewTournamentController.prototype.close = function () {
-            this.$location.path('/dashboard/1/active-tournaments');
+            this.$location.path('/dashboard/' + this.authService.userLoggedIn.username + '/active-tournaments');
         };
         ViewTournamentController.prototype.edit = function () {
             if (this.isEditingScore) {
@@ -40,10 +41,9 @@ var TourneyMaker;
                 this.isEditingScore = true;
             }
         };
-        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log"];
+        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService"];
         return ViewTournamentController;
     }());
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=view-tournament.controller.js.map

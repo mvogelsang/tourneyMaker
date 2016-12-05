@@ -4,6 +4,9 @@ var TourneyMaker;
         function BracketService($http) {
             this.$http = $http;
         }
+        BracketService.prototype.publishTournament = function (host, tournament) {
+            return this.$http.post("Tourney/NewTourney", { _data: host, _t: tournament });
+        };
         BracketService.prototype.getBracket = function () {
             return this.$http.get("Models/bracket.json");
         };
@@ -13,4 +16,3 @@ var TourneyMaker;
     TourneyMaker.BracketService = BracketService;
     TourneyMaker.app.service("BracketService", BracketService);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=bracket.service.js.map

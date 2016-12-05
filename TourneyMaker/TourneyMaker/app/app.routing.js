@@ -19,7 +19,7 @@ var TourneyMaker;
                             return $q.when(uid);
                         }
                         else {
-                            //$location.path('/');
+                            $location.path('/');
                             return $q.reject({ authenticated: false });
                         }
                     }]
@@ -130,4 +130,3 @@ var TourneyMaker;
             .otherwise({ redirectTo: '/' });
     });
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=app.routing.js.map

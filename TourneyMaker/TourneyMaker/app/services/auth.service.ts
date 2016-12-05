@@ -1,12 +1,12 @@
 ﻿module TourneyMaker {
     export class AuthService {
 
-        private user: User;
+        public userLoggedIn: User;
         private uid: number;
 
-        public static $inject = ["$http", "$cookies", "$q", "UserService", "$location"];
+        public static $inject = ["$http", "$cookies", "$q", "UserService", "$location", "$route"];
 
-        constructor(private $http: ng.IHttpService, private $cookies, private $q: ng.IQService, private userService: UserService, private $location: ng.ILocationService) {
+        constructor(private $http: ng.IHttpService, private $cookies, private $q: ng.IQService, private userService: UserService, private $location: ng.ILocationService, private $route) {
             if (this.$cookies.get('uid')) {  
                 this.uid = this.$cookies.get('uid');
             }
@@ -20,10 +20,12 @@
             //http POST
             //success
             this.userService.getUser(user).then((data): any => {
-                this.user = data.data;
-                this.$cookies.put('uid', this.user.username);
+                this.userLoggedIn = data.data;
+                this.$cookies.put('uid', this.userLoggedIn.username);
                 this.uid = this.$cookies.get('uid');
                 this.$location.path('dashboard/' + this.getUid() + '/active-tournaments');
+                this.$route.reload();
+                
                 
                 defer.resolve(this.uid);
             }).catch((error): any => {

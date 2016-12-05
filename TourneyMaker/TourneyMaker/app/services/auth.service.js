@@ -1,12 +1,13 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var AuthService = (function () {
-        function AuthService($http, $cookies, $q, userService, $location) {
+        function AuthService($http, $cookies, $q, userService, $location, $route) {
             this.$http = $http;
             this.$cookies = $cookies;
             this.$q = $q;
             this.userService = userService;
             this.$location = $location;
+            this.$route = $route;
             if (this.$cookies.get('uid')) {
                 this.uid = this.$cookies.get('uid');
             }
@@ -17,10 +18,11 @@ var TourneyMaker;
             //http POST
             //success
             this.userService.getUser(user).then(function (data) {
-                _this.user = data.data;
-                _this.$cookies.put('uid', _this.user.username);
+                _this.userLoggedIn = data.data;
+                _this.$cookies.put('uid', _this.userLoggedIn.username);
                 _this.uid = _this.$cookies.get('uid');
                 _this.$location.path('dashboard/' + _this.getUid() + '/active-tournaments');
+                _this.$route.reload();
                 defer.resolve(_this.uid);
             }).catch(function (error) {
                 //log error
@@ -30,10 +32,9 @@ var TourneyMaker;
         AuthService.prototype.getUid = function () {
             return this.uid;
         };
-        AuthService.$inject = ["$http", "$cookies", "$q", "UserService", "$location"];
+        AuthService.$inject = ["$http", "$cookies", "$q", "UserService", "$location", "$route"];
         return AuthService;
     }());
     TourneyMaker.AuthService = AuthService;
     TourneyMaker.app.service("AuthService", AuthService);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=auth.service.js.map
