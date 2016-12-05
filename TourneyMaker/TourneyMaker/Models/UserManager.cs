@@ -33,6 +33,7 @@ namespace TourneyMaker.Models
                 {
                     while (dr.Read())
                     {
+                        ui.uid = Convert.ToInt32(dr["uid"]);
                         ui.password = dr["password"].ToString();
                         ui.username = dr["username"].ToString();
                     }
@@ -45,12 +46,13 @@ namespace TourneyMaker.Models
         {
             bool registered = false;
             int success = 0;
+            int uid = 0;
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.registerUser", conn);
-                cmd.Parameters.AddWithValue("@username", username ?? Convert.DBNull);
-                cmd.Parameters.AddWithValue("@password", password ?? Convert.DBNull);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -61,7 +63,7 @@ namespace TourneyMaker.Models
                     {
                         //isRegistered will be an int in the database that is set at 0 or 1
                         success = Convert.ToInt32(dr["isRegistered"]);
-
+                        uid = Convert.ToInt32(dr["uid"]);
                     }
                 }
             }
@@ -70,8 +72,9 @@ namespace TourneyMaker.Models
             {
                 registered = true;
                 isAuthorized = true;
-                info.username = username ?? "";
-                info.password = password ?? "";
+                info.uid = uid;
+                info.username = username;
+                info.password = password;
                 info.email = email;
                 //send email to user of success
             }
@@ -83,6 +86,7 @@ namespace TourneyMaker.Models
         {
             bool authorized = false;
             string email = "";
+            int uid = 0;
             //Check database for username and password verification
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
@@ -104,6 +108,7 @@ namespace TourneyMaker.Models
                         //this procedure will return both the int and the user's password and email
                         password = dr["password"].ToString();
                         email = dr["email"].ToString();
+                        uid = Convert.ToInt32(dr["uid"]);
                     }
                 }
 
@@ -112,6 +117,7 @@ namespace TourneyMaker.Models
             {
                 isAuthorized = true;
                 authorized = true;
+                info.uid = uid;
                 info.username = username;
                 info.password = password;
                 info.email = email;
@@ -122,11 +128,13 @@ namespace TourneyMaker.Models
 
     public class UserInfo
     {
+        public int uid { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
         public UserInfo()
         {
+            uid = 0;
             username = "";
             password = "";
             email = "";
