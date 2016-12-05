@@ -108,6 +108,9 @@
    
 
     <div ng-if="!lpc.isLoggedIn">
+        <div ng-if="lpc.invalidLogin">
+            <div class="alert-danger text-center" style="font-size:1.25em">Username or password is incorrect</div>
+        </div>
         <!-- Controller doesn't need to be added on each page because it is referenced in the app.routing.ts file when this particular page is loaded -->
         <div class="container">
             <div class="row" style="margin-top:75px">
