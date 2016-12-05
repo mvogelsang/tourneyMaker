@@ -41,7 +41,7 @@ var TourneyMaker;
             this.user.username = this.usernameLogin;
             this.user.password = this.passwordLogin;
             this.authService.login(this.user).then(function (data) {
-                _this.user = data.data;
+                //this.user = data.data;
                 _this.isLoggedIn = true;
             }).catch(function (error) {
                 //error

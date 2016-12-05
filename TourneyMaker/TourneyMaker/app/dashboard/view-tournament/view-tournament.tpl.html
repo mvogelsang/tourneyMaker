@@ -3,7 +3,7 @@
         <div class="pull-right">
             <button class="btn btn-success" ng-click="vm.isEditingScore = false" ng-if="vm.isEditingScore">Save Scores</button>
             <button class="btn btn-primary" ng-click="vm.isEditingScore = true" ng-if="!vm.isEditingScore">Update Scores</button>
-            <button class="btn btn-default" ng-click="vm.close()">Close</button>
+            <a href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/active-tournaments" class="btn btn-default" >Close</a>
         </div>
         <h3>View Tournament 1</h3>
     </div>  

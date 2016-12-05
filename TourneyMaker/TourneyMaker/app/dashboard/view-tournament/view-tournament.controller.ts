@@ -8,15 +8,17 @@
         private bracket;
 
 
-        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log"];
+        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService"];
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService) {
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService) {
             bracketService.getBracket().then((data): any => {
                 this.bracket = data.data;
             }).catch((error): any => {
                 this.$log.error("There was an error loading bracket");
                 this.$log.error(error);
-            });
+                });
+
+
         }
 
         private openProfile(profile): void {
@@ -33,7 +35,7 @@
         }
 
         private close(): void {
-            this.$location.path('/dashboard/1/active-tournaments');
+            this.$location.path('/dashboard/' + this.authService.userLoggedIn.username + '/active-tournaments');
         }
 
         private edit(): void {

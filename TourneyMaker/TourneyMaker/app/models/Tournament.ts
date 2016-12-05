@@ -1,8 +1,13 @@
 ﻿module TourneyMaker {
     export class Tournament {
-        tid: number;
-        hostid: number;
-        size: number;
-        type: number;
+        public tid: number;
+        public tname: string;
+        public numParticipants: number;
+        public host: User;
+        public managers: Array<User>;
+        public participants: Array<User>;
+        public rounds;
+        public commaDlParts: Array<string>;
+
     }
 }

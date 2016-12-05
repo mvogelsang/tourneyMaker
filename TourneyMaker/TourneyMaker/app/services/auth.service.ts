@@ -1,7 +1,7 @@
 ﻿module TourneyMaker {
     export class AuthService {
 
-        private user: User;
+        public userLoggedIn: User;
         private uid: number;
 
         public static $inject = ["$http", "$cookies", "$q", "UserService", "$location", "$route"];
@@ -20,8 +20,8 @@
             //http POST
             //success
             this.userService.getUser(user).then((data): any => {
-                this.user = data.data;
-                this.$cookies.put('uid', this.user.username);
+                this.userLoggedIn = data.data;
+                this.$cookies.put('uid', this.userLoggedIn.username);
                 this.uid = this.$cookies.get('uid');
                 this.$location.path('dashboard/' + this.getUid() + '/active-tournaments');
                 this.$route.reload();
