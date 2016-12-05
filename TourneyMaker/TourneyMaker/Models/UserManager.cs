@@ -67,7 +67,7 @@ namespace TourneyMaker.Models
             return ui;
         }
 
-        public bool checkUserParams(string username, string email)
+        public bool checkUserParams(string username)
         {
             bool isAvailable = false;
             int avail = 0;
@@ -75,7 +75,6 @@ namespace TourneyMaker.Models
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.checkUser", conn);
-                cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -100,7 +99,7 @@ namespace TourneyMaker.Models
             bool registered = false;
             int success = 0;
             int uid = 0;
-            if (checkUserParams(username, email))
+            if (checkUserParams(username))
             {
                 using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
                 {
