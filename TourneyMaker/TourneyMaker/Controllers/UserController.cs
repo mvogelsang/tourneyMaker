@@ -22,7 +22,8 @@ namespace TourneyMaker.Controllers
             }
             else
             {
-                return "error";
+                UserInfo error = new UserInfo();
+                return JsonConvert.SerializeObject(error);
             }
         }
 
