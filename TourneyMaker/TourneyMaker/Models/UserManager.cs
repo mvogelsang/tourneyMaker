@@ -67,43 +67,72 @@ namespace TourneyMaker.Models
             return ui;
         }
 
+        public bool checkUserParams(string username)
+        {
+            bool isAvailable = false;
+            int avail = 0;
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.checkUser", conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        avail = Convert.ToInt32(dr["isAvailable"]);
+                    }
+                }
+            }
+            if(avail == 1)
+            {
+                isAvailable = true;
+            }
+
+            return isAvailable;
+        }
+
         public bool Register(string username, string password, string email)
         {
             bool registered = false;
             int success = 0;
             int uid = 0;
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            if (checkUserParams(username))
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.registerUser", conn);
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", password);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                //Check if the email exists in the database, if it is already there, update the username and password if they are null.
-                using (SqlDataReader dr = cmd.ExecuteReader())
+                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
                 {
-                    while (dr.Read())
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.registerUser", conn);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    //Check if the email exists in the database, if it is already there, update the username and password if they are null.
+                    using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        //isRegistered will be an int in the database that is set at 0 or 1
-                        success = Convert.ToInt32(dr["isRegistered"]);
-                        uid = Convert.ToInt32(dr["uid"]);
+                        while (dr.Read())
+                        {
+                            //isRegistered will be an int in the database that is set at 0 or 1
+                            success = Convert.ToInt32(dr["isRegistered"]);
+                            uid = Convert.ToInt32(dr["uid"]);
+                        }
                     }
                 }
-            }
 
-            if (success == 1)
-            {
-                registered = true;
-                isAuthorized = true;
-                info.uid = uid;
-                info.username = username;
-                info.password = password;
-                info.email = email;
-                //send email to user of success
+                if (success == 1)
+                {
+                    registered = true;
+                    isAuthorized = true;
+                    info.uid = uid;
+                    info.username = username;
+                    info.password = password;
+                    info.email = email;
+                    //send email to user of success
+                }
             }
-
             return registered;
         }
 

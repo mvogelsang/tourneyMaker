@@ -7,6 +7,10 @@
 
         }
 
+        getUserByUsername(user): ng.IPromise<any> {
+            return this.$http.post("User/GetUser", user);
+        }
+
         getUser(user): ng.IPromise<any> {
             return this.$http.post("User/LoginUser", user);
         }
