@@ -4,6 +4,9 @@ var TourneyMaker;
         function UserService($http) {
             this.$http = $http;
         }
+        UserService.prototype.getUserByUsername = function (user) {
+            return this.$http.post("User/GetUser", user);
+        };
         UserService.prototype.getUser = function (user) {
             return this.$http.post("User/LoginUser", user);
         };
