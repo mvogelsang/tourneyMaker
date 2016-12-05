@@ -3,14 +3,15 @@
 
         //will be set 
         private isLoggedIn: boolean = false; 
-        private usernameLogin: string;
-        private passwordLogin: string; 
+        private usernameLogin: string = "";
+        private passwordLogin: string = "";
         private invalidLogin: boolean = false;
 
         private user = {
             username: "",
             password: "",
-            email: ""
+            email: "",
+            uid: 0
         };
 
         private registerError: boolean = false;
@@ -46,22 +47,27 @@
 
         login(username: string, password: string): void {
 
-            this.user.username = this.usernameLogin;
-            this.user.password = this.passwordLogin;
+            if (this.usernameLogin != "" && this.passwordLogin != "") {
 
-            this.authService.login(this.user).then((data) => {
-                //this.user = data.data;
+                this.user.username = this.usernameLogin;
+                this.user.password = this.passwordLogin;
 
-                if (this.authService.userLoggedIn.email != "" && this.authService.userLoggedIn.username != "") {
-                    this.invalidLogin = false;
-                    this.isLoggedIn = true;
-                }
-                else {
-                    this.invalidLogin = true;
-                }
-            }).catch((error) => {
-                //error
-            });
+                this.authService.login(this.user).then((data) => {
+                    //this.user = data.data;
+
+                    if (this.authService.userLoggedIn.uid != 0) {
+                        this.invalidLogin = false;
+                        this.isLoggedIn = true;
+                        this.user.username = "";
+                        this.user.password = "";
+                    }
+                    else {
+                        this.invalidLogin = true;
+                    }
+                }).catch((error) => {
+                    //error
+                });
+            }
 
             //.then((data) => {
             //    this.user = data.data;
@@ -136,14 +142,22 @@
                 //GET userID and append to dashboard (/dashboard:{userId})
 
                 this.userService.registerUser(this.user).then((data) => {
-                    this.authService.login(this.user).then((data) => {
-                        //login
-                        this.isLoggedIn = true;
-                    }).catch((error) => {
+                    this.user = data.data;
+                    if (this.user.uid != 0) {
+                        this.authService.login(this.user).then((data) => {
+                            //login
+                            this.isLoggedIn = true;
+                            this.registerError = false;
+                            this.user.username = "";
+                            this.user.password = "";
+                            this.user.email = "";
+                        }).catch((error) => {
 
-                    });
-                }).catch((error) => {
+                        });
+                    }
                     this.registerError = true;
+                }).catch((error) => {
+                    
                 });
 
             }
