@@ -38,3 +38,4 @@ var TourneyMaker;
     TourneyMaker.AuthService = AuthService;
     TourneyMaker.app.service("AuthService", AuthService);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=auth.service.js.map
