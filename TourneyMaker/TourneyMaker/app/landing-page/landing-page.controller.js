@@ -16,6 +16,7 @@ var TourneyMaker;
             this.authService = authService;
             //will be set 
             this.isLoggedIn = false;
+            this.invalidLogin = false;
             this.user = {
                 username: "",
                 password: "",
@@ -42,7 +43,13 @@ var TourneyMaker;
             this.user.password = this.passwordLogin;
             this.authService.login(this.user).then(function (data) {
                 //this.user = data.data;
-                _this.isLoggedIn = true;
+                if (_this.authService.userLoggedIn.email != "" && _this.authService.userLoggedIn.username != "") {
+                    _this.invalidLogin = false;
+                    _this.isLoggedIn = true;
+                }
+                else {
+                    _this.invalidLogin = true;
+                }
             }).catch(function (error) {
                 //error
             });

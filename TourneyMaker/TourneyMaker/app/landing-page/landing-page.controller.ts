@@ -5,6 +5,7 @@
         private isLoggedIn: boolean = false; 
         private usernameLogin: string;
         private passwordLogin: string; 
+        private invalidLogin: boolean = false;
 
         private user = {
             username: "",
@@ -50,7 +51,14 @@
 
             this.authService.login(this.user).then((data) => {
                 //this.user = data.data;
-                this.isLoggedIn = true;
+
+                if (this.authService.userLoggedIn.email != "" && this.authService.userLoggedIn.username != "") {
+                    this.invalidLogin = false;
+                    this.isLoggedIn = true;
+                }
+                else {
+                    this.invalidLogin = true;
+                }
             }).catch((error) => {
                 //error
             });

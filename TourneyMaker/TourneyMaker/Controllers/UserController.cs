@@ -22,7 +22,8 @@ namespace TourneyMaker.Controllers
             }
             else
             {
-                return "error";
+                UserInfo error = new UserInfo();
+                return JsonConvert.SerializeObject(error);
             }
         }
 
@@ -36,10 +37,11 @@ namespace TourneyMaker.Controllers
         }
 
         [HttpPost]
-        public string GetUser(string username)
+        public string GetUser(UserInfo user)
         {
             UserManager um = new UserManager();
-            UserInfo ui = um.GetUser2(username);
+            //UserInfo user = JsonConvert.DeserializeObject<UserInfo>(data);
+            UserInfo ui = um.GetUser2(user.username);
             return JsonConvert.SerializeObject(ui);
         }
 
