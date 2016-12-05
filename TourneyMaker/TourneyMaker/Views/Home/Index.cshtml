@@ -20,7 +20,7 @@
 </head>
 <body class="skin-blue" ng-controller="LandingPageController as lpc">
 
-    <header class="main-header">
+    <header class="main-header" style="position:fixed; width:100%">
         <a href="#/dashboard" class="logo">TourneyMaker</a>
         <nav class="nav navbar navbar-static-top">
 
@@ -31,9 +31,9 @@
             <div class="navbar-custom-menu">
                 @* User is logged in *@
                 <ul class="nav navbar-nav" ng-if="lpc.isLoggedIn">   
-                    <li>
+                    @*<li>
                         <a href=""><i class="fa fa-bell-o"></i></a>
-                    </li>
+                    </li>*@
                     <li>
                         <a href="" style="pointer-events:none">{{lpc.authService.userLoggedIn.username}}</a>
                     </li>
@@ -81,19 +81,19 @@
     </header>
 
     @* User is logged in *@
-    <aside class="main-sidebar" ng-show="lpc.isLoggedIn" style="height:auto">
+    <aside class="main-sidebar" ng-show="lpc.isLoggedIn">
         <section class="sidebar">
             <ul class="sidebar-menu">
                 <li class="header">Participant</li>
                 <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/active-tournaments'}">
-                    <a href="" ng-click="lpc.setActiveTourmaments()">Active Tournaments</a>
+                    <a href="" ng-click="lpc.setActiveTourmaments()">Tournaments</a>
                 </li>
-                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/completed-tournaments'}">
+                @*<li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/completed-tournaments'}">
                     <a href="" ng-click="lpc.setCompletedTourmaments()">Completed Tournaments</a>
-                </li>
+                </li>*@
                 <li class="header">Profile</li>
                 <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/profile'}">
-                    <a href="" ng-click="lpc.setProfile()">View/Update Profile</a>
+                    <a href="" ng-click="lpc.setProfile()">Profile</a>
                 </li>
                 <li class="header">Management</li>
                 <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/tournament-management'}">
@@ -103,6 +103,8 @@
         </section>
     </aside>
 
+
+    <div class="display-top"></div>
     @* This is where our application lives *@
     <ng-view ng-if="lpc.isLoggedIn"></ng-view>
    

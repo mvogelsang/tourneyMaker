@@ -1,11 +1,15 @@
 ﻿module TourneyMaker {
     export class ProfileController {
 
-        private user: User;
+        private userLoggedIn: User;
 
-        public static $inject = ["$scope", "UserService", "$log", "$routeParams", "AuthService"];
+        private user = {
+            username: ""
+        };
 
-        constructor(private $scope: ng.IScope, private userService: UserService, private $log: ng.ILogService, private $routeParams, private authService: AuthService) {
+        public static $inject = ["$scope", "UserService", "$log", "$routeParams", "AuthService", "$route"];
+
+        constructor(private $scope: ng.IScope, private userService: UserService, private $log: ng.ILogService, private $routeParams, private authService: AuthService, private $route) {
             //get user based of routeParams not like what is happening below
             //this.userService.getUser(this.user).then((data): any => {
             //    this.user = data.data;
@@ -15,7 +19,17 @@
             //    alert("There was an error loading profile data.");
             //});
 
-            this.user = this.authService.userLoggedIn;
+            this.user.username = this.$routeParams.id;
+
+            this.userService.getUserByUsername(this.user).then((data): any => {
+                this.user = data.data;
+            }).catch((error): any => {
+                //error
+            });
+        }
+
+        cancel(): void {
+            this.$route.reload();
         }
     }
 
