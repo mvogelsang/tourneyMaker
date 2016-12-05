@@ -2,13 +2,23 @@
     export class AuthService {
 
         public userLoggedIn: User;
-        private uid: number;
+        public user = {
+            username: ""
+        }
+        private uid: string;
 
         public static $inject = ["$http", "$cookies", "$q", "UserService", "$location", "$route"];
 
         constructor(private $http: ng.IHttpService, private $cookies, private $q: ng.IQService, private userService: UserService, private $location: ng.ILocationService, private $route) {
             if (this.$cookies.get('uid')) {  
                 this.uid = this.$cookies.get('uid');
+                this.user.username = this.uid;
+
+                this.userService.getUserByUsername(this.user).then((data) => {
+                    this.userLoggedIn = data.data;
+                }).catch((error): any => {
+                    //error
+                });
             }
         }
 
@@ -23,6 +33,7 @@
                 this.userLoggedIn = data.data;
                 this.$cookies.put('uid', this.userLoggedIn.username);
                 this.uid = this.$cookies.get('uid');
+
                 this.$location.path('dashboard/' + this.getUid() + '/active-tournaments');
                 this.$route.reload();
                 
@@ -36,7 +47,7 @@
             
         }
 
-        getUid(): number {
+        getUid(): string {
             return this.uid;
         }
 
