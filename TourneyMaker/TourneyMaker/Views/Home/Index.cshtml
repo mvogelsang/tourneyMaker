@@ -35,7 +35,7 @@
                         <a href=""><i class="fa fa-bell-o"></i></a>
                     </li>
                     <li>
-                        <a href="" style="pointer-events:none">{{lpc.authService.getUid()}} {{lpc.user.username}}</a>
+                        <a href="" style="pointer-events:none">{{lpc.authService.userLoggedIn.username}}</a>
                     </li>
                     <li>
                         <a href="#/home" ng-click="lpc.logout()">Logout</a>
@@ -85,18 +85,18 @@
         <section class="sidebar">
             <ul class="sidebar-menu">
                 <li class="header">Participant</li>
-                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.user.username + '/active-tournaments'}">
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/active-tournaments'}">
                     <a href="" ng-click="lpc.setActiveTourmaments()">Active Tournaments</a>
                 </li>
-                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.user.username + '/completed-tournaments'}">
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/completed-tournaments'}">
                     <a href="" ng-click="lpc.setCompletedTourmaments()">Completed Tournaments</a>
                 </li>
                 <li class="header">Profile</li>
-                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.user.username + '/profile'}">
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/profile'}">
                     <a href="" ng-click="lpc.setProfile()">View/Update Profile</a>
                 </li>
                 <li class="header">Management</li>
-                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.user.username + '/tournament-management'}">
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/tournament-management'}">
                     <a href="" ng-click="lpc.setTournamentManagement()">Tournament Management</a>
                 </li>
             </ul>

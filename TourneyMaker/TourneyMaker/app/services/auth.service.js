@@ -18,8 +18,8 @@ var TourneyMaker;
             //http POST
             //success
             this.userService.getUser(user).then(function (data) {
-                _this.user = data.data;
-                _this.$cookies.put('uid', _this.user.username);
+                _this.userLoggedIn = data.data;
+                _this.$cookies.put('uid', _this.userLoggedIn.username);
                 _this.uid = _this.$cookies.get('uid');
                 _this.$location.path('dashboard/' + _this.getUid() + '/active-tournaments');
                 _this.$route.reload();
@@ -38,4 +38,3 @@ var TourneyMaker;
     TourneyMaker.AuthService = AuthService;
     TourneyMaker.app.service("AuthService", AuthService);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=auth.service.js.map
