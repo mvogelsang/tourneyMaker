@@ -28,11 +28,34 @@ namespace UnitTesting
         {
             string TestUserName = "testuser123";
             string TestUserPass = "test123";
+            bool loggedIn = false;
 
             UserManager TestUserManager = new UserManager();
             TestUserManager.Login(TestUserName, TestUserPass);
+            loggedIn = TestUserManager.Login(TestUserName, TestUserPass);
+            Assert.IsTrue(loggedIn == true);
+            
+        }
 
-            // Assert.AreEqual(TestUserManager.authorized == true);
+        [TestMethod]
+        public void GetuserTest()
+        {
+            UserInfo TestUserInfo = new UserInfo();
+            UserManager TestUserManager = new UserManager();
+
+            TestUserInfo = TestUserManager.GetUser("test@test.com");
+            Assert.AreEqual(TestUserInfo.username, "testUser123");
+            
+        }
+
+        [TestMethod]
+        public void Getuser2Test()
+        {
+            UserInfo TestUserInfo = new UserInfo();
+            UserManager TestUserManager = new UserManager();
+
+            TestUserInfo = TestUserManager.GetUser2("testUser123");
+            Assert.AreEqual(TestUserInfo.email, "test@test.com");
 
         }
     }
