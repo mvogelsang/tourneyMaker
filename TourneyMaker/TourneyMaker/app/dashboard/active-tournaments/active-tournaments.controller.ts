@@ -1,14 +1,17 @@
 ﻿module TourneyMaker {
     export class ActiveTournamentsController {
 
-        public static $inject = ['$location'];
+        private tid;
+        private activeTournaments = new Array<Tournament>();
 
-        constructor(private $location: ng.ILocationService) {
+        public static $inject = ['$location', 'AuthService'];
+
+        constructor(private $location: ng.ILocationService, private authService: AuthService) {
 
         }
 
         viewTournament(): void {
-            this.$location.path('/dashboard/1/view-tournament/1');
+            this.$location.path('/dashboard/' + this.authService.userLoggedIn.username + '/view-tournament/' + this.tid);
         }
 
     }

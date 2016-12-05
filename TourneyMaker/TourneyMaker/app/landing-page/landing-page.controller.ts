@@ -38,7 +38,7 @@
 
             if (authService.getUid()) {
                 this.isLoggedIn = true;
-                //this.setActiveTourmaments();
+                //If user is logged in call GetUser to get the current user based on the cookie that is set
             }
 
         }
@@ -49,7 +49,7 @@
             this.user.password = this.passwordLogin;
 
             this.authService.login(this.user).then((data) => {
-                this.user = data.data;
+                //this.user = data.data;
                 this.isLoggedIn = true;
             }).catch((error) => {
                 //error

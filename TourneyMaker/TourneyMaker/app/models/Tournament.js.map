@@ -1,1 +1,1 @@
-{"version":3,"file":"Tournament.js","sourceRoot":"","sources":["Tournament.ts"],"names":[],"mappings":"AAAA,IAAO,YAAY,CAOlB;AAPD,WAAO,YAAY,EAAC,CAAC;IACjB;QAAA;QAKA,CAAC;QAAD,iBAAC;IAAD,CAAC,AALD,IAKC;IALY,uBAAU,aAKtB,CAAA;AACL,CAAC,EAPM,YAAY,KAAZ,YAAY,QAOlB"}
+{"version":3,"file":"Tournament.js","sourceRoot":"","sources":["Tournament.ts"],"names":[],"mappings":"AAAA,IAAO,YAAY,CAYlB;AAZD,WAAO,YAAY,EAAC,CAAC;IACjB;QAAA;QAUA,CAAC;QAAD,iBAAC;IAAD,CAAC,AAVD,IAUC;IAVY,uBAAU,aAUtB,CAAA;AACL,CAAC,EAZM,YAAY,KAAZ,YAAY,QAYlB"}
