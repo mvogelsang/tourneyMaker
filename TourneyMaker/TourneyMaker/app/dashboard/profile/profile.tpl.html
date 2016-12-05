@@ -1,12 +1,11 @@
 ﻿<div class="content-wrapper">
-    <h3 class="content-header">{{vm.user.username}}'s Profile</h3>
     <br />
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>Basic Info</h4>
+    <div class="col-md-8">
+        <div class="box box-default">
+            <div class="box-header">
+                <div class="box-title">{{lpc.authService.userLoggedIn.username}}'s Details</div>
             </div>
-            <div class="panel-body">
+            <div class="box-body">
                 <div ng-form="vm.profileForm">
                     <div class="form-group">
                         <div class="pull-right text-sm text-muted">You cannot change your username</div>
@@ -54,20 +53,10 @@
 
                     <div class="pull-right" ng-if="vm.profileForm.$dirty">
                         <button class="btn btn-success" ng-disabled="vm.profileForm.$invalid">Save</button>
-                        <button class="btn btn-default">Cancel</button>
+                        <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
                     </div>
 
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h4>Trophy Case</h4>
-            </div>
-            <div class="panel-body">
-                <h4 class="text-center">Coming Soon!</h4>
             </div>
         </div>
     </div>

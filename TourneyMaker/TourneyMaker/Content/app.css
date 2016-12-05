@@ -3,6 +3,25 @@
   If a page needs a specific style sheet associated with it, create a new one and include it in the BundleConfig.cs
 */
 
+.display-top{
+    padding-top: 50px;
+}
+
+@media (max-width: 767px) {
+    .display-top {
+        padding-top: 100px;
+    }
+}
+
+
+.content-wrapper {
+    background-color: #eee;
+}
+
+html {
+    background-color: #eee;
+}
+
 .clickable {
     cursor: pointer;
 }
