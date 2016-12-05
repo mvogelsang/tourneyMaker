@@ -42,6 +42,31 @@ namespace TourneyMaker.Models
             return ui;
         }
 
+        public UserInfo GetUser2(string username)
+        {
+            UserInfo ui = new UserInfo();
+            //get info on user from DB based on username
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.getUser2", conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        ui.uid = Convert.ToInt32(dr["uid"]);
+                        ui.password = dr["password"].ToString();
+                        ui.username = dr["username"].ToString();
+                        ui.email = dr["email"].ToString();
+                    }
+                }
+            }
+            return ui;
+        }
+
         public bool Register(string username, string password, string email)
         {
             bool registered = false;
