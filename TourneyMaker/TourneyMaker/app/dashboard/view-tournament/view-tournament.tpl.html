@@ -9,21 +9,51 @@
     </div>  
 
     <!-- Bracket -->
-    <div>
-        
-        <div ng-repeat="matchup in vm.bracket.matchups">
-            <table class="table table-bordered" style="width: 100px">
-                <tbody>
-                    <tr>
-                        <td>{{matchup.player1}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{matchup.player2}}</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div style="height: auto">
+        <div class="row">
+            <div ng-repeat="round in vm.bracket.rounds " class="col-md-2 vcenter" ng-class="{'final-match' : round.bottom.length == 0}">
+
+                <div class="spacing">
+
+                    <div ng-repeat="matchup in round.top">
+
+                        <table class="table table-bordered" style="width: 100px">
+                            <tbody>
+                                <tr ng-click="vm.openProfile(matchup.player1)" class="clickable">
+                                    <td>{{matchup.player1}}</td>
+                                </tr>
+                                <tr ng-click="vm.openProfile(matchup.player2)" class="clickable">
+                                    <td>{{matchup.player2}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-        
+        <div class="row">
+            <div ng-repeat="round in vm.bracket.rounds" class="col-md-2 vcenter">
+
+                <div ng-repeat="matchup in round.bottom">
+
+                    <table class="table table-bordered" style="width: 100px">
+                        <tbody>
+                            <tr>
+                                <td>{{matchup.player1}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{matchup.player2}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+           
+
     </div>
 
 </div>

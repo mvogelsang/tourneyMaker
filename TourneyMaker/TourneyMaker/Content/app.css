@@ -22,3 +22,24 @@
 .col2 {
     margin-top: 50px;
 }
+
+.vcenter{
+    display:inline-block; 
+    vertical-align: middle; 
+    float: none;
+}
+
+.table-bordered{
+    border-width: 2px;
+    border-color: #eee;
+}
+
+.spacing {
+
+}
+
+.final-match {
+    vertical-align: bottom;
+    float:none;
+    bottom: -50px;
+}

@@ -24,19 +24,19 @@ namespace TourneyMaker.Controllers
             //_t needs the following:
             //tname, name of tournament
             //numParticipants, # of participants
-            //host.username, _data.username
+            //host.email, _data.email
             //commaDlParts, comma delineated string of participant emails (no spaces or other characters)
             TourneyManager tm = new TourneyManager();
-            Tournament t = tm.CreateNewTourney(_t);
+            tm.CreateNewTourney(_t);
             TournamentList tl = tm.GetAllTourneys(_data.email);
             return JsonConvert.SerializeObject(tl);
         }
 
         [HttpPost]
-        public string AddManagers(UserInfo _data, string _emails)
+        public string AddManagers(UserInfo _data, string _emails, int tid)
         {
             TourneyManager tm = new TourneyManager();
-            tm.AddManager(_emails);
+            tm.AddManager(_emails, tid);
             TournamentList tl = tm.GetAllTourneys(_data.email);
             return JsonConvert.SerializeObject(tl);
         }
