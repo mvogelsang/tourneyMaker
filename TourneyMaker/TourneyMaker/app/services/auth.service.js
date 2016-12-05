@@ -2,14 +2,24 @@ var TourneyMaker;
 (function (TourneyMaker) {
     var AuthService = (function () {
         function AuthService($http, $cookies, $q, userService, $location, $route) {
+            var _this = this;
             this.$http = $http;
             this.$cookies = $cookies;
             this.$q = $q;
             this.userService = userService;
             this.$location = $location;
             this.$route = $route;
+            this.user = {
+                username: ""
+            };
             if (this.$cookies.get('uid')) {
                 this.uid = this.$cookies.get('uid');
+                this.user.username = this.uid;
+                this.userService.getUserByUsername(this.user).then(function (data) {
+                    _this.userLoggedIn = data.data;
+                }).catch(function (error) {
+                    //error
+                });
             }
         }
         AuthService.prototype.login = function (user) {
