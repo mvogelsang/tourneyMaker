@@ -116,16 +116,7 @@ namespace TourneyMaker.Models
             }
 
             int count = numMatches - 1;
-            int switcher = 1;
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.updateMatchup", conn);
-                cmd.Parameters.AddWithValue("@mid", count);
-                cmd.Parameters.AddWithValue("@tid", tid);
-                cmd.Parameters.AddWithValue("@email", t.host.email);
-                cmd.Parameters.AddWithValue("@player", 1);
-            }
+            int switcher = 0;
 
             foreach (string p in parts)
             {
@@ -194,6 +185,24 @@ namespace TourneyMaker.Models
         //change to getParticipant and pass back UID in userinfo
         public void SetTourneyUsers()
         {
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.getHost", conn);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        host.password = dr["password"].ToString();
+                        host.email = dr["email"].ToString();
+                        host.uid = Convert.ToInt32(dr["uid"]);
+                        host.username = dr["username"].ToString();
+                    }
+                }
+            }
+
             DataTable dt = new DataTable();
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
