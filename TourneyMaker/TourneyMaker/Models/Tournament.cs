@@ -349,7 +349,7 @@ namespace TourneyMaker.Models
                 {
                     go = false;
                 }
-                else if (tracker == 2 && divisor < numParticipants)
+                if (tracker == 2 && divisor < numParticipants)
                 {
                     divisor = divisor * 2;
                     tracker = 0;
@@ -359,10 +359,6 @@ namespace TourneyMaker.Models
                     pl.Add(top);
                     pl.Add(bottom);
                     rounds.Add(pl);
-                }
-                else
-                {
-                    go = false;
                 }
                 tracker++;
             }
