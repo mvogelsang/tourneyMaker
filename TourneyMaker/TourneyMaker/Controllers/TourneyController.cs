@@ -26,12 +26,24 @@ namespace TourneyMaker.Controllers
         }
 
         [HttpPost]
-        public string AddManagers(UserInfo _data, string _emails, int tid)
+        public string GetTourney(TourneyInt _t)
         {
             TourneyManager tm = new TourneyManager();
-            tm.AddManager(_emails, tid);
-            TournamentList tl = tm.GetAllTourneys(_data.username);
-            return JsonConvert.SerializeObject(tl);
+            Tournament t = tm.GetTournament(_t.tid);
+            return JsonConvert.SerializeObject(t);
+        }
+
+        [HttpPost]
+        public void UpdateMatchup(Matchup m, TourneyInt _t)
+        {
+            TourneyManager tm = new TourneyManager();
+            tm.UpdateMatchup(m, _t.tid);
+        }
+
+        public class TourneyInt
+        {
+            public int tid { get; set; }
+            public TourneyInt() { }
         }
     }
 }

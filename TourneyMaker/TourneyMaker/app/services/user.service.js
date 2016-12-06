@@ -4,6 +4,9 @@ var TourneyMaker;
         function UserService($http) {
             this.$http = $http;
         }
+        UserService.prototype.getAllTourneys = function (user) {
+            return this.$http.post('User/GetAllTourneys', user);
+        };
         UserService.prototype.getUserByUsername = function (user) {
             return this.$http.post("User/GetUser", user);
         };
@@ -19,3 +22,4 @@ var TourneyMaker;
     TourneyMaker.UserService = UserService;
     TourneyMaker.app.service("UserService", UserService);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=user.service.js.map
