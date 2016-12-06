@@ -1,11 +1,12 @@
 ﻿<div class="content-wrapper">
     <div>
         <br />
-        <div class="col-md-12">
+        <div class="col-md-12" ng-if="filteredActiveTournaments.length != 0">
             <div class="box box-info">
                 <div class="box-header with-border">
                     <div class="box-title">
-                        Active
+                        Active &nbsp;<span class="badge bg-aqua" ng-if="filteredActiveTournaments.length != 0">{{filteredActiveTournaments.length}}</span> 
+                        <span ng-if="filteredActiveTournaments.length == 0"><span class="fa fa-spinner fa-spin"></span></span>
                     </div>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" id="collapse-active-tournaments-button">
@@ -16,20 +17,35 @@
                 <div class="box-body">
 
                     <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Size</th>
+                                <th class="text-center">Status</th>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <tr ng-repeat="tournament in vm.tournaments">
+                            <tr ng-repeat="tournament in vm.tournaments | filter: {completed: '0'} as filteredActiveTournaments" class="clickable">
                                 <td>{{tournament.tname}}</td>
+                                <td>
+                                    {{tournament.numParticipants}} person tournament
+                                </td>
+                                <td class="text-center">
+                                    <span class="label label-success text-center" ng-if="tournament.host.username == lpc.authService.userLoggedIn.username">Host</span>
+                                    <span class="label label-info text-center" ng-if="tournament.host.username != lpc.authService.userLoggedIn.username">Participant</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" ng-if="filteredCompletedTournaments.length != 0">
             <div class="box box-success">
                 <div class="box-header with-border">
                     <div class="box-title">
-                        Completed
+                        Completed &nbsp;<span class="badge bg-green" ng-if="filteredCompletedTournaments.length != 0">{{filteredCompletedTournaments.length}}</span>
+                        <span ng-if="filteredCompletedTournaments.length == 0"><span class="fa fa-spinner fa-spin"></span></span>
                     </div>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" id="collapse-completed-tournaments-button">
@@ -42,25 +58,22 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Date</th>
-                                <th>Info</th>
+                                <th>Size</th>
+                                <th>Winner</th>
+                                <th class="text-center">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="clickable">
-                                <td>Tourney7</td>
-                                <td>May 1 2011</td>
-                                <td>Info</td>
-                            </tr>
-                            <tr class="clickable">
-                                <td>Tourney8</td>
-                                <td>May 3 2012</td>
-                                <td>Info</td>
-                            </tr>
-                            <tr class="clickable">
-                                <td>Tourney0</td>
-                                <td>May 5 2014</td>
-                                <td>Info</td>
+                            <tr ng-repeat="tournament in vm.tournaments | filter: {completed: '1'} as filteredCompletedTournaments" class="clickable">
+                                <td>{{tournament.tname}}</td>
+                                <td>{{tournament.numParticipants}} person tournament</td>
+                                <td>
+                                    winner
+                                </td>
+                                <td class="text-center">
+                                    <span class="label label-success" ng-if="tournament.host.username == lpc.authService.userLoggedIn.username">Host</span>
+                                    <span class="label label-info" ng-if="tournament.host.username != lpc.authService.userLoggedIn.username">Participant</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -17,8 +17,12 @@ var TourneyMaker;
                 numParticipants: "",
                 commaDlParts: ""
             };
+            this.newName = "New Tournament";
             this.publishing = false;
         }
+        CreateTournamentController.prototype.updateName = function (name) {
+            this.newName = name;
+        };
         CreateTournamentController.prototype.publishTournament = function () {
             var _this = this;
             this.publishing = true;

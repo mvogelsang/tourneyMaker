@@ -15,6 +15,7 @@
             commaDlParts: ""
         };
 
+        private newName: string = "New Tournament";
         private publishing: boolean = false;
         private createdTournament: Tournament;
         private commaDlPartsArray;
@@ -23,6 +24,10 @@
 
         constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private authService: AuthService, private bracketService: BracketService, private $routeParams) {
             
+        }
+
+        private updateName(name): void {
+            this.newName = name;
         }
 
         private publishTournament(): void {
