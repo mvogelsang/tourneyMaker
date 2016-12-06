@@ -10,3 +10,4 @@ var TourneyMaker;
     TourneyMaker.TournamentManagementController = TournamentManagementController;
     TourneyMaker.app.controller("TournamentManagementController", TournamentManagementController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=tournament-management.controller.js.map

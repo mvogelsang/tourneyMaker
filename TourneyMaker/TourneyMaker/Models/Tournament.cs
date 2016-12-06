@@ -363,8 +363,32 @@ namespace TourneyMaker.Models
                 {
                     d = new Display();
                     d.matchid = ml[count].mid;
-                    d.player1 = ml[count].player1;
-                    d.player2 = ml[count].player2;
+                    if (!string.IsNullOrEmpty(ml[count].p1user))
+                    {
+                        d.player1 = ml[count].p1user;                        
+                    }
+                    else if (!string.IsNullOrEmpty(ml[count].p1email))
+                    {
+                        d.player1 = ml[count].p1email;
+                    }
+                    else
+                    {
+                        d.player1 = ml[count].p1.ToString();
+                    }
+
+                    if (!string.IsNullOrEmpty(ml[count].p2user))
+                    {
+                        d.player2 = ml[count].p2user;
+                    }
+                    else if (!string.IsNullOrEmpty(ml[count].p2email))
+                    {
+                        d.player2 = ml[count].p2email;
+                    }
+                    else
+                    {
+                        d.player2 = ml[count].p2.ToString();
+                    }
+
                     if (tracker == 1)
                     {
                         top.dl.Add(d);
@@ -400,8 +424,31 @@ namespace TourneyMaker.Models
             rounds.Add(pl);
             d = new Display();
             d.matchid = ml[count].mid;
-            d.player1 = ml[count].player1;
-            d.player2 = ml[count].player2;
+            if (!string.IsNullOrEmpty(ml[count].p1user))
+            {
+                d.player1 = ml[count].p1user;
+            }
+            else if (!string.IsNullOrEmpty(ml[count].p1email))
+            {
+                d.player1 = ml[count].p1email;
+            }
+            else
+            {
+                d.player1 = ml[count].p1.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(ml[count].p2user))
+            {
+                d.player2 = ml[count].p2user;
+            }
+            else if (!string.IsNullOrEmpty(ml[count].p2email))
+            {
+                d.player2 = ml[count].p2email;
+            }
+            else
+            {
+                d.player2 = ml[count].p2.ToString();
+            }
             final.dl.Add(d);
         }
     }
@@ -433,8 +480,12 @@ namespace TourneyMaker.Models
     public class Matchup
     {
         public int mid { get; set; }
-        public string player1 { get; set; }
-        public string player2 { get; set; }
+        public int p1 { get; set; }
+        public int p2 { get; set; }
+        public string p1user { get; set; }
+        public string p2user { get; set; }
+        public string p1email { get; set; }
+        public string p2email { get; set; }
         public int p1score { get; set; }
         public int p2score { get; set; }
         public int winner { get; set; }
@@ -444,8 +495,12 @@ namespace TourneyMaker.Models
         public Matchup(DataRow dr)
         {
             mid = dr.Field<int>("mid");
-            player1 = dr["p1"].ToString();
-            player2 = dr["p2"].ToString();
+            p1 = dr.Field<int>("p1");
+            p2 = dr.Field<int>("p2");
+            p1user = dr["p1user"].ToString() ?? "";
+            p2user = dr["p2user"].ToString() ?? "";
+            p1email = dr["p1email"].ToString() ?? "";
+            p2email = dr["p2email"].ToString() ?? "";
             p1score = dr.Field<int>("p1score");
             p2score = dr.Field<int>("p2score");
             winner = dr.Field<int>("winner");
