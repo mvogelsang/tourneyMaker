@@ -59,17 +59,32 @@ namespace TourneyMaker.Models
         public void SetWinner(int tid, int mid, int winner)
         {
             int nextmatch = 0;
+            int nextplayer = 0;
             if (mid < 3)
             {
                 nextmatch = 0;
+                if (mid == 2)
+                {
+                    nextplayer = 1;
+                }
+                else if (mid == 1)
+                {
+                    nextplayer = 2;
+                }
+                else
+                {
+                    nextplayer = -1;
+                }
             }
             else if(mid % 2 == 0)
             {
                 nextmatch = mid / 2;
+                nextplayer = 1;
             }
             else if(mid % 2 == 1)
             {
                 nextmatch = (mid + 1) / 2;
+                nextplayer = 2;
             }
             else
             {
@@ -83,6 +98,7 @@ namespace TourneyMaker.Models
                 cmd.Parameters.AddWithValue("@mid", mid);
                 cmd.Parameters.AddWithValue("@winner", winner);
                 cmd.Parameters.AddWithValue("@nextmatch", nextmatch);
+                cmd.Parameters.AddWithValue("@nextplayer", nextplayer);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
             }
@@ -360,8 +376,8 @@ namespace TourneyMaker.Models
             //pl.Add(top);
             //pl.Add(bottom);
             //rounds.Add(pl);
-            DisplayList top = new DisplayList(1);
-            DisplayList bottom = new DisplayList(2);
+            DisplayList top = new DisplayList();
+            DisplayList bottom = new DisplayList();
             rounds.Add(top);
             rounds.Add(bottom);
             Display d;
@@ -423,8 +439,8 @@ namespace TourneyMaker.Models
                     //pl.Add(top);
                     //pl.Add(bottom);
                     //rounds.Add(pl);
-                    top = new DisplayList(1);
-                    bottom = new DisplayList(2);
+                    top = new DisplayList();
+                    bottom = new DisplayList();
                     rounds.Add(top);
                     rounds.Add(bottom);
                 }
@@ -434,7 +450,7 @@ namespace TourneyMaker.Models
             //pl = new PositionList();
             //Position final = new Position(0);
             //pl.Add(final);
-            DisplayList final = new DisplayList(0);
+            DisplayList final = new DisplayList();
             rounds.Add(final);
             d = new Display();
             d.matchid = ml[count].mid;
@@ -536,22 +552,7 @@ namespace TourneyMaker.Models
 
     public class DisplayList : List<Display>
     {
-        public string pos { get; set; }
-        public DisplayList(int track)
-        {
-            if (track == 1)
-            {
-                pos = "top";
-            }
-            else if (track == 2)
-            {
-                pos = "bottom";
-            }
-            else
-            {
-                pos = "final";
-            }
-        }
+        public DisplayList() {}
     }
 
     //public class Position
