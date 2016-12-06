@@ -16,7 +16,7 @@
         }
 
         getTournament(tourney): ng.IPromise<any> {
-            return this.$http.post('Tournament/GetTourney', tourney);
+            return this.$http.post('Tourney/GetTourney', tourney);
         }
     }
 

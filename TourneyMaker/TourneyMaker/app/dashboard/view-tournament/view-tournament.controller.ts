@@ -27,6 +27,7 @@
 
             this.bracketService.getTournament(this.tourney).then((data): any => {
                 this.tournament = data.data;
+                this.bracket = this.tournament.rounds;
             });
 
 

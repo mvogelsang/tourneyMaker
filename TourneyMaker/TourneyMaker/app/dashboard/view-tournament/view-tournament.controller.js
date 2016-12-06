@@ -24,6 +24,7 @@ var TourneyMaker;
             this.tourney.tid = this.$routeParams.id;
             this.bracketService.getTournament(this.tourney).then(function (data) {
                 _this.tournament = data.data;
+                _this.bracket = _this.tournament.rounds;
             });
         }
         ViewTournamentController.prototype.openProfile = function (profile) {

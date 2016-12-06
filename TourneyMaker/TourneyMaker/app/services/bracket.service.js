@@ -11,7 +11,7 @@ var TourneyMaker;
             return this.$http.get("Models/bracket.json");
         };
         BracketService.prototype.getTournament = function (tourney) {
-            return this.$http.post('Tournament/GetTourney', tourney);
+            return this.$http.post('Tourney/GetTourney', tourney);
         };
         BracketService.$inject = ["$http"];
         return BracketService;

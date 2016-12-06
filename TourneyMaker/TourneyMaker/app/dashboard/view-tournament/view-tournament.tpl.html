@@ -11,7 +11,9 @@
     <!-- Bracket -->
     <div style="height: auto">
         <div class="row">
-            <div ng-repeat="round in vm.bracket.rounds " class="col-md-2 vcenter" ng-class="{'final-match' : round.bottom.length == 0}">
+            <div ng-repeat="round in vm.bracket" class="col-md-2 vcenter" ng-class="{'final-match' : round.bottom.length == 0}">
+
+                {{round}}
 
                 <div class="spacing">
 
