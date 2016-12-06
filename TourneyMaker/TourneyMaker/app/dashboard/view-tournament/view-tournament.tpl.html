@@ -11,42 +11,38 @@
     <!-- Bracket -->
     <div style="height: auto">
         <div class="row">
-            <div ng-repeat="round in vm.bracket" class="col-md-2 vcenter" ng-class="{'final-match' : round.bottom.length == 0}">
-
-                {{round}}
-
+            <div ng-repeat="round in vm.top" class="col-md-2 vcenter">
                 <div class="spacing">
 
-                    <div ng-repeat="matchup in round.top">
+                    <div ng-repeat="matchup in round" ng-if="matchup.matchid != 0">
 
-                        <table class="table table-bordered" style="width: 100px">
+                        <table class="table table-bordered table-hover" id="bracket" style="width: 100px">
                             <tbody>
                                 <tr ng-click="vm.openProfile(matchup.player1)" class="clickable">
-                                    <td>{{matchup.player1}}</td>
+                                    <td>
+                                        <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
+                                    </td>
                                 </tr>
                                 <tr ng-click="vm.openProfile(matchup.player2)" class="clickable">
-                                    <td>{{matchup.player2}}</td>
+                                    <td>
+                                        <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-
-
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div ng-repeat="round in vm.bracket.rounds" class="col-md-2 vcenter">
 
-                <div ng-repeat="matchup in round.bottom">
-
-                    <table class="table table-bordered" style="width: 100px">
+                    <table class="table table-bordered table-hover" id="bracket" style="width: 100px" ng-if="round[0].matchid == 0" ng-class="{'final-match-4': vm.tournament.numParticipants == 4, 'final-match-8' : vm.tournament.numParticipants == 8, 'final-match-16' : vm.tournament.numParticipants == 16}">
                         <tbody>
-                            <tr>
-                                <td>{{matchup.player1}}</td>
+                            <tr ng-click="vm.openProfile(matchup.player1)" class="clickable">
+                                <td>
+                                    <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>{{matchup.player2}}</td>
+                            <tr ng-click="vm.openProfile(matchup.player2)" class="clickable">
+                                <td>
+                                    <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -54,8 +50,29 @@
                 </div>
             </div>
         </div>
-           
+        <div class="row">
+            <div ng-repeat="round in vm.bottom" class="col-md-2 vcenter">
 
+                <div ng-repeat="matchup in round">
+
+                    <table class="table table-bordered table-hover" id="bracket" style="width: 100px">
+                        <tbody>
+                            <tr ng-click="vm.openProfile(matchup.player1)" class="clickable">
+                                <td>
+                                    <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
+                                </td>
+                            </tr>
+                            <tr ng-click="vm.openProfile(matchup.player2)" class="clickable">
+                                <td>
+                                    <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

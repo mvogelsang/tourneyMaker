@@ -12,6 +12,8 @@ var TourneyMaker;
             this.$routeParams = $routeParams;
             this.isEditingScore = false;
             this.offset = 50;
+            this.top = new Array();
+            this.bottom = new Array();
             this.tourney = {
                 tid: 0
             };
@@ -30,7 +32,7 @@ var TourneyMaker;
         }
         ViewTournamentController.prototype.sort = function () {
             for (var i = 0; i < this.bracket.length; i++) {
-                if (this.bracket.indexOf(i) % 2 == 0) {
+                if (i % 2 == 0) {
                     this.top.push(this.bracket[i]);
                 }
                 else {
@@ -67,3 +69,4 @@ var TourneyMaker;
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=view-tournament.controller.js.map

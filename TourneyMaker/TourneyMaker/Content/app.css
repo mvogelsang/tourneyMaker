@@ -12,7 +12,17 @@
         padding-top: 100px;
     }
 }
+#bracket.table {
+    background-color:#ddd;
+}
 
+.transparent {
+    color: transparent;
+}
+
+.table > tbody > tr {
+    height: 35px;
+}
 
 .content-wrapper {
     background-color: #eee;
@@ -57,8 +67,16 @@ html {
 
 }
 
-.final-match {
-    vertical-align: bottom;
-    float:none;
-    bottom: -50px;
+.final-match-4 {
+    position: absolute;
+}
+
+.final-match-8 {
+    position: absolute;
+    margin-top: 45px;
+}
+
+.final-match-16{
+    position: absolute;
+    margin-top: 150px;
 }

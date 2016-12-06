@@ -39,7 +39,7 @@
                 this.publishing = false;
                 this.createdTournament = data.data;
 
-                this.$location.path("dashboard/" + this.$routeParams.id + "/view-tournament/" + this.createdTournament.tid);
+                this.$location.path("dashboard/view-tournament/" + this.createdTournament.tid);
                 //navigate to view tournament 
             }).catch((error) => {
                 //error

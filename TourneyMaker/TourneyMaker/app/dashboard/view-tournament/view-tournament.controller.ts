@@ -6,8 +6,8 @@
         private offset: number = 50;
 
         private bracket;
-        private top;
-        private bottom;
+        private top = new Array<any>();
+        private bottom = new Array<any>();
 
         private tourney = {
             tid: 0
@@ -38,7 +38,7 @@
 
         private sort(): void {
             for (var i = 0; i < this.bracket.length; i++) {
-                if (this.bracket.indexOf(i) % 2 == 0) {
+                if (i % 2 == 0) {
                     this.top.push(this.bracket[i]);
                 }
                 else {

@@ -31,7 +31,7 @@ var TourneyMaker;
             this.bracketService.publishTournament(this.host, this.tournament).then(function (data) {
                 _this.publishing = false;
                 _this.createdTournament = data.data;
-                _this.$location.path("dashboard/" + _this.$routeParams.id + "/view-tournament/" + _this.createdTournament.tid);
+                _this.$location.path("dashboard/view-tournament/" + _this.createdTournament.tid);
                 //navigate to view tournament 
             }).catch(function (error) {
                 //error
@@ -46,3 +46,4 @@ var TourneyMaker;
     TourneyMaker.CreateTournamentController = CreateTournamentController;
     TourneyMaker.app.controller("CreateTournamentController", CreateTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=create-tournament.controller.js.map
