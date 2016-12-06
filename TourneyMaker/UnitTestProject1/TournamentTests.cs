@@ -27,7 +27,13 @@ namespace UnitTestProject1
         [TestMethod]
         public void CreateNewTourneyTest()
         {
-            Assert.AreEqual(1, 0);
+            Tournament t = new Tournament();
+            t.host.email = "testuser@test.com";
+            t.numParticipants = 4;
+            t.tname = GetRandomAlphaNumeric();
+            t.commaDlParts = "1,2,3,4";
+            TourneyManager test = new TourneyManager();
+            Assert.IsTrue(test.CreateNewTourney(t).GetType() == t.GetType());
         }
 
         [TestMethod]
