@@ -25,8 +25,19 @@ var TourneyMaker;
             this.bracketService.getTournament(this.tourney).then(function (data) {
                 _this.tournament = data.data;
                 _this.bracket = _this.tournament.rounds;
+                _this.sort();
             });
         }
+        ViewTournamentController.prototype.sort = function () {
+            for (var i = 0; i < this.bracket.length; i++) {
+                if (this.bracket.indexOf(i) % 2 == 0) {
+                    this.top.push(this.bracket[i]);
+                }
+                else {
+                    this.bottom.push(this.bracket[i]);
+                }
+            }
+        };
         ViewTournamentController.prototype.openProfile = function (profile) {
             this.$uibModal.open({
                 animation: true,

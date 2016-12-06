@@ -6,6 +6,8 @@
         private offset: number = 50;
 
         private bracket;
+        private top;
+        private bottom;
 
         private tourney = {
             tid: 0
@@ -28,9 +30,21 @@
             this.bracketService.getTournament(this.tourney).then((data): any => {
                 this.tournament = data.data;
                 this.bracket = this.tournament.rounds;
+                this.sort();
             });
 
 
+        }
+
+        private sort(): void {
+            for (var i = 0; i < this.bracket.length; i++) {
+                if (this.bracket.indexOf(i) % 2 == 0) {
+                    this.top.push(this.bracket[i]);
+                }
+                else {
+                    this.bottom.push(this.bracket[i]);
+                }
+            }
         }
 
         private openProfile(profile): void {
