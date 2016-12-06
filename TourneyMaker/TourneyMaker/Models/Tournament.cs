@@ -52,7 +52,7 @@ namespace TourneyMaker.Models
             }
         }
 
-        public TournamentList GetAllTourneys(string email)
+        public TournamentList GetAllTourneys(string username)
         {
             TournamentList tl = new TournamentList();
             //get list from DB
@@ -61,7 +61,7 @@ namespace TourneyMaker.Models
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.getAllTourneys", conn);
-                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@username", username);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
