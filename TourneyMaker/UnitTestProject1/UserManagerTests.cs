@@ -35,8 +35,8 @@ namespace UnitTesting
         [TestMethod]
         public void UserLoginTest()
         {
-            string TestUserName = "testuser123";
-            string TestUserPass = "test123";
+            string TestUserName = "testname";
+            string TestUserPass = "testpass123";
             bool loggedIn = false;
 
             UserManager TestUserManager = new UserManager();
@@ -52,8 +52,8 @@ namespace UnitTesting
             UserInfo TestUserInfo = new UserInfo();
             UserManager TestUserManager = new UserManager();
 
-            TestUserInfo = TestUserManager.GetUser("test@test.com");
-            Assert.AreEqual(TestUserInfo.username, "testUser123");
+            TestUserInfo = TestUserManager.GetUser("testuser@test.com");
+            Assert.AreEqual(TestUserInfo.username, "testname");
             
         }
 
@@ -63,8 +63,8 @@ namespace UnitTesting
             UserInfo TestUserInfo = new UserInfo();
             UserManager TestUserManager = new UserManager();
 
-            TestUserInfo = TestUserManager.GetUser2("testUser123");
-            Assert.AreEqual(TestUserInfo.email, "test@test.com");
+            TestUserInfo = TestUserManager.GetUser2("testname");
+            Assert.AreEqual(TestUserInfo.email, "testuser@test.com");
 
         }
 
