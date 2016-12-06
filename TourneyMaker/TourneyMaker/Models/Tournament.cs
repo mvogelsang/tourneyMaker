@@ -55,30 +55,14 @@ namespace TourneyMaker.Models
         {
             int nextmatch = 0;
             int nextplayer = 0;
-            if (mid < 3)
+            if(mid % 2 == 0)
             {
-                nextmatch = 0;
-                if (mid == 2)
-                {
-                    nextplayer = 1;
-                }
-                else if (mid == 1)
-                {
-                    nextplayer = 2;
-                }
-                else
-                {
-                    nextplayer = -1;
-                }
-            }
-            else if(mid % 2 == 0)
-            {
-                nextmatch = mid / 2;
+                nextmatch = (mid / 2) - 1;
                 nextplayer = 1;
             }
             else if(mid % 2 == 1)
             {
-                nextmatch = (mid + 1) / 2;
+                nextmatch = ((mid + 1) / 2) - 1;
                 nextplayer = 2;
             }
             else
