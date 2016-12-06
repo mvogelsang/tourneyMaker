@@ -36,4 +36,3 @@ var TourneyMaker;
     TourneyMaker.ProfileController = ProfileController;
     TourneyMaker.app.controller('ProfileController', ProfileController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=profile.controller.js.map

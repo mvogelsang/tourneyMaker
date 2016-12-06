@@ -1,59 +1,63 @@
 ﻿<div class="content-wrapper">
     <br />
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="box box-default">
             <div class="box-header">
                 <div class="box-title">{{lpc.authService.userLoggedIn.username}}'s Details</div>
             </div>
             <div class="box-body">
                 <div ng-form="vm.profileForm">
-                    <div class="form-group">
-                        <div class="pull-right text-sm text-muted">You cannot change your username</div>
-                        <label>Username</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input class="form-control" type="text" ng-model="vm.user.username" readonly />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-at"></i></span>
-                            <input name="email" class="form-control" type="email" ng-model="vm.user.email" required />
-                        </div>
-                        <div ng-messages="vm.profileForm.email.$error" ng-if="vm.profileForm.email.$dirty" class="pull-right text-danger">
-                            <div ng-message="required">
-                                Please enter an email.
-                            </div>
-                            <div ng-message="email">
-                                Please enter a valid email.
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="pull-right text-sm text-muted">You cannot change your username</div>
+                            <label>Username</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input class="form-control" type="text" ng-model="vm.user.username" readonly />
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input class="form-control" type="text" ng-model="vm.user.name" />
+                        <div class="form-group">
+                            <label>Email</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-at"></i></span>
+                                <input name="email" class="form-control" type="email" ng-model="vm.user.email" required id="user-email-input"/>
+                            </div>
+                            <div ng-messages="vm.profileForm.email.$error" ng-if="vm.profileForm.email.$dirty" class="pull-right text-danger">
+                                <div ng-message="required">
+                                    Please enter an email.
+                                </div>
+                                <div ng-message="email">
+                                    Please enter a valid email.
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!--<div class="form-group">
-                        <label>Timezone</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                            <input class="form-control" type="text" ng-model="vm.timezone" required />
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input class="form-control" type="text" ng-model="vm.user.name" id="user-full-name-input"/>
+                            </div>
                         </div>
-                    </div>-->
-                    <div class="form-group">
-                        <label>Bio</label>
-                        <div class="input-group">
-                            <textarea class="form-control" rows="5" cols="100" ng-model="vm.user.bio" style="resize:none"></textarea>
+                        <!--<div class="form-group">
+                            <label>Timezone</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                <input class="form-control" type="text" ng-model="vm.timezone" required />
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <div class="input-group">
+                                <textarea class="form-control" rows="5" cols="100" ng-model="vm.user.bio" style="resize:none" id="user-bio-input"></textarea>
+                            </div>
                         </div>
                     </div>
 
                     <div class="pull-right" ng-if="vm.profileForm.$dirty">
-                        <button class="btn btn-success" ng-disabled="vm.profileForm.$invalid">Save</button>
-                        <button class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
+                        <button class="btn btn-success" ng-disabled="vm.profileForm.$invalid" id="user-save-button">Save</button>
+                        <button class="btn btn-default" ng-click="vm.cancel()" id="user-cancel-button">Cancel</button>
                     </div>
 
                 </div>

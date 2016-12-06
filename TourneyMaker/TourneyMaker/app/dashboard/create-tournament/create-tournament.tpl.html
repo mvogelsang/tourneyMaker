@@ -1,15 +1,18 @@
 ﻿<div class="container-fluid content-wrapper" ng-form="vm.createTournamentForm">
     <div class="page-header">
         <div class="pull-right">
-            <button class="btn btn-success" ng-disabled="vm.createTournamentForm.$invalid" ng-click="vm.publishTournament()">Publish</button>
-            <a ng-href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/tournament-management" class="btn btn-default" >Cancel</a>
+            <button class="btn btn-success btn-flat" ng-disabled="vm.createTournamentForm.$invalid" ng-click="vm.publishTournament()" id="create-tournament-button">
+                <span ng-if="!vm.publishing">Publish</span>
+                <span ng-if="vm.publishing"><i class="fa fa-spinner fa-spin"></i></span>
+            </button>
+            <a ng-href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/tournament-management" class="btn btn-default btn-flat" id="cancel-create-tournament-link">Cancel</a>
         </div>
-        <h3>Create Tournament</h3>
+        <h3>Create {{vm.tournament.tname}}</h3>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-8">
         <div class="form-group">
             <label>Name</label>
-            <input class="form-control" type="text" ng-model="vm.tournament.tname" required />
+            <input class="form-control" type="text" ng-model="vm.tournament.tname" required id="tournament-name-input" />
         </div>
         <!--<div class="form-group">
             <label>Start Date</label>
@@ -25,14 +28,17 @@
         </div>-->
         <div class="form-group">
             <label>Number of Participants</label>
-            <input class="form-control" type="number" ng-model="vm.tournament.numParticipants" required />
+            <input class="form-control" type="number" ng-model="vm.tournament.numParticipants" required id="num-participants-input"/>
         </div>
         <div class="form-group">
             <p class="text-muted text-sm pull-right">Please enter only one email per line</p>
             <label>Participants Email</label>
             
-            <textarea class="form-control" rows="8" cols="100" ng-model="vm.commaDlPartsArray" style="resize:none" ng-list="&#10;" ng-trim="false"></textarea>
+            <textarea class="form-control" rows="8" cols="100" ng-model="vm.commaDlPartsArray" style="resize:none" ng-list="&#10;" ng-trim="false" required id="participants-email-input"></textarea>
         </div>
+    </div>
+    <div class="col-md-4">
+        <br />
         <p class="text-warning">
             <span class="fa fa-info-circle fa-lg"></span> When you publish the tournament, a mass email will be sent to all those you have included. If the participant already has an account they will be able to view the bracket, if not, they will be prompted to make an account.
         </p>
