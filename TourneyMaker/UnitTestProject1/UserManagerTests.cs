@@ -71,7 +71,10 @@ namespace UnitTesting
         [TestMethod]
         public void CheckUserParamsTest()
         {
-            Assert.AreEqual(1, 0);
+            bool available = false;
+            UserManager TestUserManager = new UserManager();
+            available = TestUserManager.checkUserParams(GetRandomAlphaNumeric() + GetRandomAlphaNumeric());
+            Assert.IsTrue(available);
         }
     }
 }
