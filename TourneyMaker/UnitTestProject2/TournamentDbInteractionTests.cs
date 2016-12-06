@@ -18,7 +18,7 @@ namespace UnitTestProject2
         }
 
         [TestMethod]
-        public void blankTest()
+        public void TournamentDbIntegration()
         {
             Assert.AreEqual(1, 0);
         }

@@ -18,7 +18,19 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void blankTest()
+        public void RegisterUserTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void LoginUserTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void GetUserTest()
         {
             Assert.AreEqual(1, 0);
         }

@@ -18,7 +18,19 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void blankTest()
+        public void GetTourneyInfoTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void NewTourneyTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void AddManagersTest()
         {
             Assert.AreEqual(1, 0);
         }

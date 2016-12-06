@@ -18,7 +18,37 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void blankTest()
+        public void AddManagerTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void GetAllTourneysTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void CreateNewTourneyTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void SetTourneyUsersTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void GetMatchupsTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
+
+        [TestMethod]
+        public void GetDisplayTest()
         {
             Assert.AreEqual(1, 0);
         }

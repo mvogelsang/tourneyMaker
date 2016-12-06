@@ -67,5 +67,11 @@ namespace UnitTesting
             Assert.AreEqual(TestUserInfo.email, "test@test.com");
 
         }
+
+        [TestMethod]
+        public void CheckUserParamsTest()
+        {
+            Assert.AreEqual(1, 0);
+        }
     }
 }
