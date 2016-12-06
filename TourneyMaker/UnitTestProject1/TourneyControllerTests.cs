@@ -18,9 +18,13 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void GetTourneyInfoTest()
+        public void GetTourneyTest()
         {
-            Assert.AreEqual(1, 0);
+            TourneyController test = new TourneyController();
+            TourneyController.TourneyInt tint = new TourneyController.TourneyInt();
+            tint.tid = 4;
+            String res = test.GetTourney(tint);
+            Assert.AreNotEqual(res, "");
         }
 
         [TestMethod]
@@ -29,10 +33,5 @@ namespace UnitTestProject1
             Assert.AreEqual(1, 0);
         }
 
-        [TestMethod]
-        public void AddManagersTest()
-        {
-            Assert.AreEqual(1, 0);
-        }
     }
 }

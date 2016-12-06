@@ -17,11 +17,6 @@ namespace UnitTestProject1
             return new string(chars.Select(c => chars[random.Next(chars.Length)]).Take(8).ToArray());
         }
 
-        [TestMethod]
-        public void AddManagerTest()
-        {
-            Assert.AreEqual(1, 0);
-        }
 
         [TestMethod]
         public void GetAllTourneysTest()
