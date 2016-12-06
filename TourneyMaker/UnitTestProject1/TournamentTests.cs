@@ -39,7 +39,11 @@ namespace UnitTestProject1
         [TestMethod]
         public void SetTourneyUsersTest()
         {
-            Assert.AreEqual(1, 0);
+            Tournament TestTournament = new Tournament();
+            TestTournament.tid = 4;
+            TestTournament.SetTourneyUsers();
+            Assert.IsNotNull(TestTournament.participants);
+
         }
 
         [TestMethod]
