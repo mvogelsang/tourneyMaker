@@ -1,15 +1,26 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var ActiveTournamentsController = (function () {
-        function ActiveTournamentsController($location, authService) {
+        function ActiveTournamentsController($location, authService, bracketService, userService, $routeParams) {
+            var _this = this;
             this.$location = $location;
             this.authService = authService;
-            this.activeTournaments = new Array();
+            this.bracketService = bracketService;
+            this.userService = userService;
+            this.$routeParams = $routeParams;
+            this.user = {
+                username: ""
+            };
+            this.tournaments = new Array();
+            this.user.username = this.$routeParams.id;
+            this.userService.getAllTourneys(this.user).then(function (data) {
+                _this.tournaments = data.data;
+            });
         }
         ActiveTournamentsController.prototype.viewTournament = function () {
             this.$location.path('/dashboard/' + this.authService.userLoggedIn.username + '/view-tournament/' + this.tid);
         };
-        ActiveTournamentsController.$inject = ['$location', 'AuthService'];
+        ActiveTournamentsController.$inject = ['$location', 'AuthService', "BracketService", "UserService", "$routeParams"];
         return ActiveTournamentsController;
     }());
     TourneyMaker.ActiveTournamentsController = ActiveTournamentsController;

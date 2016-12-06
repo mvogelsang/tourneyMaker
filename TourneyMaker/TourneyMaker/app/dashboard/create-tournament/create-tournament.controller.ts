@@ -16,12 +16,12 @@
         };
 
         private publishing: boolean = false;
-        private tid;
+        private createdTournament: Tournament;
         private commaDlPartsArray;
 
-        public static $inject = ["$scope", "$location", "AuthService", "BracketService"];
+        public static $inject = ["$scope", "$location", "AuthService", "BracketService", "$routeParams"];
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private authService: AuthService, private bracketService: BracketService) {
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private authService: AuthService, private bracketService: BracketService, private $routeParams) {
             
         }
 
@@ -32,9 +32,9 @@
             this.bracketService.publishTournament(this.host, this.tournament).then((data) => {
 
                 this.publishing = false;
-                this.tid = data.data.tid;
+                this.createdTournament = data.data;
 
-                this.$location.path("dashboard/" + this.authService.userLoggedIn.name + "view-tournament" + this.tid);
+                this.$location.path("dashboard/" + this.$routeParams.id + "/view-tournament/" + this.createdTournament.tid);
                 //navigate to view tournament 
             }).catch((error) => {
                 //error
