@@ -18,6 +18,22 @@ namespace TourneyMaker.Models
             //CreateNewTourney
         }
 
+        public void UpdateMatchup(int tid, int mid, int player1score, int player2score, int winner)
+        {
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.updateMatchup", conn);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@mid", mid);
+                cmd.Parameters.AddWithValue("@player1score", player1score);
+                cmd.Parameters.AddWithValue("@player2score", player2score);
+                cmd.Parameters.AddWithValue("@winner", winner);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public void AddManager(string emails, int tid)
         {
             string[] ems = emails.Split(',');
@@ -36,7 +52,7 @@ namespace TourneyMaker.Models
             }
         }
 
-        public TournamentList GetAllTourneys(string email)
+        public TournamentList GetAllTourneys(string username)
         {
             TournamentList tl = new TournamentList();
             //get list from DB
@@ -45,7 +61,7 @@ namespace TourneyMaker.Models
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.getAllTourneys", conn);
-                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@username", username);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -61,7 +77,7 @@ namespace TourneyMaker.Models
             return tl;
         }
 
-        public void CreateNewTourney(Tournament t)
+        public Tournament CreateNewTourney(Tournament t)
         {
             int tid = 0;
             //add to DB and return updated tournament info
@@ -142,6 +158,21 @@ namespace TourneyMaker.Models
                     cmd.ExecuteNonQuery();
                 }
             }
+
+            DataTable dt = new DataTable();
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            Tournament temp = new Tournament(dt.Rows[0]);
+
+            return temp;
         }
     }
 
@@ -157,6 +188,7 @@ namespace TourneyMaker.Models
         public MatchupList ml { get; set; }
         public RoundsList rounds { get; set; }
         public string commaDlParts { get; set; }
+        public int completed { get; set; }
 
         public Tournament()
         {
@@ -176,7 +208,10 @@ namespace TourneyMaker.Models
             um = new UserManager();
             ml = new MatchupList();
             rounds = new RoundsList();
-            tid = dr.Field<int>("tid");
+            tid = dr.Field<int>("TID");
+            numParticipants = dr.Field<int>("SIZE");
+            tname = dr["NAME"].ToString();
+            completed = dr.Field<int>("COMPLETED");
             SetTourneyUsers();
             GetMatchups();
             GetDisplay();
@@ -263,8 +298,12 @@ namespace TourneyMaker.Models
         {
             int tracker = 1;
             int divisor = 4;
+            if(numParticipants < 1)
+            {
+                numParticipants = participants.Count;
+            }
             bool go = true;
-            int count = ml.Count - 1;
+            int count = numParticipants - 2;
             PositionList pl = new PositionList();
             Position top = new Position(1);
             Position bottom = new Position(2);
@@ -272,7 +311,7 @@ namespace TourneyMaker.Models
             pl.Add(bottom);
             rounds.Add(pl);
             Display d;
-
+         
             while (go)
             {
                 for (int i = 0; i < (numParticipants / divisor); i++)
@@ -360,8 +399,8 @@ namespace TourneyMaker.Models
         public Matchup(DataRow dr)
         {
             mid = dr.Field<int>("mid");
-            player1 = dr["player1"].ToString();
-            player2 = dr["player2"].ToString();
+            player1 = dr["p1"].ToString();
+            player2 = dr["p2"].ToString();
             p1score = dr.Field<int>("p1score");
             p2score = dr.Field<int>("p2score");
             winner = dr.Field<int>("winner");

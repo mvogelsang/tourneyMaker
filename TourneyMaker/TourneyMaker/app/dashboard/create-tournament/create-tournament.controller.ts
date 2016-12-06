@@ -14,7 +14,8 @@
             numParticipants: "",
             commaDlParts: ""
         };
- 
+
+        private publishing: boolean = false;
         private tid;
         private commaDlPartsArray;
 
@@ -25,10 +26,12 @@
         }
 
         private publishTournament(): void {
+            this.publishing = true;
             this.host = this.authService.userLoggedIn;
             this.tournament.commaDlParts = this.commaDlPartsArray.toString();
             this.bracketService.publishTournament(this.host, this.tournament).then((data) => {
 
+                this.publishing = false;
                 this.tid = data.data.tid;
 
                 this.$location.path("dashboard/" + this.authService.userLoggedIn.name + "view-tournament" + this.tid);

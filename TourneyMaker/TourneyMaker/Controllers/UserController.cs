@@ -45,5 +45,13 @@ namespace TourneyMaker.Controllers
             return JsonConvert.SerializeObject(ui);
         }
 
+        [HttpPost]
+        public string GetAllTourneys(UserInfo _data)
+        {
+            TourneyManager tm = new TourneyManager();
+            TournamentList tl = tm.GetAllTourneys(_data.username);
+            return JsonConvert.SerializeObject(tl);
+        }
+
     }
 }

@@ -16,12 +16,15 @@ var TourneyMaker;
                 numParticipants: "",
                 commaDlParts: ""
             };
+            this.publishing = false;
         }
         CreateTournamentController.prototype.publishTournament = function () {
             var _this = this;
+            this.publishing = true;
             this.host = this.authService.userLoggedIn;
             this.tournament.commaDlParts = this.commaDlPartsArray.toString();
             this.bracketService.publishTournament(this.host, this.tournament).then(function (data) {
+                _this.publishing = false;
                 _this.tid = data.data.tid;
                 _this.$location.path("dashboard/" + _this.authService.userLoggedIn.name + "view-tournament" + _this.tid);
                 //navigate to view tournament 
@@ -38,4 +41,3 @@ var TourneyMaker;
     TourneyMaker.CreateTournamentController = CreateTournamentController;
     TourneyMaker.app.controller("CreateTournamentController", CreateTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=create-tournament.controller.js.map

@@ -26,6 +26,8 @@ var TourneyMaker;
                 uid: 0
             };
             this.registerError = false;
+            this.registering = false;
+            this.loggingin = false;
             this.validPassError = false;
             //$scope.$watch(() => {
             //    return this.$cookies;
@@ -43,10 +45,12 @@ var TourneyMaker;
         LandingPageController.prototype.login = function (username, password) {
             var _this = this;
             if (this.usernameLogin != "" && this.passwordLogin != "") {
+                this.loggingin = true;
                 this.user.username = this.usernameLogin;
                 this.user.password = this.passwordLogin;
                 this.authService.login(this.user).then(function (data) {
                     //this.user = data.data;
+                    _this.loggingin = false;
                     if (_this.authService.userLoggedIn.uid != 0) {
                         _this.invalidLogin = false;
                         _this.isLoggedIn = true;
@@ -104,6 +108,7 @@ var TourneyMaker;
         };
         LandingPageController.prototype.createAccount = function (form, isLoggedIn) {
             var _this = this;
+            this.registering = true;
             this.user.username = this.username;
             this.user.password = this.password;
             this.user.email = this.email;
@@ -115,6 +120,7 @@ var TourneyMaker;
                     if (_this.user.uid != 0) {
                         _this.authService.login(_this.user).then(function (data) {
                             //login
+                            _this.registering = false;
                             _this.isLoggedIn = true;
                             _this.registerError = false;
                             _this.user.username = "";
@@ -152,4 +158,3 @@ var TourneyMaker;
     TourneyMaker.LandingPageController = LandingPageController;
     TourneyMaker.app.controller("LandingPageController", LandingPageController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=landing-page.controller.js.map

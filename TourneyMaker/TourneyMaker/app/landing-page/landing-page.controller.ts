@@ -15,7 +15,8 @@
         };
 
         private registerError: boolean = false;
-
+        private registering: boolean = false;
+        private loggingin: boolean = false;
 
         public static $inject = ["$scope", "$location", "UserService", "$log", "$cookies", "AuthService"]
 
@@ -49,11 +50,13 @@
 
             if (this.usernameLogin != "" && this.passwordLogin != "") {
 
+                this.loggingin = true;
                 this.user.username = this.usernameLogin;
                 this.user.password = this.passwordLogin;
 
                 this.authService.login(this.user).then((data) => {
                     //this.user = data.data;
+                    this.loggingin = false;
 
                     if (this.authService.userLoggedIn.uid != 0) {
                         this.invalidLogin = false;
@@ -133,6 +136,7 @@
 
         private createAccount(form, isLoggedIn): void {
 
+            this.registering = true;
             this.user.username = this.username;
             this.user.password = this.password;
             this.user.email = this.email;
@@ -146,6 +150,7 @@
                     if (this.user.uid != 0) {
                         this.authService.login(this.user).then((data) => {
                             //login
+                            this.registering = false;
                             this.isLoggedIn = true;
                             this.registerError = false;
                             this.user.username = "";
