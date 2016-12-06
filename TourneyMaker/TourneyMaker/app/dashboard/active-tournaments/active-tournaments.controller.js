@@ -12,8 +12,11 @@ var TourneyMaker;
                 username: ""
             };
             this.tournaments = new Array();
+            this.waiting = false;
             this.user.username = this.$routeParams.id;
+            this.waiting = true;
             this.userService.getAllTourneys(this.user).then(function (data) {
+                _this.waiting = false;
                 _this.tournaments = data.data;
             });
         }
@@ -26,4 +29,3 @@ var TourneyMaker;
     TourneyMaker.ActiveTournamentsController = ActiveTournamentsController;
     TourneyMaker.app.controller('ActiveTournamentsController', ActiveTournamentsController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=active-tournaments.controller.js.map

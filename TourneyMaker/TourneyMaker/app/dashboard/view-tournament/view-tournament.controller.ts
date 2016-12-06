@@ -36,8 +36,26 @@
 
         }
 
+        private updateScores(mid, s1, s2, tid): void {
+
+            var matchup = {
+                matchid: mid,
+                score1: s1,
+                score2: s2,
+            };
+
+            var tournament = {
+                tournamentid: tid,
+            }
+
+            this.bracketService.updateMatchups(matchup, tournament).then((data): any => {
+
+            });
+        }
+
         private sort(): void {
             for (var i = 0; i < this.bracket.length; i++) {
+                this.bracket[i].isEditing = false;
                 if (i % 2 == 0) {
                     this.top.push(this.bracket[i]);
                 }

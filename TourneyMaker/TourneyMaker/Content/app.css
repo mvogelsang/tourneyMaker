@@ -24,6 +24,11 @@
     height: 35px;
 }
 
+.table > tbody > tr > td {
+    overflow:hidden;
+    white-space: nowrap;
+}
+
 .content-wrapper {
     background-color: #eee;
 }
@@ -79,4 +84,17 @@ html {
 .final-match-16{
     position: absolute;
     margin-top: 150px;
+}
+
+.final-match-32{
+    position: absolute;
+    margin-top: 400px;
+}
+
+.score-width {
+    width: 50px;
+}
+
+.input-score-width {
+    width: 45px;
 }

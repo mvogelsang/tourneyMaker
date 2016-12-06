@@ -30,8 +30,21 @@ var TourneyMaker;
                 _this.sort();
             });
         }
+        ViewTournamentController.prototype.updateScores = function (mid, s1, s2, tid) {
+            var matchup = {
+                matchid: mid,
+                score1: s1,
+                score2: s2,
+            };
+            var tournament = {
+                tournamentid: tid,
+            };
+            this.bracketService.updateMatchups(matchup, tournament).then(function (data) {
+            });
+        };
         ViewTournamentController.prototype.sort = function () {
             for (var i = 0; i < this.bracket.length; i++) {
+                this.bracket[i].isEditing = false;
                 if (i % 2 == 0) {
                     this.top.push(this.bracket[i]);
                 }
@@ -69,4 +82,3 @@ var TourneyMaker;
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=view-tournament.controller.js.map

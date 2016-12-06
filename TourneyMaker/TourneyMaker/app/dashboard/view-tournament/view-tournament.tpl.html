@@ -1,8 +1,7 @@
 ﻿<div class="container-fluid content-wrapper">
     <div class="page-header">
         <div class="pull-right">
-            <button class="btn btn-success btn-flat" ng-click="vm.isEditingScore = false" ng-if="vm.isEditingScore">Save Scores</button>
-            <button class="btn btn-primary btn-flat" ng-click="vm.isEditingScore = true" ng-if="!vm.isEditingScore">Update Scores</button>
+            <button class="btn btn-success btn-flat">Save Scores</button>
             <a href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/active-tournaments" class="btn btn-default" >Close</a>
         </div>
         <h3>View Tournament </h3>
@@ -16,32 +15,62 @@
 
                     <div ng-repeat="matchup in round" ng-if="matchup.matchid != 0">
 
-                        <table class="table table-bordered table-hover" id="bracket" style="width: 100px">
+                        <table class="table table-bordered table-hover" id="bracket" style="width: 200px">
                             <tbody>
-                                <tr ng-click="vm.openProfile(matchup.player1)" class="clickable">
-                                    <td>
+                                <tr class="clickable">
+                                    <td ng-click="vm.openProfile(matchup.player1)">
                                         <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
                                     </td>
+                                    <td class="score-width" ng-click="matchup.isEditing = true">
+                                        <span ng-if="!matchup.isEditing">{{matchup.score1}}</span>
+                                        <span ng-if="matchup.isEditing && matchup.player1 != 0">
+                                            <input class="input-score-width" ng-model="matchup.score1" />
+                                        </span>
+                                    </td>
+                                    <td ng-if="matchup.isEditing">
+                                        <button class="btn btn-success btn-xs" ng-click="matchup.isEditing = false;
+                                                vm.updateScores(matchup.matchid, matchup.score1, matchup.score2, vm.tournament.tid)">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                    </td>
                                 </tr>
-                                <tr ng-click="vm.openProfile(matchup.player2)" class="clickable">
-                                    <td>
+                                <tr class="clickable">
+                                    <td ng-click="vm.openProfile(matchup.player2)">
                                         <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
+                                    </td>
+                                    <td class="score-width" ng-click="matchup.isEditing = true">
+                                        <span ng-if="!matchup.isEditing">{{matchup.score2}}</span>
+                                        <span ng-if="matchup.isEditing && matchup.player2 != 0">
+                                            <input class="input-score-width" ng-model="matchup.score2" />
+                                        </span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <table class="table table-bordered table-hover" id="bracket" style="width: 100px" ng-if="round[0].matchid == 0" ng-class="{'final-match-4': vm.tournament.numParticipants == 4, 'final-match-8' : vm.tournament.numParticipants == 8, 'final-match-16' : vm.tournament.numParticipants == 16}">
+                    <table class="table table-bordered table-hover" id="bracket" style="width: 200px" ng-if="round[0].matchid == 0" ng-class="{'final-match-4': vm.tournament.numParticipants == 4, 'final-match-8' : vm.tournament.numParticipants == 8, 'final-match-16' : vm.tournament.numParticipants == 16, 'final-match-32': vm.tournament.numParticipants == 32}">
                         <tbody>
-                            <tr ng-click="vm.openProfile(matchup.player1)" class="clickable">
-                                <td>
-                                    <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
+                            <tr class="clickable">
+                                <td ng-click="vm.openProfile(matchup.player1)">
+                                    <span ng-if="matchup.player1 != '0'">{{matchup.player1}}</span>
+                                </td>
+                                <td class="score-width" ng-click="matchup.isEditing = true">
+                                    <span ng-if="!matchup.isEditing">{{matchup.score1}}</span>
+                                    <span ng-if="matchup.isEditing && matchup.player1 != '0'">
+                                        <input class="input-score-width" ng-model="matchup.score1" />
+                                    </span>
                                 </td>
                             </tr>
-                            <tr ng-click="vm.openProfile(matchup.player2)" class="clickable">
-                                <td>
+                            <tr class="clickable">
+                                <td ng-click="vm.openProfile(matchup.player2)">
                                     <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
+                                </td>
+                                <td class="score-width" ng-click="matchup.isEditing = true">
+                                    <span ng-if="!matchup.isEditing">{{matchup.score2}}</span>
+                                    <span ng-if="matchup.isEditing && matchup.player2 != '0'">
+                                        <input class="input-score-width" ng-model="matchup.score2" />
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
@@ -55,21 +84,32 @@
 
                 <div ng-repeat="matchup in round">
 
-                    <table class="table table-bordered table-hover" id="bracket" style="width: 100px">
+                    <table class="table table-bordered table-hover" id="bracket" style="width: 200px">
                         <tbody>
-                            <tr ng-click="vm.openProfile(matchup.player1)" class="clickable">
-                                <td>
+                            <tr class="clickable">
+                                <td ng-click="vm.openProfile(matchup.player1)">
                                     <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
                                 </td>
+                                <td class="score-width" ng-click="matchup.isEditing = true">
+                                    <span ng-if="!matchup.isEditing">{{matchup.score1}}</span>
+                                    <span ng-if="matchup.isEditing && matchup.player1 != 0">
+                                        <input class="input-score-width" ng-model="matchup.score1" />
+                                    </span>
+                                </td>
                             </tr>
-                            <tr ng-click="vm.openProfile(matchup.player2)" class="clickable">
-                                <td>
+                            <tr class="clickable">
+                                <td ng-click="vm.openProfile(matchup.player2)">
                                     <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
+                                </td>
+                                <td class="score-width" ng-click="matchup.isEditing = true">
+                                    <span ng-if="!matchup.isEditing">{{matchup.score2}}</span>
+                                    <span ng-if="matchup.isEditing && matchup.player2 != 0">
+                                        <input class="input-score-width" ng-model="matchup.score2" />
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>

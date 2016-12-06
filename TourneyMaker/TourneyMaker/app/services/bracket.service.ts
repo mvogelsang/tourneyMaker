@@ -18,6 +18,10 @@
         getTournament(tourney): ng.IPromise<any> {
             return this.$http.post('Tourney/GetTourney', tourney);
         }
+
+        updateMatchups(matchup, tourney): ng.IPromise<any> {
+            return this.$http.post('Tourney/UpdateMatchup', {_m: matchup, _t: tourney})
+        }
     }
 
     app.service("BracketService", BracketService);

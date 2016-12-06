@@ -5,8 +5,8 @@
             <div class="box box-info">
                 <div class="box-header with-border">
                     <div class="box-title">
-                        Active &nbsp;<span class="badge bg-aqua" ng-if="filteredActiveTournaments.length != 0">{{filteredActiveTournaments.length}}</span> 
-                        <span ng-if="filteredActiveTournaments.length == 0"><span class="fa fa-spinner fa-spin"></span></span>
+                        Active &nbsp;<span class="badge bg-aqua" ng-if="!vm.waiting">{{filteredActiveTournaments.length}}</span> 
+                        <span ng-if="vm.waiting"><span class="fa fa-spinner fa-spin"></span></span>
                     </div>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" id="collapse-active-tournaments-button">
@@ -44,8 +44,8 @@
             <div class="box box-success">
                 <div class="box-header with-border">
                     <div class="box-title">
-                        Completed &nbsp;<span class="badge bg-green" ng-if="filteredCompletedTournaments.length != 0">{{filteredCompletedTournaments.length}}</span>
-                        <span ng-if="filteredCompletedTournaments.length == 0"><span class="fa fa-spinner fa-spin"></span></span>
+                        Completed &nbsp;<span class="badge bg-green" ng-if="!vm.waiting">{{filteredCompletedTournaments.length}}</span>
+                        <span ng-if="vm.waiting"><span class="fa fa-spinner fa-spin"></span></span>
                     </div>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" id="collapse-completed-tournaments-button">
