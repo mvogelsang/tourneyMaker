@@ -26,8 +26,8 @@ var TourneyMaker;
             this.tournament.commaDlParts = this.commaDlPartsArray.toString();
             this.bracketService.publishTournament(this.host, this.tournament).then(function (data) {
                 _this.publishing = false;
-                _this.tid = data.data.tid;
-                _this.$location.path("dashboard/" + _this.$routeParams.id + "view-tournament" + _this.tid);
+                _this.createdTournament = data.data;
+                _this.$location.path("dashboard/" + _this.$routeParams.id + "view-tournament" + _this.createdTournament.tid);
                 //navigate to view tournament 
             }).catch(function (error) {
                 //error

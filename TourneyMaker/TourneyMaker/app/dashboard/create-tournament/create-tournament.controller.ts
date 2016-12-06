@@ -16,7 +16,7 @@
         };
 
         private publishing: boolean = false;
-        private tid;
+        private createdTournament: Tournament;
         private commaDlPartsArray;
 
         public static $inject = ["$scope", "$location", "AuthService", "BracketService", "$routeParams"];
@@ -32,9 +32,9 @@
             this.bracketService.publishTournament(this.host, this.tournament).then((data) => {
 
                 this.publishing = false;
-                this.tid = data.data.tid;
+                this.createdTournament = data.data;
 
-                this.$location.path("dashboard/" + this.$routeParams.id + "view-tournament" + this.tid);
+                this.$location.path("dashboard/" + this.$routeParams.id + "view-tournament" + this.createdTournament.tid);
                 //navigate to view tournament 
             }).catch((error) => {
                 //error
