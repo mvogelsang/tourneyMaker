@@ -148,10 +148,7 @@ namespace TourneyMaker.Models
                 //loginUser will take the username parameter and accept an optional password parameter
                 SqlCommand cmd = new SqlCommand("dbo.loginUser", conn);
                 cmd.Parameters.AddWithValue("@username", username);
-                if (!string.IsNullOrEmpty(password))
-                {
-                    cmd.Parameters.AddWithValue("@password", password);
-                }
+                cmd.Parameters.AddWithValue("@password", password);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 using (SqlDataReader dr = cmd.ExecuteReader())
