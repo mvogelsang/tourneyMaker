@@ -31,9 +31,8 @@ namespace TourneyMaker.Models
             return temp;
         }
 
-        public void UpdateMatchup(List<Matchup> matches, int tid)
+        public void UpdateMatchup(Matchup m, int tid)
         {
-            foreach(Matchup m in matches) {
             if(m.winner > 0)
             {
                 SetWinner(tid, m.mid, m.winner);
@@ -50,7 +49,7 @@ namespace TourneyMaker.Models
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
-            }
+            
         }
 
         public void SetWinner(int tid, int mid, int winner)
