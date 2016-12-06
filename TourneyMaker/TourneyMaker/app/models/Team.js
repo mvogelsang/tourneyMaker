@@ -7,3 +7,4 @@ var TourneyMaker;
     }());
     TourneyMaker.Team = Team;
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=Team.js.map
