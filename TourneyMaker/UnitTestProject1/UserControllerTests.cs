@@ -20,7 +20,15 @@ namespace UnitTestProject1
         [TestMethod]
         public void RegisterUserTest()
         {
-            Assert.AreEqual(1, 0);
+            UserInfo TestUser = new UserInfo();
+            TestUser.email = GetRandomAlphaNumeric() + GetRandomAlphaNumeric() + "@test.com";
+            TestUser.password = "test123";
+            TestUser.username = GetRandomAlphaNumeric() + GetRandomAlphaNumeric();
+
+            UserController tested = new UserController();
+
+            String result = tested.RegisterUser(TestUser);
+            StringAssert.Contains(result, "uid");
         }
 
         [TestMethod]

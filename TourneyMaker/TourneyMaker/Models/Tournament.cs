@@ -11,24 +11,73 @@ namespace TourneyMaker.Models
 
     public class TourneyManager
     {
-        public TourneyManager()
-        {
-            //Functions
-            //GetAllTourneys
-            //CreateNewTourney
-        }
+        public TourneyManager() {}
 
-        public void UpdateMatchup(int tid, int mid, int player1score, int player2score, int winner)
+        public Tournament GetTournament(int tid)
         {
+            DataTable dt = new DataTable();
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.updateMatchup", conn);
+                SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            Tournament temp = new Tournament(dt.Rows[0]);
+
+            return temp;
+        }
+
+        public void UpdateMatchup(Matchup m, int tid)
+        {
+            if(m.winner > 0)
+            {
+                SetWinner(tid, m.mid, m.winner);
+            }
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.modifyMatchup", conn);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@mid", m.mid);
+                cmd.Parameters.AddWithValue("@p1score", m.p1score);
+                cmd.Parameters.AddWithValue("@p2score", m.p2score);
+                cmd.Parameters.AddWithValue("@winner", m.winner);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void SetWinner(int tid, int mid, int winner)
+        {
+            int nextmatch = 0;
+            int nextplayer = 0;
+            if(mid % 2 == 0)
+            {
+                nextmatch = (mid / 2) - 1;
+                nextplayer = 1;
+            }
+            else if(mid % 2 == 1)
+            {
+                nextmatch = ((mid + 1) / 2) - 1;
+                nextplayer = 2;
+            }
+            else
+            {
+                nextmatch = -1;
+            }
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.decideMatchup", conn);
                 cmd.Parameters.AddWithValue("@tid", tid);
                 cmd.Parameters.AddWithValue("@mid", mid);
-                cmd.Parameters.AddWithValue("@player1score", player1score);
-                cmd.Parameters.AddWithValue("@player2score", player2score);
                 cmd.Parameters.AddWithValue("@winner", winner);
+                cmd.Parameters.AddWithValue("@nextmatch", nextmatch);
+                cmd.Parameters.AddWithValue("@nextplayer", nextplayer);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
             }
@@ -268,7 +317,7 @@ namespace TourneyMaker.Models
                 }
                 else
                 {
-                    //error
+                    //host, already added
                 }
             }
         }
@@ -298,18 +347,12 @@ namespace TourneyMaker.Models
         {
             int tracker = 1;
             int divisor = 4;
-            if(numParticipants < 1)
-            {
-                numParticipants = participants.Count;
-            }
             bool go = true;
             int count = numParticipants - 2;
-            PositionList pl = new PositionList();
-            Position top = new Position(1);
-            Position bottom = new Position(2);
-            pl.Add(top);
-            pl.Add(bottom);
-            rounds.Add(pl);
+            DisplayList top = new DisplayList();
+            DisplayList bottom = new DisplayList();
+            rounds.Add(top);
+            rounds.Add(bottom);
             Display d;
          
             while (go)
@@ -318,15 +361,39 @@ namespace TourneyMaker.Models
                 {
                     d = new Display();
                     d.matchid = ml[count].mid;
-                    d.player1 = ml[count].player1;
-                    d.player2 = ml[count].player2;
-                    if (tracker == 1)
+                    if (!string.IsNullOrEmpty(ml[count].p1user))
                     {
-                        top.dl.Add(d);
+                        d.player1 = ml[count].p1user;                        
+                    }
+                    else if (!string.IsNullOrEmpty(ml[count].p1email))
+                    {
+                        d.player1 = ml[count].p1email;
                     }
                     else
                     {
-                        bottom.dl.Add(d);
+                        d.player1 = ml[count].p1.ToString();
+                    }
+
+                    if (!string.IsNullOrEmpty(ml[count].p2user))
+                    {
+                        d.player2 = ml[count].p2user;
+                    }
+                    else if (!string.IsNullOrEmpty(ml[count].p2email))
+                    {
+                        d.player2 = ml[count].p2email;
+                    }
+                    else
+                    {
+                        d.player2 = ml[count].p2.ToString();
+                    }
+
+                    if (tracker == 1)
+                    {
+                        top.Add(d);
+                    }
+                    else
+                    {
+                        bottom.Add(d);                     
                     }
                     count--;
                 }
@@ -339,25 +406,43 @@ namespace TourneyMaker.Models
                 {
                     divisor = divisor * 2;
                     tracker = 0;
-                    pl = new PositionList();
-                    top = new Position(1);
-                    bottom = new Position(2);
-                    pl.Add(top);
-                    pl.Add(bottom);
-                    rounds.Add(pl);
+                    top = new DisplayList();
+                    bottom = new DisplayList();
+                    rounds.Add(top);
+                    rounds.Add(bottom);
                 }
                 tracker++;
             }
-            //add final info to list for final matchup
-            pl = new PositionList();
-            Position final = new Position(0);
-            pl.Add(final);
-            rounds.Add(pl);
+            DisplayList final = new DisplayList();
+            rounds.Add(final);
             d = new Display();
             d.matchid = ml[count].mid;
-            d.player1 = ml[count].player1;
-            d.player2 = ml[count].player2;
-            final.dl.Add(d);
+            if (!string.IsNullOrEmpty(ml[count].p1user))
+            {
+                d.player1 = ml[count].p1user;
+            }
+            else if (!string.IsNullOrEmpty(ml[count].p1email))
+            {
+                d.player1 = ml[count].p1email;
+            }
+            else
+            {
+                d.player1 = ml[count].p1.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(ml[count].p2user))
+            {
+                d.player2 = ml[count].p2user;
+            }
+            else if (!string.IsNullOrEmpty(ml[count].p2email))
+            {
+                d.player2 = ml[count].p2email;
+            }
+            else
+            {
+                d.player2 = ml[count].p2.ToString();
+            }
+            final.Add(d);
         }
     }
 
@@ -388,8 +473,12 @@ namespace TourneyMaker.Models
     public class Matchup
     {
         public int mid { get; set; }
-        public string player1 { get; set; }
-        public string player2 { get; set; }
+        public int p1 { get; set; }
+        public int p2 { get; set; }
+        public string p1user { get; set; }
+        public string p2user { get; set; }
+        public string p1email { get; set; }
+        public string p2email { get; set; }
         public int p1score { get; set; }
         public int p2score { get; set; }
         public int winner { get; set; }
@@ -399,8 +488,12 @@ namespace TourneyMaker.Models
         public Matchup(DataRow dr)
         {
             mid = dr.Field<int>("mid");
-            player1 = dr["p1"].ToString();
-            player2 = dr["p2"].ToString();
+            p1 = dr.Field<int>("p1");
+            p2 = dr.Field<int>("p2");
+            p1user = dr["p1user"].ToString() ?? "";
+            p2user = dr["p2user"].ToString() ?? "";
+            p1email = dr["p1email"].ToString() ?? "";
+            p2email = dr["p2email"].ToString() ?? "";
             p1score = dr.Field<int>("p1score");
             p2score = dr.Field<int>("p2score");
             winner = dr.Field<int>("winner");
@@ -422,37 +515,10 @@ namespace TourneyMaker.Models
 
     public class DisplayList : List<Display>
     {
-        public DisplayList() { }
+        public DisplayList() {}
     }
 
-    public class Position
-    {
-        public DisplayList dl;
-        public string pos { get; set; }
-        public Position(int track)
-        {
-            dl = new DisplayList();
-            if(track == 1)
-            {
-                pos = "top";
-            }
-            else if(track == 2)
-            {
-                pos = "bottom";
-            }
-            else
-            {
-                pos = "final";
-            }
-        }
-    }
-
-    public class PositionList : List<Position>
-    {
-        public PositionList() { }
-    }
-
-    public class RoundsList : List<PositionList>
+    public class RoundsList : List<DisplayList>
     {
         public RoundsList() { }
     }

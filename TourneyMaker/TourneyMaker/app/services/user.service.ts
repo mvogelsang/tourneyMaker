@@ -7,6 +7,10 @@
 
         }
 
+        getAllTourneys(user): ng.IPromise<any> {
+            return this.$http.post('User/GetAllTourneys', user);
+        }
+
         getUserByUsername(user): ng.IPromise<any> {
             return this.$http.post("User/GetUser", user);
         }
