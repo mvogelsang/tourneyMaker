@@ -30,7 +30,18 @@ namespace UnitTestProject1
         [TestMethod]
         public void NewTourneyTest()
         {
-            Assert.AreEqual(1, 0);
+            TourneyController TestTourneyController = new TourneyController();
+            UserInfo TestUserInfo = new UserInfo();
+            Tournament TestTournament = new Tournament();
+
+            TestTournament.tname = GetRandomAlphaNumeric() + GetRandomAlphaNumeric();
+            TestTournament.numParticipants = 4;
+            TestTournament.host.email = "testuser@test.com";
+            TestTournament.commaDlParts = "testuser2@test.com,testuser3@test.com,testuser4@test.com";
+
+            TestUserInfo.email = "testuser@test.com";
+            Assert.IsNotNull(TestTourneyController.NewTourney(TestUserInfo, TestTournament));
+            
         }
 
     }
