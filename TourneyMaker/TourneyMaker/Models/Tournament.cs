@@ -360,8 +360,8 @@ namespace TourneyMaker.Models
             //pl.Add(top);
             //pl.Add(bottom);
             //rounds.Add(pl);
-            DisplayList top = new DisplayList();
-            DisplayList bottom = new DisplayList();
+            DisplayList top = new DisplayList(1);
+            DisplayList bottom = new DisplayList(2);
             rounds.Add(top);
             rounds.Add(bottom);
             Display d;
@@ -423,8 +423,8 @@ namespace TourneyMaker.Models
                     //pl.Add(top);
                     //pl.Add(bottom);
                     //rounds.Add(pl);
-                    top = new DisplayList();
-                    bottom = new DisplayList();
+                    top = new DisplayList(1);
+                    bottom = new DisplayList(2);
                     rounds.Add(top);
                     rounds.Add(bottom);
                 }
@@ -434,7 +434,7 @@ namespace TourneyMaker.Models
             //pl = new PositionList();
             //Position final = new Position(0);
             //pl.Add(final);
-            DisplayList final = new DisplayList();
+            DisplayList final = new DisplayList(0);
             rounds.Add(final);
             d = new Display();
             d.matchid = ml[count].mid;
@@ -536,21 +536,14 @@ namespace TourneyMaker.Models
 
     public class DisplayList : List<Display>
     {
-        public DisplayList() { }
-    }
-
-    public class Position
-    {
-        public DisplayList dl;
         public string pos { get; set; }
-        public Position(int track)
+        public DisplayList(int track)
         {
-            dl = new DisplayList();
-            if(track == 1)
+            if (track == 1)
             {
                 pos = "top";
             }
-            else if(track == 2)
+            else if (track == 2)
             {
                 pos = "bottom";
             }
@@ -561,10 +554,32 @@ namespace TourneyMaker.Models
         }
     }
 
-    public class PositionList : List<Position>
-    {
-        public PositionList() { }
-    }
+    //public class Position
+    //{
+    //    public DisplayList dl;
+    //    public string pos { get; set; }
+    //    public Position(int track)
+    //    {
+    //        dl = new DisplayList();
+    //        if(track == 1)
+    //        {
+    //            pos = "top";
+    //        }
+    //        else if(track == 2)
+    //        {
+    //            pos = "bottom";
+    //        }
+    //        else
+    //        {
+    //            pos = "final";
+    //        }
+    //    }
+    //}
+
+    //public class PositionList : List<Position>
+    //{
+    //    public PositionList() { }
+    //}
 
     public class RoundsList : List<DisplayList>
     {
