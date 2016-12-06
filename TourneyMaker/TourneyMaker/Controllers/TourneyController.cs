@@ -10,13 +10,6 @@ namespace TourneyMaker.Controllers
 {
     public class TourneyController : Controller
     {
-        [HttpPost]
-        public string GetTourneyInfo(UserInfo _data)
-        {
-            TourneyManager tm = new TourneyManager();
-            TournamentList tl = tm.GetAllTourneys(_data.email);
-            return JsonConvert.SerializeObject(tl);
-        }
 
         [HttpPost]
         public string NewTourney(UserInfo _data, Tournament _t)
@@ -28,9 +21,8 @@ namespace TourneyMaker.Controllers
             //commaDlParts, comma delineated string of participant emails (no spaces or other characters)
             TourneyManager tm = new TourneyManager();
             _t.host.email = _data.email;
-            tm.CreateNewTourney(_t);
-            TournamentList tl = tm.GetAllTourneys(_data.email);
-            return JsonConvert.SerializeObject(tl);
+            Tournament t = tm.CreateNewTourney(_t);
+            return JsonConvert.SerializeObject(t);
         }
 
         [HttpPost]
@@ -38,7 +30,7 @@ namespace TourneyMaker.Controllers
         {
             TourneyManager tm = new TourneyManager();
             tm.AddManager(_emails, tid);
-            TournamentList tl = tm.GetAllTourneys(_data.email);
+            TournamentList tl = tm.GetAllTourneys(_data.username);
             return JsonConvert.SerializeObject(tl);
         }
     }

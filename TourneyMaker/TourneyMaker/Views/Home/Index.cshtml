@@ -24,7 +24,7 @@
         <a href="#/dashboard" class="logo">TourneyMaker</a>
         <nav class="nav navbar navbar-static-top">
 
-            <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button" ng-show="lpc.isLoggedIn">
+            <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button" ng-show="lpc.isLoggedIn" id="collapse-side-nav-link">
                 <span class="sr-only">Toggle Navigation</span>
             </a>
 
@@ -35,10 +35,10 @@
                         <a href=""><i class="fa fa-bell-o"></i></a>
                     </li>*@
                     <li>
-                        <a href="" style="pointer-events:none">{{lpc.authService.userLoggedIn.username}}</a>
+                        <a href="" style="pointer-events:none">Welcome {{lpc.authService.userLoggedIn.username}}</a>
                     </li>
                     <li>
-                        <a href="#/home" ng-click="lpc.logout()">Logout</a>
+                        <a href="#/home" ng-click="lpc.logout()" id="logout-link">Logout</a>
                     </li>
                 </ul>
 
@@ -56,22 +56,22 @@
                                <div class="form-group">
                                    <div class="input-group">
                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                       <input name="username" class="form-control" type="text" placeholder="Username" ng-model="lpc.usernameLogin" required/>
+                                       <input name="username" class="form-control" type="text" placeholder="Username" ng-model="lpc.usernameLogin" required id="login-username-input"/>
                                    </div>
                                </div>
 
                                <div>
                                    <div class="input-group">
                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                       <input name="password" class="form-control" type="password" placeholder="Password" ng-model="lpc.passwordLogin" required/>
+                                       <input name="password" class="form-control" type="password" placeholder="Password" ng-model="lpc.passwordLogin" required id="login-password-input"/>
                                    </div>
                                </div>
-                               <div class="checkbox">
+                               @*<div class="checkbox">
                                    <label><input type="checkbox" value=""/>Remember Me</label>
-                               </div>
+                               </div>*@
                            </li>
                            <li class="user-footer">
-                               <button class="btn btn-primary" ng-click="lpc.login(lpc.usernameLogin, lpc.passwordLogin, lpc.loginForm)">Login</button>
+                               <button class="btn btn-primary btn-flat" ng-click="lpc.login(lpc.usernameLogin, lpc.passwordLogin, lpc.loginForm)" id="login-button">Login</button>
                            </li>
                        </ul>
                    </li>
@@ -86,18 +86,18 @@
             <ul class="sidebar-menu">
                 <li class="header">Participant</li>
                 <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/active-tournaments'}">
-                    <a href="" ng-click="lpc.setActiveTourmaments()">Tournaments</a>
+                    <a href="" ng-click="lpc.setActiveTourmaments()" id="tournaments-link">Tournaments</a>
                 </li>
                 @*<li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/completed-tournaments'}">
                     <a href="" ng-click="lpc.setCompletedTourmaments()">Completed Tournaments</a>
                 </li>*@
-                <li class="header">Profile</li>
+                <li class="header">Personal Information</li>
                 <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/profile'}">
-                    <a href="" ng-click="lpc.setProfile()">Profile</a>
+                    <a href="" ng-click="lpc.setProfile()" id="profile-link">Profile</a>
                 </li>
                 <li class="header">Management</li>
                 <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/tournament-management'}">
-                    <a href="" ng-click="lpc.setTournamentManagement()">Tournament Management</a>
+                    <a href="" ng-click="lpc.setTournamentManagement()" id="tournament-management-link">Tournament Management</a>
                 </li>
             </ul>
         </section>
@@ -112,6 +112,9 @@
     <div ng-if="!lpc.isLoggedIn">
         <div ng-if="lpc.invalidLogin">
             <div class="alert-danger text-center" style="font-size:1.25em">Username or password is incorrect</div>
+        </div>
+        <div ng-if="lpc.registerError">
+            <div class="alert-danger text-center" style="font-size:1.25em">Username already exists</div>
         </div>
         <!-- Controller doesn't need to be added on each page because it is referenced in the app.routing.ts file when this particular page is loaded -->
         <div class="container">
@@ -135,7 +138,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input name="username" class="form-control" type="text" placeholder="Username" ng-model="lpc.username" required ng-maxlength="12" ng-pattern="/^[a-zA-Z0-9]*$/" />
+                                        <input name="username" class="form-control" type="text" placeholder="Username" ng-model="lpc.username" required ng-maxlength="12" ng-pattern="/^[a-zA-Z0-9]*$/" id="reg-username-input"/>
                                     </div>
                                     <div ng-messages="lpc.registerForm.username.$error" ng-if="lpc.registerForm.username.$dirty" class="pull-right text-danger">
                                         <div ng-message="required">
@@ -153,7 +156,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-at"></i></span>
-                                        <input name="email" class="form-control" type="email" placeholder="Email" ng-model="lpc.email" required />
+                                        <input name="email" class="form-control" type="email" placeholder="Email" ng-model="lpc.email" required id="reg-email-input"/>
                                     </div>
                                     <div ng-messages="lpc.registerForm.email.$error" ng-if="lpc.registerForm.email.$dirty" class="pull-right text-danger">
                                         <div ng-message="required">
@@ -168,7 +171,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                        <input name="password" class="form-control" type="password" placeholder="Password" ng-model="lpc.password" required ng-minlength="8" ng-maxlength="20" , ng-pattern="/^[a-zA-Z0-9]*$/" />
+                                        <input name="password" class="form-control" type="password" placeholder="Password" ng-model="lpc.password" required ng-minlength="8" ng-maxlength="20" , ng-pattern="/^[a-zA-Z0-9]*$/" id="reg-password1-input"/>
                                     </div>
                                     <div ng-messages="lpc.registerForm.password.$error" ng-if="lpc.registerForm.password.$dirty" class="pull-right text-danger">
                                         <div ng-message="required">
@@ -189,7 +192,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                        <input class="form-control" type="password" placeholder="Retype Password" ng-model="lpc.rePassword" required ng-change="lpc.validatePassword(lpc.registerForm)" />
+                                        <input class="form-control" type="password" placeholder="Retype Password" ng-model="lpc.rePassword" required ng-change="lpc.validatePassword(lpc.registerForm)" id="reg-password2-input"/>
                                     </div>
                                     <div class="pull-right text-danger" ng-show="lpc.validPassError">
                                         Passwords do not match
@@ -203,7 +206,10 @@
                                     <a href="#/dashboard/1/active-tournaments" class="btn btn-default">Sign in</a>
                                 </div>-->
                                     <div class="text-center">
-                                        <button class="btn btn-success" ng-click="lpc.createAccount(lpc.registerForm, lpc.isLoggedIn);">Create Account</button>
+                                        <button class="btn btn-success btn-flat" ng-click="lpc.createAccount(lpc.registerForm, lpc.isLoggedIn);" id="create-account-button">
+                                            <span ng-if="!lpc.registering">Create Account</span>
+                                            <span ng-if="lpc.registering"><i class="fa fa-spinner fa-spin"></i></span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

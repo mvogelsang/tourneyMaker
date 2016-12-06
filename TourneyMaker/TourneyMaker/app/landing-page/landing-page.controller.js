@@ -16,13 +16,18 @@ var TourneyMaker;
             this.authService = authService;
             //will be set 
             this.isLoggedIn = false;
+            this.usernameLogin = "";
+            this.passwordLogin = "";
             this.invalidLogin = false;
             this.user = {
                 username: "",
                 password: "",
-                email: ""
+                email: "",
+                uid: 0
             };
             this.registerError = false;
+            this.registering = false;
+            this.loggingin = false;
             this.validPassError = false;
             //$scope.$watch(() => {
             //    return this.$cookies;
@@ -39,20 +44,26 @@ var TourneyMaker;
         }
         LandingPageController.prototype.login = function (username, password) {
             var _this = this;
-            this.user.username = this.usernameLogin;
-            this.user.password = this.passwordLogin;
-            this.authService.login(this.user).then(function (data) {
-                //this.user = data.data;
-                if (_this.authService.userLoggedIn.email != "" && _this.authService.userLoggedIn.username != "") {
-                    _this.invalidLogin = false;
-                    _this.isLoggedIn = true;
-                }
-                else {
-                    _this.invalidLogin = true;
-                }
-            }).catch(function (error) {
-                //error
-            });
+            if (this.usernameLogin != "" && this.passwordLogin != "") {
+                this.loggingin = true;
+                this.user.username = this.usernameLogin;
+                this.user.password = this.passwordLogin;
+                this.authService.login(this.user).then(function (data) {
+                    //this.user = data.data;
+                    _this.loggingin = false;
+                    if (_this.authService.userLoggedIn.uid != 0) {
+                        _this.invalidLogin = false;
+                        _this.isLoggedIn = true;
+                        _this.user.username = "";
+                        _this.user.password = "";
+                    }
+                    else {
+                        _this.invalidLogin = true;
+                    }
+                }).catch(function (error) {
+                    //error
+                });
+            }
             //.then((data) => {
             //    this.user = data.data;
             //}).catch((error) => {
@@ -97,6 +108,7 @@ var TourneyMaker;
         };
         LandingPageController.prototype.createAccount = function (form, isLoggedIn) {
             var _this = this;
+            this.registering = true;
             this.user.username = this.username;
             this.user.password = this.password;
             this.user.email = this.email;
@@ -104,13 +116,21 @@ var TourneyMaker;
                 //POST to database
                 //GET userID and append to dashboard (/dashboard:{userId})
                 this.userService.registerUser(this.user).then(function (data) {
-                    _this.authService.login(_this.user).then(function (data) {
-                        //login
-                        _this.isLoggedIn = true;
-                    }).catch(function (error) {
-                    });
-                }).catch(function (error) {
+                    _this.user = data.data;
+                    if (_this.user.uid != 0) {
+                        _this.authService.login(_this.user).then(function (data) {
+                            //login
+                            _this.registering = false;
+                            _this.isLoggedIn = true;
+                            _this.registerError = false;
+                            _this.user.username = "";
+                            _this.user.password = "";
+                            _this.user.email = "";
+                        }).catch(function (error) {
+                        });
+                    }
                     _this.registerError = true;
+                }).catch(function (error) {
                 });
             }
             else {
@@ -138,4 +158,3 @@ var TourneyMaker;
     TourneyMaker.LandingPageController = LandingPageController;
     TourneyMaker.app.controller("LandingPageController", LandingPageController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=landing-page.controller.js.map
