@@ -26,6 +26,14 @@ namespace TourneyMaker.Controllers
         }
 
         [HttpPost]
+        public string GetTourney(int tid)
+        {
+            TourneyManager tm = new TourneyManager();
+            Tournament t = tm.GetTournament(tid);
+            return JsonConvert.SerializeObject(t);
+        }
+
+        [HttpPost]
         public string AddManagers(UserInfo _data, string _emails, int tid)
         {
             TourneyManager tm = new TourneyManager();

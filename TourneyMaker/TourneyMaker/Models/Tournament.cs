@@ -18,6 +18,24 @@ namespace TourneyMaker.Models
             //CreateNewTourney
         }
 
+        public Tournament GetTournament(int tid)
+        {
+            DataTable dt = new DataTable();
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            Tournament temp = new Tournament(dt.Rows[0]);
+
+            return temp;
+        }
+
         public void UpdateMatchup(int tid, int mid, int player1score, int player2score, int winner)
         {
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
@@ -268,7 +286,7 @@ namespace TourneyMaker.Models
                 }
                 else
                 {
-                    //error
+                    //host, already added
                 }
             }
         }
@@ -298,10 +316,6 @@ namespace TourneyMaker.Models
         {
             int tracker = 1;
             int divisor = 4;
-            if(numParticipants < 1)
-            {
-                numParticipants = participants.Count;
-            }
             bool go = true;
             int count = numParticipants - 2;
             PositionList pl = new PositionList();
