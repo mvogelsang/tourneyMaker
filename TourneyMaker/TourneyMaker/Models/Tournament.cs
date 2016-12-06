@@ -31,23 +31,25 @@ namespace TourneyMaker.Models
             return temp;
         }
 
-        public void UpdateMatchup(Matchup m, int tid)
+        public void UpdateMatchup(List<Matchup> matches, int tid)
         {
+            foreach(Matchup m in matches) {
             if(m.winner > 0)
             {
                 SetWinner(tid, m.mid, m.winner);
             }
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.modifyMatchup", conn);
-                cmd.Parameters.AddWithValue("@tid", tid);
-                cmd.Parameters.AddWithValue("@mid", m.mid);
-                cmd.Parameters.AddWithValue("@p1score", m.p1score);
-                cmd.Parameters.AddWithValue("@p2score", m.p2score);
-                cmd.Parameters.AddWithValue("@winner", m.winner);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.ExecuteNonQuery();
+                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.modifyMatchup", conn);
+                    cmd.Parameters.AddWithValue("@tid", tid);
+                    cmd.Parameters.AddWithValue("@mid", m.mid);
+                    cmd.Parameters.AddWithValue("@p1score", m.p1score);
+                    cmd.Parameters.AddWithValue("@p2score", m.p2score);
+                    cmd.Parameters.AddWithValue("@winner", m.winner);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
@@ -373,6 +375,7 @@ namespace TourneyMaker.Models
                     {
                         d.player1 = ml[count].p1.ToString();
                     }
+                    d.score1 = ml[count].p1score;
 
                     if (!string.IsNullOrEmpty(ml[count].p2user))
                     {
@@ -386,6 +389,7 @@ namespace TourneyMaker.Models
                     {
                         d.player2 = ml[count].p2.ToString();
                     }
+                    d.score2 = ml[count].p2score;
 
                     if (tracker == 1)
                     {
@@ -429,6 +433,7 @@ namespace TourneyMaker.Models
             {
                 d.player1 = ml[count].p1.ToString();
             }
+            d.score1 = ml[count].p1score;
 
             if (!string.IsNullOrEmpty(ml[count].p2user))
             {
@@ -442,6 +447,7 @@ namespace TourneyMaker.Models
             {
                 d.player2 = ml[count].p2.ToString();
             }
+            d.score2 = ml[count].p2score;
             final.Add(d);
         }
     }
@@ -510,6 +516,8 @@ namespace TourneyMaker.Models
         public int matchid { get; set; }
         public string player1 { get; set; }
         public string player2 { get; set; }
+        public int score1 { get; set; }
+        public int score2 { get; set; }
         public Display() { }
     }
 

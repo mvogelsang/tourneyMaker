@@ -34,10 +34,10 @@ namespace TourneyMaker.Controllers
         }
 
         [HttpPost]
-        public string UpdateMatchup(Matchup m, TourneyInt _t)
+        public string UpdateMatchup(List<Matchup> matches, TourneyInt _t)
         {
             TourneyManager tm = new TourneyManager();
-            tm.UpdateMatchup(m, _t.tid);
+            tm.UpdateMatchup(matches, _t.tid);
             Tournament t = tm.GetTournament(_t.tid);
             return JsonConvert.SerializeObject(t);
         }
