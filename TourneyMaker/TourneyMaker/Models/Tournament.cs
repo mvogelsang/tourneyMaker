@@ -36,16 +36,17 @@ namespace TourneyMaker.Models
             return temp;
         }
 
-        public void UpdateMatchup(int tid, int mid, int player1score, int player2score)
+        public void UpdateMatchup(Matchup m, int tid)
         {
+
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.updateMatchup", conn);
                 cmd.Parameters.AddWithValue("@tid", tid);
-                cmd.Parameters.AddWithValue("@mid", mid);
-                cmd.Parameters.AddWithValue("@player1score", player1score);
-                cmd.Parameters.AddWithValue("@player2score", player2score);
+                cmd.Parameters.AddWithValue("@mid", m.mid);
+                cmd.Parameters.AddWithValue("@p1score", m.p1score);
+                cmd.Parameters.AddWithValue("@p2score", m.p2score);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
             }
