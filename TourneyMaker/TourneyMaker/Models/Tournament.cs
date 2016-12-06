@@ -38,15 +38,19 @@ namespace TourneyMaker.Models
 
         public void UpdateMatchup(Matchup m, int tid)
         {
-
+            if(m.winner > 0)
+            {
+                SetWinner(tid, m.mid, m.winner);
+            }
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.updateMatchup", conn);
+                SqlCommand cmd = new SqlCommand("dbo.modifyMatchup", conn);
                 cmd.Parameters.AddWithValue("@tid", tid);
                 cmd.Parameters.AddWithValue("@mid", m.mid);
                 cmd.Parameters.AddWithValue("@p1score", m.p1score);
                 cmd.Parameters.AddWithValue("@p2score", m.p2score);
+                cmd.Parameters.AddWithValue("@winner", m.winner);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
             }
@@ -350,12 +354,16 @@ namespace TourneyMaker.Models
             int divisor = 4;
             bool go = true;
             int count = numParticipants - 2;
-            PositionList pl = new PositionList();
-            Position top = new Position(1);
-            Position bottom = new Position(2);
-            pl.Add(top);
-            pl.Add(bottom);
-            rounds.Add(pl);
+            //PositionList pl = new PositionList();
+            //Position top = new Position(1);
+            //Position bottom = new Position(2);
+            //pl.Add(top);
+            //pl.Add(bottom);
+            //rounds.Add(pl);
+            DisplayList top = new DisplayList();
+            DisplayList bottom = new DisplayList();
+            rounds.Add(top);
+            rounds.Add(bottom);
             Display d;
          
             while (go)
@@ -392,11 +400,11 @@ namespace TourneyMaker.Models
 
                     if (tracker == 1)
                     {
-                        top.dl.Add(d);
+                        top.Add(d);
                     }
                     else
                     {
-                        bottom.dl.Add(d);                     
+                        bottom.Add(d);                     
                     }
                     count--;
                 }
@@ -409,20 +417,25 @@ namespace TourneyMaker.Models
                 {
                     divisor = divisor * 2;
                     tracker = 0;
-                    pl = new PositionList();
-                    top = new Position(1);
-                    bottom = new Position(2);
-                    pl.Add(top);
-                    pl.Add(bottom);
-                    rounds.Add(pl);
+                    //pl = new PositionList();
+                    //top = new Position(1);
+                    //bottom = new Position(2);
+                    //pl.Add(top);
+                    //pl.Add(bottom);
+                    //rounds.Add(pl);
+                    top = new DisplayList();
+                    bottom = new DisplayList();
+                    rounds.Add(top);
+                    rounds.Add(bottom);
                 }
                 tracker++;
             }
             //add final info to list for final matchup
-            pl = new PositionList();
-            Position final = new Position(0);
-            pl.Add(final);
-            rounds.Add(pl);
+            //pl = new PositionList();
+            //Position final = new Position(0);
+            //pl.Add(final);
+            DisplayList final = new DisplayList();
+            rounds.Add(final);
             d = new Display();
             d.matchid = ml[count].mid;
             if (!string.IsNullOrEmpty(ml[count].p1user))
@@ -450,7 +463,7 @@ namespace TourneyMaker.Models
             {
                 d.player2 = ml[count].p2.ToString();
             }
-            final.dl.Add(d);
+            final.Add(d);
         }
     }
 
@@ -553,7 +566,7 @@ namespace TourneyMaker.Models
         public PositionList() { }
     }
 
-    public class RoundsList : List<PositionList>
+    public class RoundsList : List<DisplayList>
     {
         public RoundsList() { }
     }
