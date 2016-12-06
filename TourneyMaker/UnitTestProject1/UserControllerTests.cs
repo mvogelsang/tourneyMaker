@@ -34,7 +34,13 @@ namespace UnitTestProject1
         [TestMethod]
         public void LoginUserTest()
         {
-            Assert.AreEqual(1, 0);
+            UserInfo TestUser = new UserInfo();
+            UserController TestUserController = new UserController();
+
+            TestUser.username = "testname";
+            TestUser.password = "testpass";
+
+            Assert.IsNotNull(TestUserController.LoginUser(TestUser));
         }
 
         [TestMethod]
