@@ -17,8 +17,8 @@ var TourneyMaker;
                 _this.tournaments = data.data;
             });
         }
-        ActiveTournamentsController.prototype.viewTournament = function () {
-            this.$location.path('/dashboard/' + this.authService.userLoggedIn.username + '/view-tournament/' + this.tid);
+        ActiveTournamentsController.prototype.viewTournament = function (tid) {
+            this.$location.path('/dashboard/view-tournament/' + tid);
         };
         ActiveTournamentsController.$inject = ['$location', 'AuthService', "BracketService", "UserService", "$routeParams"];
         return ActiveTournamentsController;
@@ -26,4 +26,3 @@ var TourneyMaker;
     TourneyMaker.ActiveTournamentsController = ActiveTournamentsController;
     TourneyMaker.app.controller('ActiveTournamentsController', ActiveTournamentsController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=active-tournaments.controller.js.map

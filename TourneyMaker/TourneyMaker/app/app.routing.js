@@ -110,7 +110,7 @@ var TourneyMaker;
                     }]
             }
         })
-            .when('/dashboard/:id/view-tournament/:id', {
+            .when('/dashboard/view-tournament/:id', {
             templateUrl: 'app/dashboard/view-tournament/view-tournament.tpl.html',
             controller: TourneyMaker.ViewTournamentController,
             controllerAs: 'vm',
@@ -130,4 +130,3 @@ var TourneyMaker;
             .otherwise({ redirectTo: '/' });
     });
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=app.routing.js.map

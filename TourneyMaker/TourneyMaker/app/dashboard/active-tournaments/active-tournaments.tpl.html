@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="tournament in vm.tournaments | filter: {completed: '0'} as filteredActiveTournaments" class="clickable">
+                            <tr ng-repeat="tournament in vm.tournaments | filter: {completed: '0'} as filteredActiveTournaments" class="clickable" ng-click="vm.viewTournament(tournament.tid)">
                                 <td>{{tournament.tname}}</td>
                                 <td>
                                     {{tournament.numParticipants}} person tournament

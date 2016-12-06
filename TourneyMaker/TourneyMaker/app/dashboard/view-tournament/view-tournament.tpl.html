@@ -1,11 +1,11 @@
 ﻿<div class="container-fluid content-wrapper">
     <div class="page-header">
         <div class="pull-right">
-            <button class="btn btn-success" ng-click="vm.isEditingScore = false" ng-if="vm.isEditingScore">Save Scores</button>
-            <button class="btn btn-primary" ng-click="vm.isEditingScore = true" ng-if="!vm.isEditingScore">Update Scores</button>
+            <button class="btn btn-success btn-flat" ng-click="vm.isEditingScore = false" ng-if="vm.isEditingScore">Save Scores</button>
+            <button class="btn btn-primary btn-flat" ng-click="vm.isEditingScore = true" ng-if="!vm.isEditingScore">Update Scores</button>
             <a href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/active-tournaments" class="btn btn-default" >Close</a>
         </div>
-        <h3>View Tournament 1</h3>
+        <h3>View Tournament </h3>
     </div>  
 
     <!-- Bracket -->

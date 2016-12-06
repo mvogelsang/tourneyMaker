@@ -7,16 +7,27 @@
 
         private bracket;
 
+        private tourney = {
+            tid: 0
+        }
 
-        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService"];
+        private tournament: Tournament;
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService) {
-            bracketService.getBracket().then((data): any => {
-                this.bracket = data.data;
-            }).catch((error): any => {
-                this.$log.error("There was an error loading bracket");
-                this.$log.error(error);
-                });
+
+        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams"];
+
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService, private $routeParams) {
+            //bracketService.getBracket().then((data): any => {
+            //    this.bracket = data.data;
+            //}).catch((error): any => {
+            //    this.$log.error("There was an error loading bracket");
+            //    this.$log.error(error);
+            //    });
+            this.tourney.tid = this.$routeParams.id;
+
+            this.bracketService.getTournament(this.tourney).then((data): any => {
+                this.tournament = data.data;
+            });
 
 
         }

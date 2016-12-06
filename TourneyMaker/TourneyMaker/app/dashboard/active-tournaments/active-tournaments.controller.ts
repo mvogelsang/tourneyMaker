@@ -16,8 +16,8 @@
             });
         }
 
-        viewTournament(): void {
-            this.$location.path('/dashboard/' + this.authService.userLoggedIn.username + '/view-tournament/' + this.tid);
+        viewTournament(tid): void {
+            this.$location.path('/dashboard/view-tournament/' + tid);
         }
 
     }

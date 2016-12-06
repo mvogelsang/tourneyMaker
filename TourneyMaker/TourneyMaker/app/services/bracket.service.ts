@@ -14,6 +14,10 @@
         getBracket(): ng.IPromise<any> {
             return this.$http.get("Models/bracket.json");
         }
+
+        getTournament(tourney): ng.IPromise<any> {
+            return this.$http.post('Tournament/GetTourney', tourney);
+        }
     }
 
     app.service("BracketService", BracketService);

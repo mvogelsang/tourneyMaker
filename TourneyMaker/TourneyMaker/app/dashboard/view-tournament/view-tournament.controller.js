@@ -1,7 +1,7 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var ViewTournamentController = (function () {
-        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService) {
+        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService, $routeParams) {
             var _this = this;
             this.$scope = $scope;
             this.$location = $location;
@@ -9,13 +9,21 @@ var TourneyMaker;
             this.bracketService = bracketService;
             this.$log = $log;
             this.authService = authService;
+            this.$routeParams = $routeParams;
             this.isEditingScore = false;
             this.offset = 50;
-            bracketService.getBracket().then(function (data) {
-                _this.bracket = data.data;
-            }).catch(function (error) {
-                _this.$log.error("There was an error loading bracket");
-                _this.$log.error(error);
+            this.tourney = {
+                tid: 0
+            };
+            //bracketService.getBracket().then((data): any => {
+            //    this.bracket = data.data;
+            //}).catch((error): any => {
+            //    this.$log.error("There was an error loading bracket");
+            //    this.$log.error(error);
+            //    });
+            this.tourney.tid = this.$routeParams.id;
+            this.bracketService.getTournament(this.tourney).then(function (data) {
+                _this.tournament = data.data;
             });
         }
         ViewTournamentController.prototype.openProfile = function (profile) {
@@ -41,10 +49,9 @@ var TourneyMaker;
                 this.isEditingScore = true;
             }
         };
-        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService"];
+        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams"];
         return ViewTournamentController;
     }());
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=view-tournament.controller.js.map
