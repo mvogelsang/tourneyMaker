@@ -36,7 +36,7 @@ namespace TourneyMaker.Models
             return temp;
         }
 
-        public void UpdateMatchup(int tid, int mid, int player1score, int player2score, int winner)
+        public void UpdateMatchup(int tid, int mid, int player1score, int player2score)
         {
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
@@ -46,7 +46,38 @@ namespace TourneyMaker.Models
                 cmd.Parameters.AddWithValue("@mid", mid);
                 cmd.Parameters.AddWithValue("@player1score", player1score);
                 cmd.Parameters.AddWithValue("@player2score", player2score);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void SetWinner(int tid, int mid, int winner)
+        {
+            int nextmatch = 0;
+            if (mid < 3)
+            {
+                nextmatch = 0;
+            }
+            else if(mid % 2 == 0)
+            {
+                nextmatch = mid / 2;
+            }
+            else if(mid % 2 == 1)
+            {
+                nextmatch = (mid + 1) / 2;
+            }
+            else
+            {
+                nextmatch = -1;
+            }
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.decideMatchup", conn);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@mid", mid);
                 cmd.Parameters.AddWithValue("@winner", winner);
+                cmd.Parameters.AddWithValue("@nextmatch", nextmatch);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
             }
