@@ -42,7 +42,7 @@ namespace TourneyMaker.Models
             return ui;
         }
 
-        public UserInfo GetUser2(string username)
+        public UserInfo GetUsername(string username)
         {
             UserInfo ui = new UserInfo();
             //get info on user from DB based on username
@@ -96,16 +96,15 @@ namespace TourneyMaker.Models
             return isAvailable;
         }
 
-        public void modifyUserProfile(int uid, string email, string name, string bio)
+        public void modifyUserProfile(UserInfo info)
         {
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.modifyUserProfile", conn);
-                cmd.Parameters.AddWithValue("@uid", uid);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Parameters.AddWithValue("@name", name);
-                cmd.Parameters.AddWithValue("@bio", bio);
+                cmd.Parameters.AddWithValue("@uid", info.uid);
+                cmd.Parameters.AddWithValue("@name", info.name);
+                cmd.Parameters.AddWithValue("@bio", info.bio);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.ExecuteNonQuery();
