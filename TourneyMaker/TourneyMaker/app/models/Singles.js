@@ -7,4 +7,3 @@ var TourneyMaker;
     }());
     TourneyMaker.Singles = Singles;
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=Singles.js.map
