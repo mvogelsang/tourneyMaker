@@ -34,7 +34,7 @@
         save(): void {
             
             this.userService.modifyUserProfile(this.user).then((data): any => {
-
+                this.user = data.data
             });
         }
 

@@ -19,6 +19,7 @@ var TourneyMaker;
             };
             this.newName = "New Tournament";
             this.publishing = false;
+            this.error = false;
         }
         CreateTournamentController.prototype.updateName = function (name) {
             this.newName = name;
@@ -31,7 +32,12 @@ var TourneyMaker;
             this.bracketService.publishTournament(this.host, this.tournament).then(function (data) {
                 _this.publishing = false;
                 _this.createdTournament = data.data;
-                _this.$location.path("dashboard/view-tournament/" + _this.createdTournament.tid);
+                if (_this.createdTournament.tid != 0) {
+                    _this.$location.path("dashboard/view-tournament/" + _this.createdTournament.tid);
+                }
+                else {
+                    _this.error = true;
+                }
                 //navigate to view tournament 
             }).catch(function (error) {
                 //error
