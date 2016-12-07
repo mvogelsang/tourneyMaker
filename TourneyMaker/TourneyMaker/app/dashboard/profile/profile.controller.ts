@@ -34,7 +34,10 @@
         save(): void {
             
             this.userService.modifyUserProfile(this.user).then((data): any => {
-                this.user = data.data
+                this.userService.getUserByUsername(this.user).then((data): any => {
+                    this.user = data.data;
+                    this.$route.reload();
+                });
             });
         }
 
