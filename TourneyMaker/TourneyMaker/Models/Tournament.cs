@@ -279,7 +279,6 @@ namespace TourneyMaker.Models
         public RoundsList rounds { get; set; }
         public string commaDlParts { get; set; }
         public int completed { get; set; }
-        public int winner { get; set; }
         public string winnername { get; set; }
 
         public Tournament()
@@ -390,16 +389,28 @@ namespace TourneyMaker.Models
                 ml.Add(temp);
                 if(completed == 1 && temp.mid == 0)
                 {
-                    winner = temp.winner;
                     if(temp.winner == 1)
                     {
-                        winnername = temp.p1user;
+                        if (!string.IsNullOrEmpty(temp.p1user))
+                        {
+                            winnername = temp.p1user;
+                        }
+                        else
+                        {
+                            winnername = temp.p1email;
+                        }
                     }
                     else
                     {
-                        winnername = temp.p2user;
-                    }
-                    
+                        if (!string.IsNullOrEmpty(temp.p2user))
+                        {
+                            winnername = temp.p2user;
+                        }
+                        else
+                        {
+                            winnername = temp.p2email;
+                        }
+                    }               
                 }
             }
         }
