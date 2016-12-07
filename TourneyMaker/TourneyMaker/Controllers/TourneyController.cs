@@ -21,6 +21,7 @@ namespace TourneyMaker.Controllers
             //commaDlParts, comma delineated string of participant emails (no spaces or other characters)
             TourneyManager tm = new TourneyManager();
             _t.host.email = _data.email;
+            _t.host.username = _data.username;
             Tournament t = tm.CreateNewTourney(_t);
             return JsonConvert.SerializeObject(t);
         }

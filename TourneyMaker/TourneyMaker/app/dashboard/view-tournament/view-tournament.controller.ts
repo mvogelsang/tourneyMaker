@@ -17,6 +17,8 @@
 
         private user = {
             username: "",
+            password: "",
+            email: ""
         };
 
 

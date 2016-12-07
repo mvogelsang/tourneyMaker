@@ -26,6 +26,8 @@ var TourneyMaker;
             };
             this.user = {
                 username: "",
+                password: "",
+                email: ""
             };
             this.user.username = this.$cookies.get('uid');
             this.tourney.tid = this.$routeParams.id;

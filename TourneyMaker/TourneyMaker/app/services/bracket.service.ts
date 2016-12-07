@@ -16,7 +16,7 @@
         }
 
         getTournament(user, tourney): ng.IPromise<any> {
-            return this.$http.post('Tourney/GetTourney', {_u: user, _t: tourney});
+            return this.$http.post('Tourney/GetTourney', {_data: user, _t: tourney});
         }
 
         updateMatchups(matchup, tourney): ng.IPromise<any> {
