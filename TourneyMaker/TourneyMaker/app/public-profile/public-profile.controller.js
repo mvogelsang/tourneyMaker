@@ -12,6 +12,7 @@ var TourneyMaker;
             };
             this.user = {
                 username: "",
+                email: "",
                 name: "",
                 bio: ""
             };
@@ -33,4 +34,3 @@ var TourneyMaker;
     TourneyMaker.PublicProfileController = PublicProfileController;
     TourneyMaker.app.controller("PublicProfileController", PublicProfileController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=public-profile.controller.js.map

@@ -12,6 +12,10 @@
                 <label>Name</label>
                 <p>{{vm.user.name}}</p>
             </div>
+            <div ng-if="vm.user.email">
+                <label>Email</label>
+                <p>{{vm.user.email}}</p>
+            </div>
             <div ng-if="vm.user.bio">
                 <label>Bio</label>
                 <p>{{vm.user.bio}}</p>
