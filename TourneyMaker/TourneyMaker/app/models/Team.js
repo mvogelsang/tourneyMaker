@@ -4,6 +4,6 @@ var TourneyMaker;
         function Team() {
         }
         return Team;
-    })();
+    }());
     TourneyMaker.Team = Team;
 })(TourneyMaker || (TourneyMaker = {}));

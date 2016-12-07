@@ -11,7 +11,7 @@ var TourneyMaker;
         };
         PublicProfileController.$inject = ["$uibModalInstance", "profile"];
         return PublicProfileController;
-    })();
+    }());
     TourneyMaker.PublicProfileController = PublicProfileController;
     TourneyMaker.app.controller("PublicProfileController", PublicProfileController);
 })(TourneyMaker || (TourneyMaker = {}));

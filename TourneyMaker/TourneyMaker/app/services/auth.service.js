@@ -44,7 +44,7 @@ var TourneyMaker;
         };
         AuthService.$inject = ["$http", "$cookies", "$q", "UserService", "$location", "$route"];
         return AuthService;
-    })();
+    }());
     TourneyMaker.AuthService = AuthService;
     TourneyMaker.app.service("AuthService", AuthService);
 })(TourneyMaker || (TourneyMaker = {}));

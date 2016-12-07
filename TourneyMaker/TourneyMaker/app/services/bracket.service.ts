@@ -15,8 +15,8 @@
             return this.$http.get("Models/bracket.json");
         }
 
-        getTournament(tourney): ng.IPromise<any> {
-            return this.$http.post('Tourney/GetTourney', tourney);
+        getTournament(user, tourney): ng.IPromise<any> {
+            return this.$http.post('Tourney/GetTourney', {_u: user, _t: tourney});
         }
 
         updateMatchups(matchup, tourney): ng.IPromise<any> {
