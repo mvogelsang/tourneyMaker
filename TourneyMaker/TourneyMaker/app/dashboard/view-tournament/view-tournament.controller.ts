@@ -51,6 +51,10 @@
 
         }
 
+        private manager = {
+            email: "",
+        };
+
         private addManager(email): void {
 
             var manager = {
@@ -58,6 +62,7 @@
             };
 
             this.bracketService.addManager(manager, this.tourney).then((data): any => {
+                this.manager.email = "";
                 this.addedManager = true;
             });
         }

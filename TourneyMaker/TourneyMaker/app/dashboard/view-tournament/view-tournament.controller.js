@@ -33,6 +33,9 @@ var TourneyMaker;
             };
             this.addedManager = false;
             this.isDirty = false;
+            this.manager = {
+                email: "",
+            };
             this.addedManager = false;
             this.isDirty = false;
             this.user.username = this.$cookies.get('uid');
@@ -49,6 +52,7 @@ var TourneyMaker;
                 email: email
             };
             this.bracketService.addManager(manager, this.tourney).then(function (data) {
+                _this.manager.email = "";
                 _this.addedManager = true;
             });
         };
@@ -110,4 +114,3 @@ var TourneyMaker;
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=view-tournament.controller.js.map

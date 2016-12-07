@@ -2,7 +2,8 @@
     <div class="page-header">
         <div class="pull-right">
             <button class="btn btn-success btn-flat" ng-click="vm.save()" ng-if="(vm.tournament.userPlevel == 0 || vm.tournament.userPlevel == 1) && vm.isDirty">Refresh Bracket</button>
-            <div class="input-group" style="width:300px" ng-if="vm.tournament.userPlevel == 0">
+            <div class="input-group" style="width:350px" ng-if="vm.tournament.userPlevel == 0">
+                <span class="input-group-addon" ng-if="vm.addedManager"><span class="fa fa-check"></span></span>
                 <input placeholder="Email" ng-model="vm.manager.email" class="form-control"/>
                 <span class="input-group-btn">
                     <button class="btn btn-info btn-flat" ng-click="vm.addManager(vm.manager.email)"><span class="fa fa-plus"></span> &nbsp;Add Manager</button>

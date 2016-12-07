@@ -31,7 +31,9 @@ var TourneyMaker;
             });
         }
         ProfileController.prototype.save = function () {
+            var _this = this;
             this.userService.modifyUserProfile(this.user).then(function (data) {
+                _this.user = data.data;
             });
         };
         ProfileController.prototype.cancel = function () {
@@ -43,4 +45,3 @@ var TourneyMaker;
     TourneyMaker.ProfileController = ProfileController;
     TourneyMaker.app.controller('ProfileController', ProfileController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=profile.controller.js.map
