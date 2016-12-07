@@ -15,6 +15,7 @@
             commaDlParts: ""
         };
 
+        private newName: string = "New Tournament";
         private publishing: boolean = false;
         private createdTournament: Tournament;
         private commaDlPartsArray;
@@ -23,6 +24,10 @@
 
         constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private authService: AuthService, private bracketService: BracketService, private $routeParams) {
             
+        }
+
+        private updateName(name): void {
+            this.newName = name;
         }
 
         private publishTournament(): void {
@@ -34,7 +39,7 @@
                 this.publishing = false;
                 this.createdTournament = data.data;
 
-                this.$location.path("dashboard/" + this.$routeParams.id + "/view-tournament/" + this.createdTournament.tid);
+                this.$location.path("dashboard/view-tournament/" + this.createdTournament.tid);
                 //navigate to view tournament 
             }).catch((error) => {
                 //error

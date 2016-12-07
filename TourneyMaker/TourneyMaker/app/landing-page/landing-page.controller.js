@@ -154,7 +154,7 @@ var TourneyMaker;
         };
         LandingPageController.$inject = ["$scope", "$location", "UserService", "$log", "$cookies", "AuthService"];
         return LandingPageController;
-    })();
+    }());
     TourneyMaker.LandingPageController = LandingPageController;
     TourneyMaker.app.controller("LandingPageController", LandingPageController);
 })(TourneyMaker || (TourneyMaker = {}));

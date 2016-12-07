@@ -84,7 +84,7 @@
     <aside class="main-sidebar" ng-show="lpc.isLoggedIn">
         <section class="sidebar">
             <ul class="sidebar-menu">
-                <li class="header">Participant</li>
+                <li class="header">Main</li>
                 <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/active-tournaments'}">
                     <a href="" ng-click="lpc.setActiveTourmaments()" id="tournaments-link">Tournaments</a>
                 </li>
@@ -96,8 +96,10 @@
                     <a href="" ng-click="lpc.setProfile()" id="profile-link">Profile</a>
                 </li>
                 <li class="header">Management</li>
-                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/tournament-management'}">
-                    <a href="" ng-click="lpc.setTournamentManagement()" id="tournament-management-link">Tournament Management</a>
+                <li ng-class="{'active' : lpc.$location.path() == '/dashboard/'+ lpc.authService.userLoggedIn.username + '/create-tournament'}">
+                    <a ng-href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/create-tournament" id="create-tournament-link">
+                        <span class="fa fa-plus"></span> &nbsp;New Tournament
+                    </a>
                 </li>
             </ul>
         </section>

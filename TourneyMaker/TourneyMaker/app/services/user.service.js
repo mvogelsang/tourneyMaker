@@ -22,7 +22,7 @@ var TourneyMaker;
         };
         UserService.$inject = ["$http"];
         return UserService;
-    })();
+    }());
     TourneyMaker.UserService = UserService;
     TourneyMaker.app.service("UserService", UserService);
 })(TourneyMaker || (TourneyMaker = {}));
