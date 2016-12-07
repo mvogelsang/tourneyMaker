@@ -20,7 +20,18 @@ namespace UnitTestProject2
         [TestMethod]
         public void UserDbIntegration()
         {
-            Assert.AreEqual(1, 0);
+            UserInfo TestUserInfo = new UserInfo();
+            UserManager TestUserManager = new UserManager();
+
+            TestUserInfo.username = GetRandomAlphaNumeric();
+            TestUserInfo.password = GetRandomAlphaNumeric();
+            TestUserInfo.email = GetRandomAlphaNumeric() + GetRandomAlphaNumeric() + "@test.com";
+
+            Assert.IsFalse(TestUserManager.Login(TestUserInfo.username, TestUserInfo.password));
+
+            Assert.IsTrue(TestUserManager.Register(TestUserInfo.username, TestUserInfo.password, TestUserInfo.email));
+            Assert.IsTrue(TestUserManager.Login(TestUserInfo.username, TestUserInfo.password));
+
         }
     }
 }
