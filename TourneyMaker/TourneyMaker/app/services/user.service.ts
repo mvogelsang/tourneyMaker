@@ -22,6 +22,10 @@
         registerUser(user): ng.IPromise<any> {
             return this.$http.post("User/RegisterUser", user);
         }
+
+        modifyUserProfile(user): ng.IPromise<any> {
+            return this.$http.post("User/ModifyUserProfile", user);
+        }
     }
 
     app.service("UserService", UserService);

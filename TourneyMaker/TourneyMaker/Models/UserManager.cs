@@ -98,6 +98,22 @@ namespace TourneyMaker.Models
             return isAvailable;
         }
 
+        public void modifyUserProfile(int uid, string email, string name, string bio)
+        {
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.modifyUserProfile", conn);
+                cmd.Parameters.AddWithValue("@uid", uid);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@bio", bio);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public bool Register(string username, string password, string email)
         {
             bool registered = false;

@@ -49,5 +49,13 @@ namespace TourneyMaker.Controllers
             return JsonConvert.SerializeObject(tl);
         }
 
+        [HttpPost]
+        public string ModifyUserProfile(UserInfo _data)
+        {
+            UserManager um = new UserManager();
+            um.modifyUserProfile(Convert.ToInt32(_data.uid), _data.email, _data.name, _data.bio);
+            return JsonConvert.SerializeObject(um.GetUser2(_data.username));
+        }
+
     }
 }

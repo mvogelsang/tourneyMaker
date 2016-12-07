@@ -16,6 +16,9 @@ var TourneyMaker;
         UserService.prototype.registerUser = function (user) {
             return this.$http.post("User/RegisterUser", user);
         };
+        UserService.prototype.modifyUserProfile = function (user) {
+            return this.$http.post("User/ModifyUserProfile", user);
+        };
         UserService.$inject = ["$http"];
         return UserService;
     }());
