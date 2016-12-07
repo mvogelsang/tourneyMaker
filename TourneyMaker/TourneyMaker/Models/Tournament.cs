@@ -85,14 +85,15 @@ namespace TourneyMaker.Models
             }
         }
 
-        public void AddManager(string email, int tid)
+        public void UpdatePlevel(string email, int tid, int newlevel)
         {
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.updateManager", conn);
+                SqlCommand cmd = new SqlCommand("dbo.updatePlevel", conn);
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@plevel", newlevel);
                 //All level 1
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.ExecuteNonQuery();
@@ -159,6 +160,11 @@ namespace TourneyMaker.Models
                     //All level 2
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
+                }
+
+                if(p == t.host.email)
+                {
+                    UpdatePlevel(p, tid, 0);
                 }
             }
 

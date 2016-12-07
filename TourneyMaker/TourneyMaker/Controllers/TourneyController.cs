@@ -44,7 +44,7 @@ namespace TourneyMaker.Controllers
         public void AddManager(UserInfo _data, TourneyInt _t)
         {
             TourneyManager tm = new TourneyManager();
-            tm.AddManager(_data.email, _t.tid);
+            tm.UpdatePlevel(_data.email, _t.tid, 1);
         }
 
         public class TourneyInt
