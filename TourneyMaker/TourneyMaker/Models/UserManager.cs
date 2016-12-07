@@ -103,8 +103,8 @@ namespace TourneyMaker.Models
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.modifyUserProfile", conn);
                 cmd.Parameters.AddWithValue("@uid", info.uid);
-                cmd.Parameters.AddWithValue("@name", info.name);
-                cmd.Parameters.AddWithValue("@bio", info.bio);
+                cmd.Parameters.AddWithValue("@name", info.name ?? "");
+                cmd.Parameters.AddWithValue("@bio", info.bio ?? "");
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.ExecuteNonQuery();
