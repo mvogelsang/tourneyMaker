@@ -11,11 +11,9 @@ namespace TourneyMaker.Models
     public class UserManager
     {
         public UserInfo info;
-        bool isAuthorized;
         public UserManager()
         {
             info = new UserInfo();
-            isAuthorized = false;
         }
 
         public UserInfo GetUser(string email)
@@ -145,7 +143,6 @@ namespace TourneyMaker.Models
                 if (success == 1)
                 {
                     registered = true;
-                    isAuthorized = true;
                     info.uid = uid;
                     info.username = username;
                     info.password = password;
@@ -186,7 +183,6 @@ namespace TourneyMaker.Models
             }
             if (!string.IsNullOrEmpty(email))
             {
-                isAuthorized = true;
                 authorized = true;
                 info.uid = uid;
                 info.username = username;
