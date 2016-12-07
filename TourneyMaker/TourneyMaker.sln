@@ -5,7 +5,14 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourneyMaker", "TourneyMaker\TourneyMaker.csproj", "{6093B839-E063-459A-B566-22CAD497A2BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{1906B98A-CEA5-4C42-9B08-7EAF9B2089C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTesting", "UnitTestProject1\UnitTesting.csproj", "{1906B98A-CEA5-4C42-9B08-7EAF9B2089C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTesting", "UnitTestProject2\IntegrationTesting.csproj", "{64B3D716-6FB5-4A27-BAD5-F9DC55B22CC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{388C32DC-B3DA-4697-88D9-0BFAB4668701}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +28,10 @@ Global
 		{1906B98A-CEA5-4C42-9B08-7EAF9B2089C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1906B98A-CEA5-4C42-9B08-7EAF9B2089C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1906B98A-CEA5-4C42-9B08-7EAF9B2089C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64B3D716-6FB5-4A27-BAD5-F9DC55B22CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64B3D716-6FB5-4A27-BAD5-F9DC55B22CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64B3D716-6FB5-4A27-BAD5-F9DC55B22CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64B3D716-6FB5-4A27-BAD5-F9DC55B22CC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

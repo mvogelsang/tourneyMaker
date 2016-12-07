@@ -21,7 +21,7 @@ namespace TourneyMaker.Models
         public UserInfo GetUser(string email)
         {
             UserInfo ui = new UserInfo();
-            //get info on user from DB based on username
+            //get info on user from DB based on email
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
