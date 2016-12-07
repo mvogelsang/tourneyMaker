@@ -63,7 +63,7 @@ namespace UnitTesting
             UserInfo TestUserInfo = new UserInfo();
             UserManager TestUserManager = new UserManager();
 
-            TestUserInfo = TestUserManager.GetUser2("testname");
+            TestUserInfo = TestUserManager.GetUsername("testname");
             Assert.AreEqual(TestUserInfo.email, "testuser@test.com");
 
         }
