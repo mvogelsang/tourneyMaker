@@ -432,6 +432,7 @@ namespace TourneyMaker.Models
                         d.player2 = ml[count].p2.ToString();
                     }
                     d.score2 = ml[count].p2score;
+                    d.winner = ml[count].winner;
 
                     if (tracker == 1)
                     {
@@ -490,6 +491,7 @@ namespace TourneyMaker.Models
                 d.player2 = ml[count].p2.ToString();
             }
             d.score2 = ml[count].p2score;
+            d.winner = ml[count].winner;
             final.Add(d);
         }
     }
@@ -560,6 +562,7 @@ namespace TourneyMaker.Models
         public string player2 { get; set; }
         public int score1 { get; set; }
         public int score2 { get; set; }
+        public int winner { get; set; }
         public Display() { }
     }
 
