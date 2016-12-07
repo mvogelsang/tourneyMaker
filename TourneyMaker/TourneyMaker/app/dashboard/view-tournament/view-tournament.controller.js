@@ -110,3 +110,4 @@ var TourneyMaker;
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=view-tournament.controller.js.map
