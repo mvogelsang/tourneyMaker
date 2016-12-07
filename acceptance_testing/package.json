@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "acceptance-test": "chimp --path=. --chai",
+    "acceptance-test": "chimp --path=. --chai  --browser=chrome",
+    "acceptance-test-all": "chimp --path=. --chai --browser=\"internet explorer\" & chimp --path=. --chai --browser=chrome & chimp --path=. --chai --browser=firefox",
     "acceptance-test-cli": "chimp  --browser=phantomjs --path=. --chai"
   }
 }
