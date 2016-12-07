@@ -2,7 +2,8 @@ module.exports = function() {
 
   this.Given(/^I have visited Google$/, function () {
     browser.windowHandleMaximize(browser.windowHandle());
-    browser.url('https://youtu.be/CSav51fVlKU?t=31').pause(7000);
+    browser.pause()
+    browser.url('https://youtu.be/CSav51fVlKU?t=31').pause(7200);
     if(browser.isExisting('.videoAdUiSkipButton')){
       browser.waitForExist('.videoAdUiSkipButton');
       browser.click('.videoAdUiSkipButton').pause(2000);

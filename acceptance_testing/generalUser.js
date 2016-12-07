@@ -28,20 +28,52 @@ module.exports = function() {
      });
 
    this.When(/^I should see my new username if I register$/, function () {
-      // Write code here that turns the phrase above into concrete actions
-      return 'pending';
+     var uname = makeid();
+     var email = makeid() + '@' + makeid() + '.com';
+     var pass = makeid();
+
+     browser.pause();
+     browser.setValue("#reg-username-input", uname).pause();
+     browser.setValue("#reg-email-input", email).pause();
+     browser.setValue("#reg-password1-input", pass).pause();
+     browser.setValue("#reg-password2-input", pass).pause();
+     browser.click('#create-account-button').pause(1000);
+     browser.pause();
+     expect(browser.getText('.navbar-nav li:nth-child(1)')).to.contain(uname);
+     browser.pause();
+
     });
 
     this.When(/^navigate to the profile page$/, function () {
        browser.pause();
+       browser.click("#profile-link").pause();
        browser.waitForExist('#user-email-input');
        browser.pause();
      });
 
    this.Then(/^I should see my bio "([^"]*)", and be able to change it to "([^"]*)"$/, function (arg1, arg2) {
-      // Write code here that turns the phrase above into concrete actions
-      return 'pending';
+      browser.pause();
+      expect(browser.getValue("#user-bio-input")).to.be.equal(arg1);
+      browser.pause();
+      browser.setValue("#user-bio-input", arg2).pause(1000);
+      browser.click("#user-save-button").pause(2500);
+      browser.setValue("#user-bio-input", "").pause(1000);
+      browser.refresh();
+      browser.waitForExist("#user-bio-input");
+      browser.pause(1200);
+      browser.waitForValue("#user-bio-input");
+      expect(browser.getValue("#user-bio-input")).to.be.equal(arg2);
+      browser.pause();
+
     });
 
+    function makeid(){
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+      for( var i=0; i < 12; i++ )
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
 }

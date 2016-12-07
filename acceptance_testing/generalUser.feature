@@ -12,7 +12,7 @@ Feature: Interact with the site's accounting system
 
   Scenario: Making an Account
     Given I am at the site
-    When I should see my new username if I register
+    Then I should see my new username if I register
 
   Scenario: Changing account information
     Given I am at the site
