@@ -7,6 +7,7 @@
 
         private user = {
             username: "",
+            email: "",
             name: "",
             bio: ""
         }
