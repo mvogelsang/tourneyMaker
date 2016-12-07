@@ -43,7 +43,8 @@ var TourneyMaker;
         };
         ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService"];
         return ViewTournamentController;
-    })();
+    }());
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=view-tournament.controller.js.map

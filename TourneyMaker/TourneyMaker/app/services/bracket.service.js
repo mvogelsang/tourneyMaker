@@ -12,7 +12,8 @@ var TourneyMaker;
         };
         BracketService.$inject = ["$http"];
         return BracketService;
-    })();
+    }());
     TourneyMaker.BracketService = BracketService;
     TourneyMaker.app.service("BracketService", BracketService);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=bracket.service.js.map

@@ -38,7 +38,8 @@ var TourneyMaker;
         };
         CreateTournamentController.$inject = ["$scope", "$location", "AuthService", "BracketService", "$routeParams"];
         return CreateTournamentController;
-    })();
+    }());
     TourneyMaker.CreateTournamentController = CreateTournamentController;
     TourneyMaker.app.controller("CreateTournamentController", CreateTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=create-tournament.controller.js.map

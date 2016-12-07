@@ -6,7 +6,8 @@ var TourneyMaker;
         }
         TournamentManagementController.$inject = ["$location"];
         return TournamentManagementController;
-    })();
+    }());
     TourneyMaker.TournamentManagementController = TournamentManagementController;
     TourneyMaker.app.controller("TournamentManagementController", TournamentManagementController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=tournament-management.controller.js.map

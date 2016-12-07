@@ -32,7 +32,8 @@ var TourneyMaker;
         };
         ProfileController.$inject = ["$scope", "UserService", "$log", "$routeParams", "AuthService", "$route"];
         return ProfileController;
-    })();
+    }());
     TourneyMaker.ProfileController = ProfileController;
     TourneyMaker.app.controller('ProfileController', ProfileController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=profile.controller.js.map

@@ -233,6 +233,7 @@ namespace TourneyMaker.Models
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
                 cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@username", t.host.username);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
