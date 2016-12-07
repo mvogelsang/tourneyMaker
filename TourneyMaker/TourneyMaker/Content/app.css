@@ -98,3 +98,35 @@ html {
 .input-score-width {
     width: 45px;
 }
+
+.score-button {
+    position: absolute;
+    right: 45px;
+    margin-top: -15px;
+}
+
+.final-score-4 {
+    position: absolute;
+    right: 45px;
+    z-index: 2;
+    bottom: -7px;
+}
+
+.final-score-8 {
+    position: absolute;
+    right: 45px;
+    z-index: 2;
+    bottom: -7px;
+}
+
+.final-score-16 {
+    position: absolute;
+    right: 45px;
+    bottom: -155px;
+    z-index: 2;
+}
+
+.table input {
+    height: 20px;
+    width: 35px;
+}
