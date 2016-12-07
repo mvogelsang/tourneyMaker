@@ -279,6 +279,7 @@ namespace TourneyMaker.Models
         public RoundsList rounds { get; set; }
         public string commaDlParts { get; set; }
         public int completed { get; set; }
+        public int winner { get; set; }
 
         public Tournament()
         {
@@ -386,6 +387,10 @@ namespace TourneyMaker.Models
             {
                 Matchup temp = new Matchup(dr);
                 ml.Add(temp);
+                if(completed == 1 && temp.mid == 0)
+                {
+                    winner = temp.winner;
+                }
             }
         }
 
