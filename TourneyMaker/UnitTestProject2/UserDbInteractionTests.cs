@@ -14,13 +14,13 @@ namespace UnitTestProject2
         {
             Random random = new Random();
             var chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-            return new string(chars.Select(c => chars[random.Next(chars.Length)]).Take(8).ToArray());
+            return new string(chars.Select(c => chars[random.Next(chars.Length)]).Take(12).ToArray());
         }
 
         [TestMethod]
         public void UserDbIntegration()
         {
-            Assert.AreEqual(1, 0);
+
         }
     }
 }
