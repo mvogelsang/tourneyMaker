@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net.Mail;
 
 namespace TourneyMaker.Models
 {
@@ -211,6 +212,17 @@ namespace TourneyMaker.Models
                     cmd.ExecuteNonQuery();
                 }
             }
+
+            //foreach (string p in parts)
+            //{
+            //    MailMessage message = new MailMessage();
+            //    message.To.Add(p);
+            //    message.Subject = "New Tournament";
+            //    message.From = new MailAddress("tourneymaker@google.com");
+            //    message.Body = "You've been enrolled in a new tournament at TourneMaker.com!";
+            //    SmtpClient smtp = new SmtpClient("smtp.google.com");
+            //    smtp.Send(message);
+            //}
 
             DataTable dt = new DataTable();
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
