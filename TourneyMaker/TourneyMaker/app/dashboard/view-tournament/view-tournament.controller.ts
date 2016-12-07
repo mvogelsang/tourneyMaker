@@ -21,10 +21,14 @@
             email: ""
         };
 
+        private addedManager: boolean = false;
 
-        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies"];
+        private isDirty: boolean = false;
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService, private $routeParams, private $cookies) {
+
+        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies", "$route", "$timeout"];
+
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService, private $routeParams, private $cookies, private $route, private $timeout) {
             //bracketService.getBracket().then((data): any => {
             //    this.bracket = data.data;
             //}).catch((error): any => {
@@ -32,6 +36,8 @@
             //    this.$log.error(error);
             //    });
 
+            this.addedManager = false;
+            this.isDirty = false;
             this.user.username = this.$cookies.get('uid');
 
             this.tourney.tid = this.$routeParams.id;
@@ -45,21 +51,37 @@
 
         }
 
-        private updateScores(mid, s1, s2, tid): void {
+        private addManager(email): void {
+
+            var manager = {
+                email: email
+            };
+
+            this.bracketService.addManager(manager, this.tourney).then((data): any => {
+                this.addedManager = true;
+            });
+        }
+
+        private updateScores(mid, s1, s2, w, tid): void {
 
             var matchup = {
-                matchid: mid,
-                score1: s1,
-                score2: s2,
+                mid: mid,
+                p1score: s1,
+                p2score: s2,
+                winner: w
             };
 
             var tournament = {
-                tournamentid: tid,
+                tid: tid,
             }
 
             this.bracketService.updateMatchups(matchup, tournament).then((data): any => {
-
+                this.isDirty = true;
             });
+        }
+
+        private save(): void {
+            this.$route.reload();
         }
 
         private sort(): void {

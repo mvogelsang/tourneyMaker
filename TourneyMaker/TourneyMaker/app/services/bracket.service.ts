@@ -20,7 +20,11 @@
         }
 
         updateMatchups(matchup, tourney): ng.IPromise<any> {
-            return this.$http.post('Tourney/UpdateMatchup', {_m: matchup, _t: tourney})
+            return this.$http.post('Tourney/UpdateMatchup', {match: matchup, _t: tourney})
+        }
+
+        addManager(manager, tourney): ng.IPromise<any> {
+            return this.$http.post('Tourney/AddManager', {_data:manager, _t:tourney});
         }
     }
 
