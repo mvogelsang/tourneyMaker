@@ -53,13 +53,20 @@ namespace UnitTestProject1
         [TestMethod]
         public void GetMatchupsTest()
         {
-            Assert.AreEqual(1, 0);
+            Tournament TestTournament = new Tournament();
+            TestTournament.tid = 4;
+            TestTournament.GetMatchups();
+            Assert.IsNotNull(TestTournament.ml);
+
         }
 
         [TestMethod]
         public void GetDisplayTest()
         {
-            Assert.AreEqual(1, 0);
+            Tournament TestTournament = new Tournament();
+            TestTournament.tid = 4;
+            TestTournament.GetDisplay();
+            //not blowing up means it passed
         }
     }
 }
