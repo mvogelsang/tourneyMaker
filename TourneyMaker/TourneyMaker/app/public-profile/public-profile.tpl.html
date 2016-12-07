@@ -1,9 +1,13 @@
 ﻿<div class="modal-content">
     <div class="modal-header">
-        <h3>{{vm.user.username}}'s Profile</h3>
+        <h3 ng-if="vm.user.username">{{vm.user.username}}'s Profile</h3>
+        <h3 ng-if="!vm.user.username">This user doesn't exist yet!</h3>
     </div>
     <div class="modal-body">
-        <div class="container-fluid">
+        <div ng-if="!vm.user.username">
+            This user has not registered with our system yet!
+        </div>
+        <div class="container-fluid" ng-if="vm.user.username">
             <div ng-if="vm.user.name">
                 <label>Name</label>
                 <p>{{vm.user.name}}</p>

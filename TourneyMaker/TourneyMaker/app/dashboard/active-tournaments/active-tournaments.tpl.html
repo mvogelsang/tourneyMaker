@@ -65,11 +65,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="tournament in vm.tournaments | filter: {completed: '1'} as filteredCompletedTournaments" class="clickable">
+                            <tr ng-repeat="tournament in vm.tournaments | filter: {completed: '1'} as filteredCompletedTournaments" class="clickable" ng-click="vm.viewTournament(tournament.tid)">
                                 <td>{{tournament.tname}}</td>
                                 <td>{{tournament.numParticipants}} person tournament</td>
                                 <td>
-                                    <span>{{vm.getWinner(tournament)}}</span>
+                                    <span ng-if="tournament.winner == 1"></span>
                                 </td>
                                 <td class="text-center">
                                     <span class="label label-success" ng-if="tournament.userPlevel == 0">Host</span>
