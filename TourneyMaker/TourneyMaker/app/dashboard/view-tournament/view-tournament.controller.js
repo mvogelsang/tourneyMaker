@@ -1,7 +1,7 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var ViewTournamentController = (function () {
-        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService, $routeParams, $cookies) {
+        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService, $routeParams, $cookies, $route) {
             //bracketService.getBracket().then((data): any => {
             //    this.bracket = data.data;
             //}).catch((error): any => {
@@ -17,6 +17,7 @@ var TourneyMaker;
             this.authService = authService;
             this.$routeParams = $routeParams;
             this.$cookies = $cookies;
+            this.$route = $route;
             this.isEditingScore = false;
             this.offset = 50;
             this.top = new Array();
@@ -37,17 +38,21 @@ var TourneyMaker;
                 _this.sort();
             });
         }
-        ViewTournamentController.prototype.updateScores = function (mid, s1, s2, tid) {
+        ViewTournamentController.prototype.updateScores = function (mid, s1, s2, w, tid) {
             var matchup = {
-                matchid: mid,
-                score1: s1,
-                score2: s2,
+                mid: mid,
+                p1score: s1,
+                p2score: s2,
+                winner: w
             };
             var tournament = {
-                tournamentid: tid,
+                tid: tid,
             };
             this.bracketService.updateMatchups(matchup, tournament).then(function (data) {
             });
+        };
+        ViewTournamentController.prototype.save = function () {
+            this.$route.reload();
         };
         ViewTournamentController.prototype.sort = function () {
             for (var i = 0; i < this.bracket.length; i++) {
@@ -83,7 +88,7 @@ var TourneyMaker;
                 this.isEditingScore = true;
             }
         };
-        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies"];
+        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies", "$route"];
         return ViewTournamentController;
     }());
     TourneyMaker.ViewTournamentController = ViewTournamentController;

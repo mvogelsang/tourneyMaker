@@ -1,7 +1,7 @@
 ﻿<div class="container-fluid content-wrapper">
     <div class="page-header">
         <div class="pull-right">
-            <button class="btn btn-success btn-flat">Save Scores</button>
+            <button class="btn btn-success btn-flat" ng-click="vm.save()">Save Scores</button>
             <a href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/active-tournaments" class="btn btn-default" >Close</a>
         </div>
         <h3>View Tournament </h3>
@@ -17,8 +17,12 @@
 
                         <div ng-if="matchup.isEditing" class="score-button btn-group">
                             <button class="btn btn-success btn-xs" ng-click="matchup.isEditing = false;
-                                                vm.updateScores(matchup.matchid, matchup.score1, matchup.score2, vm.tournament.tid)">
-                                <i class="fa fa-check"></i>
+                                                vm.updateScores(matchup.matchid, matchup.score1, matchup.score2, matchup.winner = 1, vm.tournament.tid)">
+                                P1
+                            </button>
+                            <button class="btn btn-success btn-xs" ng-click="matchup.isEditing = false;
+                                                vm.updateScores(matchup.matchid, matchup.score1, matchup.score2, matchup.winner = 2,vm.tournament.tid)">
+                                P2
                             </button>
                             <button class="btn btn-danger btn-xs" ng-click="matchup.isEditing = false; matchup.score1 = ''; matchup.score2 =''">
                                 <i class="fa fa-times"></i>
@@ -27,7 +31,7 @@
 
                         <table class="table table-bordered table-hover" id="bracket" style="width: 200px">
                             <tbody>
-                                <tr class="clickable">
+                                <tr class="clickable" ng-class="{'winner' : matchup.winner == 1}">
                                     <td ng-click="vm.openProfile(matchup.player1)">
                                         <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
                                     </td>
@@ -38,7 +42,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="clickable">
+                                <tr class="clickable" ng-class="{'winner' : matchup.winner == 2}">
                                     <td ng-click="vm.openProfile(matchup.player2)">
                                         <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
                                     </td>
@@ -56,8 +60,12 @@
                     <div ng-if="round[0].matchid == 0">
                         <div ng-if="round[0].isEditing" class="btn-group" ng-class="{'final-score-4': vm.tournament.numParticipants == 4, 'final-score-8' : vm.tournament.numParticipants == 8, 'final-score-16' : vm.tournament.numParticipants == 16, 'final-score-32': vm.tournament.numParticipants == 32}">
                             <button class="btn btn-success btn-xs" ng-click="round[0].isEditing = false;
-                                                    vm.updateScores(round[0].matchid, round[0].score1, round[0].score2, vm.tournament.tid)">
-                                <i class="fa fa-check"></i>
+                                                vm.updateScores(round[0].matchid, round[0].score1, round[0].score2, round[0].winner = 1, vm.tournament.tid)">
+                                P1
+                            </button>
+                            <button class="btn btn-success btn-xs" ng-click="round[0].isEditing = false;
+                                                vm.updateScores(round[0].matchid, round[0].score1, round[0].score2, round[0].winner = 2,vm.tournament.tid)">
+                                P2
                             </button>
                             <button class="btn btn-danger btn-xs" ng-click="round[0].isEditing = false; round[0].score1 = ''; round[0].score2 =''">
                                 <i class="fa fa-times"></i>
@@ -100,8 +108,12 @@
 
                     <div ng-if="matchup.isEditing" class="score-button btn-group">
                         <button class="btn btn-success btn-xs" ng-click="matchup.isEditing = false;
-                                                vm.updateScores(matchup.matchid, matchup.score1, matchup.score2, vm.tournament.tid)">
-                            <i class="fa fa-check"></i>
+                                                vm.updateScores(matchup.matchid, matchup.score1, matchup.score2, matchup.winner = 1, vm.tournament.tid)">
+                            P1
+                        </button>
+                        <button class="btn btn-success btn-xs" ng-click="matchup.isEditing = false;
+                                                vm.updateScores(matchup.matchid, matchup.score1, matchup.score2, matchup.winner = 2,vm.tournament.tid)">
+                            P2
                         </button>
                         <button class="btn btn-danger btn-xs" ng-click="matchup.isEditing = false; matchup.score1 = ''; matchup.score2 =''">
                             <i class="fa fa-times"></i>

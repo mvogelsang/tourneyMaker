@@ -22,9 +22,9 @@
         };
 
 
-        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies"];
+        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies", "$route"];
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService, private $routeParams, private $cookies) {
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService, private $routeParams, private $cookies, private $route) {
             //bracketService.getBracket().then((data): any => {
             //    this.bracket = data.data;
             //}).catch((error): any => {
@@ -45,21 +45,26 @@
 
         }
 
-        private updateScores(mid, s1, s2, tid): void {
+        private updateScores(mid, s1, s2, w, tid): void {
 
             var matchup = {
-                matchid: mid,
-                score1: s1,
-                score2: s2,
+                mid: mid,
+                p1score: s1,
+                p2score: s2,
+                winner: w
             };
 
             var tournament = {
-                tournamentid: tid,
+                tid: tid,
             }
 
             this.bracketService.updateMatchups(matchup, tournament).then((data): any => {
 
             });
+        }
+
+        private save(): void {
+            this.$route.reload();
         }
 
         private sort(): void {

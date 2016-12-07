@@ -14,7 +14,7 @@ var TourneyMaker;
             return this.$http.post('Tourney/GetTourney', { _data: user, _t: tourney });
         };
         BracketService.prototype.updateMatchups = function (matchup, tourney) {
-            return this.$http.post('Tourney/UpdateMatchup', { _m: matchup, _t: tourney });
+            return this.$http.post('Tourney/UpdateMatchup', { match: matchup, _t: tourney });
         };
         BracketService.$inject = ["$http"];
         return BracketService;
