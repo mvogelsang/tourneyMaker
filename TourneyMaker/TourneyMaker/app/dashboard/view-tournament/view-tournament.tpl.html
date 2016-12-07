@@ -1,10 +1,16 @@
 ﻿<div class="container-fluid content-wrapper">
     <div class="page-header">
         <div class="pull-right">
-            <button class="btn btn-success btn-flat" ng-click="vm.save()">Save Scores</button>
-            <a href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/active-tournaments" class="btn btn-default" >Close</a>
+            <button class="btn btn-success btn-flat" ng-click="vm.save()" ng-if="(vm.tournament.userPlevel == 0 || vm.tournament.userPlevel == 1) && vm.isDirty">Refresh Bracket</button>
+            <div class="input-group" style="width:300px" ng-if="vm.tournament.userPlevel == 0">
+                <input placeholder="Email" ng-model="vm.manager.email" class="form-control"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-info btn-flat" ng-click="vm.addManager(vm.manager.email)"><span class="fa fa-plus"></span> &nbsp;Add Manager</button>
+                </span>
+            </div>
+            <!--<a href="#/dashboard/{{lpc.authService.userLoggedIn.username}}/active-tournaments" class="btn btn-default" >Close</a>-->
         </div>
-        <h3>View Tournament </h3>
+        <h3>{{vm.tournament.tname}}</h3>
     </div>  
 
     <!-- Bracket -->
@@ -35,8 +41,8 @@
                                     <td ng-click="vm.openProfile(matchup.player1)">
                                         <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
                                     </td>
-                                    <td class="score-width" ng-click="matchup.isEditing = true">
-                                        <span ng-if="!matchup.isEditing">{{matchup.score1}}</span>
+                                    <td class="score-width" ng-click="(vm.tournament.userPlevel == 0 || vm.tournament.userPlevel == 1) ? matchup.isEditing = true : matchup.isEditing = false">
+                                        <span ng-if="!matchup.isEditing && matchup.score1 != 0">{{matchup.score1}}</span>
                                         <div ng-if="matchup.isEditing && matchup.player1 != 0" class="input-group">                        
                                             <input class="input-score-width" ng-model="matchup.score1" />
                                         </div>
@@ -46,8 +52,8 @@
                                     <td ng-click="vm.openProfile(matchup.player2)">
                                         <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
                                     </td>
-                                    <td class="score-width" ng-click="matchup.isEditing = true">
-                                        <span ng-if="!matchup.isEditing">{{matchup.score2}}</span>
+                                    <td class="score-width" ng-click="(vm.tournament.userPlevel == 0 || vm.tournament.userPlevel == 1) ? matchup.isEditing = true : matchup.isEditing = false">
+                                        <span ng-if="!matchup.isEditing && matchup.score2 != 0">{{matchup.score2}}</span>
                                         <span ng-if="matchup.isEditing && matchup.player2 != 0">
                                             <input class="input-score-width" ng-model="matchup.score2" />
                                         </span>
@@ -73,23 +79,23 @@
                         </div>
                         <table class="table table-bordered table-hover" id="bracket" style="width: 200px" ng-if="round[0].matchid == 0" ng-class="{'final-match-4': vm.tournament.numParticipants == 4, 'final-match-8' : vm.tournament.numParticipants == 8, 'final-match-16' : vm.tournament.numParticipants == 16, 'final-match-32': vm.tournament.numParticipants == 32}">
                             <tbody>
-                                <tr class="clickable">
+                                <tr class="clickable"ng-class="{'winner' : round[0].winner == 1}">
                                     <td ng-click="vm.openProfile(round[0].player1)">
                                         <span ng-if="round[0].player1 != 0">{{round[0].player1}}</span>
                                     </td>
-                                    <td class="score-width" ng-click="round[0].isEditing = true">
-                                        <span ng-if="!round[0].isEditing">{{round[0].score1}}</span>
+                                    <td class="score-width" ng-click="(vm.tournament.userPlevel == 0 || vm.tournament.userPlevel == 1) ? round[0].isEditing = true : round[0].isEditing = false">
+                                        <span ng-if="!round[0].isEditing && round[0].score1 != 0">{{round[0].score1}}</span>
                                         <span ng-if="round[0].isEditing && round[0].player1 != 0">
                                             <input class="input-score-width" ng-model="round[0].score1" />
                                         </span>
                                     </td>
                                 </tr>
-                                <tr class="clickable">
+                                <tr class="clickable" ng-class="{'winner' : round[0].winner == 2}">
                                     <td ng-click="vm.openProfile(round[0].player2)">
                                         <span ng-if="round[0].player2 != 0">{{round[0].player2}}</span>
                                     </td>
-                                    <td class="score-width" ng-click="round[0].isEditing = true">
-                                        <span ng-if="!round[0].isEditing">{{round[0].score2}}</span>
+                                    <td class="score-width" ng-click="(vm.tournament.userPlevel == 0 || vm.tournament.userPlevel == 1) ? round[0].isEditing = true : round[0].isEditing = false">
+                                        <span ng-if="!round[0].isEditing && round[0].score2 != 0">{{round[0].score2}}</span>
                                         <span ng-if="round[0].isEditing && round[0].player2 != 0">
                                             <input class="input-score-width" ng-model="round[0].score2" />
                                         </span>
@@ -122,23 +128,23 @@
 
                     <table class="table table-bordered table-hover" id="bracket" style="width: 200px">
                         <tbody>
-                            <tr class="clickable">
+                            <tr class="clickable" ng-class="{'winner' : matchup.winner == 1}">
                                 <td ng-click="vm.openProfile(matchup.player1)">
                                     <span ng-if="matchup.player1 != 0">{{matchup.player1}}</span>
                                 </td>
-                                <td class="score-width" ng-click="matchup.isEditing = true">
-                                    <span ng-if="!matchup.isEditing">{{matchup.score1}}</span>
+                                <td class="score-width" ng-click="(vm.tournament.userPlevel == 0 || vm.tournament.userPlevel == 1) ? matchup.isEditing = true : matchup.isEditing = false">
+                                    <span ng-if="!matchup.isEditing && matchup.score1 != 0">{{matchup.score1}}</span>
                                     <span ng-if="matchup.isEditing && matchup.player1 != 0">
                                         <input class="input-score-width" ng-model="matchup.score1" />
                                     </span>
                                 </td>
                             </tr>
-                            <tr class="clickable">
+                            <tr class="clickable" ng-class="{'winner' : matchup.winner == 2}">
                                 <td ng-click="vm.openProfile(matchup.player2)">
                                     <span ng-if="matchup.player2 != 0">{{matchup.player2}}</span>
                                 </td>
-                                <td class="score-width" ng-click="matchup.isEditing = true">
-                                    <span ng-if="!matchup.isEditing">{{matchup.score2}}</span>
+                                <td class="score-width" ng-click="(vm.tournament.userPlevel == 0 || vm.tournament.userPlevel == 1) ? matchup.isEditing = true : matchup.isEditing = false">
+                                    <span ng-if="!matchup.isEditing && matchup.score2 != 0">{{matchup.score2}}</span>
                                     <span ng-if="matchup.isEditing && matchup.player2 != 0">
                                         <input class="input-score-width" ng-model="matchup.score2" />
                                     </span>

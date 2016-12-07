@@ -245,6 +245,7 @@
     <Content Include="app\dashboard\dashboard.tpl.html" />
     <Content Include="app\dashboard\profile\profile.tpl.html" />
     <Content Include="app\dashboard\tournament-management\tournament-management.tpl.html" />
+    <Content Include="app\dashboard\view-tournament\add-manager.template.html" />
     <Content Include="app\home\home.tpl.html" />
     <Content Include="app\public-profile\public-profile.tpl.html" />
     <Content Include="app\dashboard\view-tournament\view-tournament.tpl.html" />
@@ -385,6 +386,7 @@
     <TypeScriptCompile Include="app\dashboard\dashboard.controller.ts" />
     <TypeScriptCompile Include="app\dashboard\profile\profile.controller.ts" />
     <TypeScriptCompile Include="app\dashboard\tournament-management\tournament-management.controller.ts" />
+    <TypeScriptCompile Include="app\dashboard\view-tournament\add-manager.controller.ts" />
     <TypeScriptCompile Include="app\home\home.controller.ts" />
     <TypeScriptCompile Include="app\landing-page\landing-page.controller.ts" />
     <TypeScriptCompile Include="app\models\Doubles.ts" />

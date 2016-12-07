@@ -21,10 +21,14 @@
             email: ""
         };
 
+        private addedManager: boolean = false;
 
-        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies", "$route"];
+        private isDirty: boolean = false;
 
-        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService, private $routeParams, private $cookies, private $route) {
+
+        public static $inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies", "$route", "$timeout"];
+
+        constructor(private $scope: ng.IScope, private $location: ng.ILocationService, private $uibModal, private bracketService: BracketService, private $log: ng.ILogService, private authService: AuthService, private $routeParams, private $cookies, private $route, private $timeout) {
             //bracketService.getBracket().then((data): any => {
             //    this.bracket = data.data;
             //}).catch((error): any => {
@@ -32,6 +36,8 @@
             //    this.$log.error(error);
             //    });
 
+            this.addedManager = false;
+            this.isDirty = false;
             this.user.username = this.$cookies.get('uid');
 
             this.tourney.tid = this.$routeParams.id;
@@ -43,6 +49,17 @@
             });
 
 
+        }
+
+        private addManager(email): void {
+
+            var manager = {
+                email: email
+            };
+
+            this.bracketService.addManager(manager, this.tourney).then((data): any => {
+                this.addedManager = true;
+            });
         }
 
         private updateScores(mid, s1, s2, w, tid): void {
@@ -59,7 +76,7 @@
             }
 
             this.bracketService.updateMatchups(matchup, tournament).then((data): any => {
-
+                this.isDirty = true;
             });
         }
 

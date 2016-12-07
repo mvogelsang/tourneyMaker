@@ -17,10 +17,11 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="pull-right text-sm text-muted">You cannot change your email</div>
                             <label>Email</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-at"></i></span>
-                                <input name="email" class="form-control" type="email" ng-model="vm.user.email" required id="user-email-input"/>
+                                <input name="email" class="form-control" type="email" ng-model="vm.user.email" readonly id="user-email-input"/>
                             </div>
                             <div ng-messages="vm.profileForm.email.$error" ng-if="vm.profileForm.email.$dirty" class="pull-right text-danger">
                                 <div ng-message="required">

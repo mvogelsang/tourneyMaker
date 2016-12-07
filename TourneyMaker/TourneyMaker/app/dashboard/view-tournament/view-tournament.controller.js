@@ -1,7 +1,7 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var ViewTournamentController = (function () {
-        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService, $routeParams, $cookies, $route) {
+        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService, $routeParams, $cookies, $route, $timeout) {
             //bracketService.getBracket().then((data): any => {
             //    this.bracket = data.data;
             //}).catch((error): any => {
@@ -18,6 +18,7 @@ var TourneyMaker;
             this.$routeParams = $routeParams;
             this.$cookies = $cookies;
             this.$route = $route;
+            this.$timeout = $timeout;
             this.isEditingScore = false;
             this.offset = 50;
             this.top = new Array();
@@ -30,6 +31,10 @@ var TourneyMaker;
                 password: "",
                 email: ""
             };
+            this.addedManager = false;
+            this.isDirty = false;
+            this.addedManager = false;
+            this.isDirty = false;
             this.user.username = this.$cookies.get('uid');
             this.tourney.tid = this.$routeParams.id;
             this.bracketService.getTournament(this.user, this.tourney).then(function (data) {
@@ -38,7 +43,17 @@ var TourneyMaker;
                 _this.sort();
             });
         }
+        ViewTournamentController.prototype.addManager = function (email) {
+            var _this = this;
+            var manager = {
+                email: email
+            };
+            this.bracketService.addManager(manager, this.tourney).then(function (data) {
+                _this.addedManager = true;
+            });
+        };
         ViewTournamentController.prototype.updateScores = function (mid, s1, s2, w, tid) {
+            var _this = this;
             var matchup = {
                 mid: mid,
                 p1score: s1,
@@ -49,6 +64,7 @@ var TourneyMaker;
                 tid: tid,
             };
             this.bracketService.updateMatchups(matchup, tournament).then(function (data) {
+                _this.isDirty = true;
             });
         };
         ViewTournamentController.prototype.save = function () {
@@ -88,10 +104,9 @@ var TourneyMaker;
                 this.isEditingScore = true;
             }
         };
-        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies", "$route"];
+        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies", "$route", "$timeout"];
         return ViewTournamentController;
     }());
     TourneyMaker.ViewTournamentController = ViewTournamentController;
     TourneyMaker.app.controller("ViewTournamentController", ViewTournamentController);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=view-tournament.controller.js.map

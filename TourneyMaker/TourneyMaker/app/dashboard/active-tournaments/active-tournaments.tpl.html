@@ -31,8 +31,9 @@
                                     {{tournament.numParticipants}} person tournament
                                 </td>
                                 <td class="text-center">
-                                    <span class="label label-success text-center" ng-if="tournament.host.username == lpc.authService.userLoggedIn.username">Host</span>
-                                    <span class="label label-info text-center" ng-if="tournament.host.username != lpc.authService.userLoggedIn.username">Participant</span>
+                                    <span class="label label-success" ng-if="tournament.userPlevel == 0">Host</span>
+                                    <span class="label label-warning" ng-if="tournament.userPlevel == 1">Manager</span>
+                                    <span class="label label-info" ng-if="tournament.userPlevel == 2">Participant</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -71,8 +72,9 @@
                                     winner
                                 </td>
                                 <td class="text-center">
-                                    <span class="label label-success" ng-if="tournament.host.username == lpc.authService.userLoggedIn.username">Host</span>
-                                    <span class="label label-info" ng-if="tournament.host.username != lpc.authService.userLoggedIn.username">Participant</span>
+                                    <span class="label label-success" ng-if="tournament.userPlevel == 0">Host</span>
+                                    <span class="label label-warning" ng-if="tournament.userPlevel == 1">Manager</span>
+                                    <span class="label label-info" ng-if="tournament.userPlevel == 2">Participant</span>
                                 </td>
                             </tr>
                         </tbody>

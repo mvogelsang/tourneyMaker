@@ -32,6 +32,7 @@ namespace TourneyMaker
                 "~/app/dashboard/create-tournament/create-tournament.controller.js",
                 "~/app/dashboard/view-tournament/view-tournament.controller.js",
                 "~/app/public-profile/public-profile.controller.js",
+                "~/app/dashboard/view-tournament/add-manager.controller.js",
 
                 //services
                 "~/app/services/bracket.service.js",

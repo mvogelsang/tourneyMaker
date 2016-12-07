@@ -16,10 +16,12 @@ var TourneyMaker;
         BracketService.prototype.updateMatchups = function (matchup, tourney) {
             return this.$http.post('Tourney/UpdateMatchup', { match: matchup, _t: tourney });
         };
+        BracketService.prototype.addManager = function (manager, tourney) {
+            return this.$http.post('Tourney/AddManager', { _data: manager, _t: tourney });
+        };
         BracketService.$inject = ["$http"];
         return BracketService;
     }());
     TourneyMaker.BracketService = BracketService;
     TourneyMaker.app.service("BracketService", BracketService);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=bracket.service.js.map
