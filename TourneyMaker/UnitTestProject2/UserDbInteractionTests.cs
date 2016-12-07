@@ -28,7 +28,7 @@ namespace UnitTestProject2
             TestUserInfo.email = GetRandomAlphaNumeric() + GetRandomAlphaNumeric() + "@test.com";
 
             Assert.IsFalse(TestUserManager.Login(TestUserInfo.username, TestUserInfo.password));
-            Assert.IsTrue(TestUserManager.GetUser2(TestUserInfo.username).username == "");
+            Assert.IsTrue(TestUserManager.GetUsername(TestUserInfo.username).username == "");
             Assert.IsTrue(TestUserManager.Register(TestUserInfo.username, TestUserInfo.password, TestUserInfo.email));
             Assert.IsTrue(TestUserManager.Login(TestUserInfo.username, TestUserInfo.password));
             Assert.IsTrue(TestUserManager.GetUser(TestUserInfo.email).username == TestUserInfo.username);

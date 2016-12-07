@@ -37,7 +37,7 @@ namespace TourneyMaker.Controllers
         public string GetUser(UserInfo user)
         {
             UserManager um = new UserManager();
-            UserInfo ui = um.GetUser2(user.username);
+            UserInfo ui = um.GetUsername(user.username);
             return JsonConvert.SerializeObject(ui);
         }
 
@@ -53,7 +53,7 @@ namespace TourneyMaker.Controllers
         public void ModifyUserProfile(UserInfo _data)
         {
             UserManager um = new UserManager();
-            um.modifyUserProfile(Convert.ToInt32(_data.uid), _data.email, _data.name, _data.bio);
+            um.modifyUserProfile(_data);
             return;
         }
 

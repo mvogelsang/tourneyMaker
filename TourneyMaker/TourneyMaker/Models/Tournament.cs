@@ -220,15 +220,17 @@ namespace TourneyMaker.Models
                 //foreach (string p in parts)
                 //{
                 //    var fromAddress = new MailAddress("tourneymakerapp@gmail.com", "TourneyMaker");
-                //    var toAddress = new MailAddress("mjvoge02@louisville.edu", "Voges");
+                //    var toAddress = new MailAddress(p, p);
                 //    const string fromPassword = "Tourneypass123";
                 //    const string subject = "You've Been Invited to Join TourneyMaker!";
-                //    const string body = "Hello!\n\nSomeone has invited you to join a Tournament on TourneyMaker!\n\n" +
-                //                        "Click Here to register an account.You will automatically be added into your tournament!\n\n" +
-                //                        "tourneymaker.cecsresearch.org\n\n" +
-                //                        "Good Luck, Have Fun!\n\n" +
-                //                        "TourneyMaker Team\n\n\n" +
-                //                        "Tourney Maker is an application that allows you to create, manage, and participate in            tournaments!";
+                //    string body = "Hello " + p + "!\n\n" +
+                //        "Your friend " + t.host.username + " at " + t.host.email + " " +
+                //        "has invited you to join a Tournament on TourneyMaker!\n\n" +
+                //        "Click Here to register an account.You will automatically be added into your tournament!\n\n" +
+                //        "tourneymaker.cecsresearch.org\n\n" +
+                //        "Good Luck, Have Fun!\n\n" +
+                //        "TourneyMaker Team\n\n\n" +
+                //        "Tourney Maker is an application that allows you to create, manage, and participate in tournaments!";
 
                 //    var smtp = new SmtpClient
                 //    {
