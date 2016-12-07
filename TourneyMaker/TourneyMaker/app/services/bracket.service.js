@@ -25,4 +25,3 @@ var TourneyMaker;
     TourneyMaker.BracketService = BracketService;
     TourneyMaker.app.service("BracketService", BracketService);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=bracket.service.js.map
