@@ -24,7 +24,8 @@
         }
 
         modifyUserProfile(user): ng.IPromise<any> {
-            return this.$http.post("User/ModifyUserProfile", user);
+            this.$http.post("User/ModifyUserProfile", user);
+            return;
         }
     }
 

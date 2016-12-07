@@ -4,7 +4,6 @@ var TourneyMaker;
         function Doubles() {
         }
         return Doubles;
-    }());
+    })();
     TourneyMaker.Doubles = Doubles;
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=Doubles.js.map

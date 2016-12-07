@@ -17,12 +17,12 @@ var TourneyMaker;
             return this.$http.post("User/RegisterUser", user);
         };
         UserService.prototype.modifyUserProfile = function (user) {
-            return this.$http.post("User/ModifyUserProfile", user);
+            this.$http.post("User/ModifyUserProfile", user);
+            return;
         };
         UserService.$inject = ["$http"];
         return UserService;
-    }());
+    })();
     TourneyMaker.UserService = UserService;
     TourneyMaker.app.service("UserService", UserService);
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=user.service.js.map
