@@ -21,13 +21,17 @@ namespace UnitTestProject1
         [TestMethod]
         public void GetAllTourneysTest()
         {
-            Assert.AreEqual(1, 0);
+            string username = GetRandomAlphaNumeric();
+            TourneyManager test = new TourneyManager();
+            TournamentList tl = test.GetAllTourneys(username);
+            Assert.IsNotNull(tl);
         }
 
         [TestMethod]
         public void CreateNewTourneyTest()
         {
             Tournament t = new Tournament();
+            t.host.username = "testname";
             t.host.email = "testuser@test.com";
             t.numParticipants = 4;
             t.tname = GetRandomAlphaNumeric();
