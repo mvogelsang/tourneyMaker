@@ -23,7 +23,9 @@ namespace UnitTestProject1
             TourneyController test = new TourneyController();
             TourneyController.TourneyInt tint = new TourneyController.TourneyInt();
             tint.tid = 4;
-            String res = test.GetTourney(tint);
+            UserInfo TestUserInfo = new UserInfo();
+            TestUserInfo.email = "testuser@test.com";
+            String res = test.GetTourney(TestUserInfo, tint);
             Assert.AreNotEqual(res, "");
         }
 

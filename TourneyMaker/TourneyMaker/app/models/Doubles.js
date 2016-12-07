@@ -7,3 +7,4 @@ var TourneyMaker;
     }());
     TourneyMaker.Doubles = Doubles;
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=Doubles.js.map

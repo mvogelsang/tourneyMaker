@@ -5,6 +5,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net;
 using System.Net.Mail;
 
 namespace TourneyMaker.Models
@@ -218,12 +219,29 @@ namespace TourneyMaker.Models
 
                 //foreach (string p in parts)
                 //{
-                //    MailMessage message = new MailMessage();
-                //    message.To.Add(p);
-                //    message.Subject = "New Tournament";
-                //    message.From = new MailAddress("tourneymaker@google.com");
-                //    message.Body = "You've been enrolled in a new tournament at TourneMaker.com!";
-                //    SmtpClient smtp = new SmtpClient("smtp.google.com");
+                //    var fromAddress = new MailAddress("tourneymakerapp@gmail.com", "TourneyMaker");
+                //    var toAddress = new MailAddress("mjvoge02@louisville.edu", "Voges");
+                //    const string fromPassword = "Tourneypass123";
+                //    const string subject = "You've Been Invited to Join TourneyMaker!";
+                //    const string body = "Hello!\n\nSomeone has invited you to join a Tournament on TourneyMaker!\n\n" +
+                //                        "Click Here to register an account.You will automatically be added into your tournament!\n\n" +
+                //                        "tourneymaker.cecsresearch.org\n\n" +
+                //                        "Good Luck, Have Fun!\n\n" +
+                //                        "TourneyMaker Team\n\n\n" +
+                //                        "Tourney Maker is an application that allows you to create, manage, and participate in            tournaments!";
+
+                //    var smtp = new SmtpClient
+                //    {
+                //        Host = "smtp.gmail.com",
+                //        Port = 587,
+                //        EnableSsl = true,
+                //        DeliveryMethod = SmtpDeliveryMethod.Network,
+                //        UseDefaultCredentials = false,
+                //        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                //    };
+                //    var message = new MailMessage(fromAddress, toAddress);
+                //    message.Subject = subject;
+                //    message.Body = body;
                 //    smtp.Send(message);
                 //}
             }
@@ -414,6 +432,7 @@ namespace TourneyMaker.Models
                         d.player2 = ml[count].p2.ToString();
                     }
                     d.score2 = ml[count].p2score;
+                    d.winner = ml[count].winner;
 
                     if (tracker == 1)
                     {
@@ -472,6 +491,7 @@ namespace TourneyMaker.Models
                 d.player2 = ml[count].p2.ToString();
             }
             d.score2 = ml[count].p2score;
+            d.winner = ml[count].winner;
             final.Add(d);
         }
     }
@@ -542,6 +562,7 @@ namespace TourneyMaker.Models
         public string player2 { get; set; }
         public int score1 { get; set; }
         public int score2 { get; set; }
+        public int winner { get; set; }
         public Display() { }
     }
 

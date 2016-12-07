@@ -18,7 +18,10 @@ var TourneyMaker;
             this.authService = authService;
             this.$route = $route;
             this.user = {
-                username: ""
+                username: "",
+                email: "",
+                name: "",
+                bio: ""
             };
             this.user.username = this.$routeParams.id;
             this.userService.getUserByUsername(this.user).then(function (data) {
@@ -27,6 +30,10 @@ var TourneyMaker;
                 //error
             });
         }
+        ProfileController.prototype.save = function () {
+            this.userService.modifyUserProfile(this.user).then(function (data) {
+            });
+        };
         ProfileController.prototype.cancel = function () {
             this.$route.reload();
         };
@@ -36,3 +43,4 @@ var TourneyMaker;
     TourneyMaker.ProfileController = ProfileController;
     TourneyMaker.app.controller('ProfileController', ProfileController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=profile.controller.js.map
