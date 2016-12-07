@@ -1,40 +1,44 @@
 ﻿<div class="modal-content">
     <div class="modal-header">
-        <h3>{{vm.profile}}'s Profile</h3>
+        <h3>{{vm.user.username}}'s Profile</h3>
     </div>
     <div class="modal-body">
         <div class="container-fluid">
-            <label>Bio</label>
-            <p>
-                Here is some text to represent what a bio might look like on a public profile.
-            </p>
+            <div ng-if="vm.user.name">
+                <label>Name</label>
+                <p>{{vm.user.name}}</p>
+            </div>
+            <div ng-if="vm.user.bio">
+                <label>Bio</label>
+                <p>{{vm.user.bio}}</p>
+            </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="box box-info">
+                <div class="box-header with-border">
                     Active Tournaments
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Info</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Blah</td>
-                            <td>Blah</td>
-                            <td>blah</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="box-body">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tournament in vm.tournaments | filter: {completed: '0'} as filteredActiveTournaments">
+                                <td>{{tournament.tname}}</td>
+                                <td>{{tournament.numParticipants}} person tournament</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
         <div class="pull-right">
-            <button class="btn btn-default" ng-click="vm.close()">Close</button>
+            <button class="btn btn-default btn-flat" ng-click="vm.close()">Close</button>
         </div>
     </div>
 </div>
