@@ -9,7 +9,6 @@ var TourneyMaker;
             this.email = _email;
         };
         return User;
-    }());
+    })();
     TourneyMaker.User = User;
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=User.js.map

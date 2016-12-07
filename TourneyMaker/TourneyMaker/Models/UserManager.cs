@@ -36,6 +36,8 @@ namespace TourneyMaker.Models
                         ui.uid = Convert.ToInt32(dr["uid"]);
                         ui.password = dr["password"].ToString();
                         ui.username = dr["username"].ToString();
+                        ui.bio = dr["bio"].ToString();
+                        ui.name = dr["name"].ToString();
                     }
                 }
             }
@@ -61,6 +63,8 @@ namespace TourneyMaker.Models
                         ui.password = dr["password"].ToString();
                         ui.username = dr["username"].ToString();
                         ui.email = dr["email"].ToString();
+                        ui.bio = dr["bio"].ToString();
+                        ui.name = dr["name"].ToString();
                     }
                 }
             }
@@ -92,6 +96,22 @@ namespace TourneyMaker.Models
             }
 
             return isAvailable;
+        }
+
+        public void modifyUserProfile(int uid, string email, string name, string bio)
+        {
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.modifyUserProfile", conn);
+                cmd.Parameters.AddWithValue("@uid", uid);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@bio", bio);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public bool Register(string username, string password, string email)
@@ -183,12 +203,16 @@ namespace TourneyMaker.Models
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
+        public string name { get; set; }
+        public string bio { get; set; }
         public UserInfo()
         {
             uid = 0;
             username = "";
             password = "";
             email = "";
+            name = "";
+            bio = "";
         }
     }
 }
