@@ -130,8 +130,12 @@ namespace TourneyMaker.Models
         public Tournament CreateNewTourney(Tournament t)
         {
             int tid = 0;
+            Tournament temp = new Tournament();
+            temp.tid = 0;
             //Checking if parameters exist before running creation of tournament
-            if (!string.IsNullOrEmpty(t.tname) && t.numParticipants >= 4 && !string.IsNullOrEmpty(t.host.email))
+            string[] parts = t.commaDlParts.Split(',');
+            int numcheck = parts.Length;
+            if (!string.IsNullOrEmpty(t.tname) && t.numParticipants >= 4 && !string.IsNullOrEmpty(t.host.email) && numcheck == t.numParticipants)
             {
                 //add to DB and return updated tournament info
                 using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
@@ -153,7 +157,7 @@ namespace TourneyMaker.Models
                     }
                 }
                 //Add all participants based on the new tid
-                string[] parts = t.commaDlParts.Split(',');
+
                 foreach (string p in parts)
                 {
                     using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
@@ -246,21 +250,21 @@ namespace TourneyMaker.Models
                 //    message.Body = body;
                 //    smtp.Send(message);
                 //}
-            }
-            DataTable dt = new DataTable();
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
-                cmd.Parameters.AddWithValue("@tid", tid);
-                cmd.Parameters.AddWithValue("@username", t.host.username);
-                cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(dt);
-            }
-            Tournament temp = new Tournament(dt.Rows[0]);
+                DataTable dt = new DataTable();
+                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
+                    cmd.Parameters.AddWithValue("@tid", tid);
+                    cmd.Parameters.AddWithValue("@username", t.host.username);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+                temp = new Tournament(dt.Rows[0]);
+            }
             return temp;
         }
     }
