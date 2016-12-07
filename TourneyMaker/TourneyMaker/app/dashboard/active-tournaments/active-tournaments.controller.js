@@ -22,7 +22,7 @@ var TourneyMaker;
         };
         ActiveTournamentsController.$inject = ['$location', 'AuthService', "BracketService", "UserService", "$routeParams"];
         return ActiveTournamentsController;
-    })();
+    }());
     TourneyMaker.ActiveTournamentsController = ActiveTournamentsController;
     TourneyMaker.app.controller('ActiveTournamentsController', ActiveTournamentsController);
 })(TourneyMaker || (TourneyMaker = {}));

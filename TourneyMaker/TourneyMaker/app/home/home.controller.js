@@ -42,7 +42,7 @@ var TourneyMaker;
         //inject any dependencies such as any services we might need for this particular page
         HomeController.$inject = ["$scope", "$location"];
         return HomeController;
-    })();
+    }());
     TourneyMaker.HomeController = HomeController;
     //assigning this controller to the application, it is being assigned to the particular page in the routing file
     TourneyMaker.app.controller("HomeController", HomeController);
