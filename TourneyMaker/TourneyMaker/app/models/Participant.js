@@ -4,7 +4,6 @@ var TourneyMaker;
         function Participant() {
         }
         return Participant;
-    }());
+    })();
     TourneyMaker.Participant = Participant;
 })(TourneyMaker || (TourneyMaker = {}));
-//# sourceMappingURL=Participant.js.map
