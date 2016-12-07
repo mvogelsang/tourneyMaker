@@ -12,7 +12,22 @@
         padding-top: 100px;
     }
 }
+#bracket.table {
+    background-color:#ddd;
+}
 
+.transparent {
+    color: transparent;
+}
+
+.table > tbody > tr {
+    height: 35px;
+}
+
+.table > tbody > tr > td {
+    overflow:hidden;
+    white-space: nowrap;
+}
 
 .content-wrapper {
     background-color: #eee;
@@ -57,8 +72,61 @@ html {
 
 }
 
-.final-match {
-    vertical-align: bottom;
-    float:none;
-    bottom: -50px;
+.final-match-4 {
+    position: absolute;
+}
+
+.final-match-8 {
+    position: absolute;
+    margin-top: 45px;
+}
+
+.final-match-16{
+    position: absolute;
+    margin-top: 150px;
+}
+
+.final-match-32{
+    position: absolute;
+    margin-top: 400px;
+}
+
+.score-width {
+    width: 50px;
+}
+
+.input-score-width {
+    width: 45px;
+}
+
+.score-button {
+    position: absolute;
+    right: 45px;
+    margin-top: -15px;
+}
+
+.final-score-4 {
+    position: absolute;
+    right: 45px;
+    z-index: 2;
+    bottom: -7px;
+}
+
+.final-score-8 {
+    position: absolute;
+    right: 45px;
+    z-index: 2;
+    bottom: -7px;
+}
+
+.final-score-16 {
+    position: absolute;
+    right: 45px;
+    bottom: -155px;
+    z-index: 2;
+}
+
+.table input {
+    height: 20px;
+    width: 35px;
 }
