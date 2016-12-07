@@ -160,20 +160,18 @@ namespace TourneyMaker.Models
 
                 foreach (string p in parts)
                 {
-                    using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                    if (p != t.host.email)
                     {
-                        conn.Open();
-                        SqlCommand cmd = new SqlCommand("dbo.addParticipant", conn);
-                        cmd.Parameters.AddWithValue("@email", p);
-                        cmd.Parameters.AddWithValue("@tid", tid);
-                        //All level 2
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    if (p == t.host.email)
-                    {
-                        UpdatePlevel(p, tid, 0);
+                        using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                        {
+                            conn.Open();
+                            SqlCommand cmd = new SqlCommand("dbo.addParticipant", conn);
+                            cmd.Parameters.AddWithValue("@email", p);
+                            cmd.Parameters.AddWithValue("@tid", tid);
+                            //All level 2
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                 }
 
