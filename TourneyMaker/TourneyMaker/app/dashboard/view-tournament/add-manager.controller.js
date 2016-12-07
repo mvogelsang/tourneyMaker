@@ -26,3 +26,4 @@ var TourneyMaker;
     TourneyMaker.AddManagerController = AddManagerController;
     TourneyMaker.app.controller('AddManagerController', AddManagerController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=add-manager.controller.js.map

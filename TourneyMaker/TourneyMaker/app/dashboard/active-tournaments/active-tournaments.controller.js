@@ -29,3 +29,4 @@ var TourneyMaker;
     TourneyMaker.ActiveTournamentsController = ActiveTournamentsController;
     TourneyMaker.app.controller('ActiveTournamentsController', ActiveTournamentsController);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=active-tournaments.controller.js.map
