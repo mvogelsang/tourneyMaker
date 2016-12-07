@@ -21,25 +21,31 @@ namespace TourneyMaker.Controllers
             //commaDlParts, comma delineated string of participant emails (no spaces or other characters)
             TourneyManager tm = new TourneyManager();
             _t.host.email = _data.email;
+            _t.host.username = _data.username;
             Tournament t = tm.CreateNewTourney(_t);
             return JsonConvert.SerializeObject(t);
         }
 
         [HttpPost]
-        public string GetTourney(TourneyInt _t)
+        public string GetTourney(UserInfo _data, TourneyInt _t)
         {
             TourneyManager tm = new TourneyManager();
-            Tournament t = tm.GetTournament(_t.tid);
+            Tournament t = tm.GetTournament(_data.username, _t.tid);
             return JsonConvert.SerializeObject(t);
         }
 
         [HttpPost]
-        public string UpdateMatchup(Matchup m, TourneyInt _t)
+        public void UpdateMatchup(Matchup match, TourneyInt _t)
         {
             TourneyManager tm = new TourneyManager();
-            tm.UpdateMatchup(m, _t.tid);
-            Tournament t = tm.GetTournament(_t.tid);
-            return JsonConvert.SerializeObject(t);
+            tm.UpdateMatchup(match, _t.tid);
+        }
+
+        [HttpPost]
+        public void AddManager(UserInfo _data, TourneyInt _t)
+        {
+            TourneyManager tm = new TourneyManager();
+            tm.UpdatePlevel(_data.email, _t.tid, 1);
         }
 
         public class TourneyInt

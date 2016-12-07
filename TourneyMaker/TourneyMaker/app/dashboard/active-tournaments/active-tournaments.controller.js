@@ -12,13 +12,16 @@ var TourneyMaker;
                 username: ""
             };
             this.tournaments = new Array();
+            this.waiting = false;
             this.user.username = this.$routeParams.id;
+            this.waiting = true;
             this.userService.getAllTourneys(this.user).then(function (data) {
+                _this.waiting = false;
                 _this.tournaments = data.data;
             });
         }
-        ActiveTournamentsController.prototype.viewTournament = function () {
-            this.$location.path('/dashboard/' + this.authService.userLoggedIn.username + '/view-tournament/' + this.tid);
+        ActiveTournamentsController.prototype.viewTournament = function (tid) {
+            this.$location.path('/dashboard/view-tournament/' + tid);
         };
         ActiveTournamentsController.$inject = ['$location', 'AuthService', "BracketService", "UserService", "$routeParams"];
         return ActiveTournamentsController;

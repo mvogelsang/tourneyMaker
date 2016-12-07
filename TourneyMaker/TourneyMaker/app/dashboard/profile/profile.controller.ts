@@ -4,7 +4,10 @@
         private userLoggedIn: User;
 
         private user = {
-            username: ""
+            username: "",
+            email: "",
+            name: "",
+            bio: ""
         };
 
         public static $inject = ["$scope", "UserService", "$log", "$routeParams", "AuthService", "$route"];
@@ -25,6 +28,13 @@
                 this.user = data.data;
             }).catch((error): any => {
                 //error
+            });
+        }
+
+        save(): void {
+            
+            this.userService.modifyUserProfile(this.user).then((data): any => {
+
             });
         }
 

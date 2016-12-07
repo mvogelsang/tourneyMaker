@@ -5,6 +5,8 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net;
+using System.Net.Mail;
 
 namespace TourneyMaker.Models
 {
@@ -13,7 +15,7 @@ namespace TourneyMaker.Models
     {
         public TourneyManager() {}
 
-        public Tournament GetTournament(int tid)
+        public Tournament GetTournament(string username, int tid)
         {
             DataTable dt = new DataTable();
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
@@ -21,6 +23,7 @@ namespace TourneyMaker.Models
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
                 cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@username", username);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -37,18 +40,19 @@ namespace TourneyMaker.Models
             {
                 SetWinner(tid, m.mid, m.winner);
             }
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-            {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.modifyMatchup", conn);
-                cmd.Parameters.AddWithValue("@tid", tid);
-                cmd.Parameters.AddWithValue("@mid", m.mid);
-                cmd.Parameters.AddWithValue("@p1score", m.p1score);
-                cmd.Parameters.AddWithValue("@p2score", m.p2score);
-                cmd.Parameters.AddWithValue("@winner", m.winner);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.ExecuteNonQuery();
-            }
+                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("dbo.modifyMatchup", conn);
+                    cmd.Parameters.AddWithValue("@tid", tid);
+                    cmd.Parameters.AddWithValue("@mid", m.mid);
+                    cmd.Parameters.AddWithValue("@p1score", m.p1score);
+                    cmd.Parameters.AddWithValue("@p2score", m.p2score);
+                    cmd.Parameters.AddWithValue("@winner", m.winner);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+            
         }
 
         public void SetWinner(int tid, int mid, int winner)
@@ -83,22 +87,19 @@ namespace TourneyMaker.Models
             }
         }
 
-        public void AddManager(string emails, int tid)
+        public void UpdatePlevel(string email, int tid, int newlevel)
         {
-            string[] ems = emails.Split(',');
-            foreach (string e in ems)
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
-                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("dbo.updateManager", conn);
-                    cmd.Parameters.AddWithValue("@email", e);
-                    cmd.Parameters.AddWithValue("@tid", tid);
-                    //All level 1
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
-                }
-            }
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.updatePlevel", conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@plevel", newlevel);
+                //All level 1
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+            }          
         }
 
         public TournamentList GetAllTourneys(string username)
@@ -129,91 +130,128 @@ namespace TourneyMaker.Models
         public Tournament CreateNewTourney(Tournament t)
         {
             int tid = 0;
-            //add to DB and return updated tournament info
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+            //Checking if parameters exist before running creation of tournament
+            if (!string.IsNullOrEmpty(t.tname) && t.numParticipants >= 4 && !string.IsNullOrEmpty(t.host.email))
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("dbo.createTourney", conn);
-                cmd.Parameters.AddWithValue("@tname", t.tname);
-                cmd.Parameters.AddWithValue("@numParticipants", t.numParticipants);
-                cmd.Parameters.AddWithValue("@hostemail", t.host.email);
-                //Set host as level 0 access
-                cmd.Parameters.AddWithValue("@type", 0);
-                cmd.CommandType = CommandType.StoredProcedure;
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        tid = Convert.ToInt32(dr["tid"]);
-                    }
-                }
-            }
-            //Add all participants based on the new tid
-            string[] parts = t.commaDlParts.Split(',');
-            foreach (string p in parts)
-            {
+                //add to DB and return updated tournament info
                 using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("dbo.addParticipant", conn);
-                    cmd.Parameters.AddWithValue("@email", p);
-                    cmd.Parameters.AddWithValue("@tid", tid);
-                    //All level 2
+                    SqlCommand cmd = new SqlCommand("dbo.createTourney", conn);
+                    cmd.Parameters.AddWithValue("@tname", t.tname);
+                    cmd.Parameters.AddWithValue("@numParticipants", t.numParticipants);
+                    cmd.Parameters.AddWithValue("@hostemail", t.host.email);
+                    //Set host as level 0 access
+                    cmd.Parameters.AddWithValue("@type", 0);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            //Add matchups for this tournament
-            int numMatches = t.numParticipants - 1;
-            for (int i = 0; i < numMatches; i++)
-            {
-                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("dbo.addMatchup", conn);
-                    cmd.Parameters.AddWithValue("@mid", i);
-                    cmd.Parameters.AddWithValue("@tid", tid);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
-                }
-
-            }
-
-            int count = numMatches - 1;
-            int switcher = 0;
-
-            foreach (string p in parts)
-            {
-                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("dbo.updateMatchup", conn);
-                    cmd.Parameters.AddWithValue("@mid", count);
-                    cmd.Parameters.AddWithValue("@tid", tid);
-                    cmd.Parameters.AddWithValue("@email", p);
-                    if (switcher == 0)
+                    using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        cmd.Parameters.AddWithValue("@player", 1);
-                        switcher = 1;
+                        while (dr.Read())
+                        {
+                            tid = Convert.ToInt32(dr["tid"]);
+                        }
                     }
-                    else if (switcher == 1)
-                    {
-                        cmd.Parameters.AddWithValue("@player", 2);
-                        switcher = 0;
-                        count--;
-                    }
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
                 }
-            }
+                //Add all participants based on the new tid
+                string[] parts = t.commaDlParts.Split(',');
+                foreach (string p in parts)
+                {
+                    using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand("dbo.addParticipant", conn);
+                        cmd.Parameters.AddWithValue("@email", p);
+                        cmd.Parameters.AddWithValue("@tid", tid);
+                        //All level 2
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.ExecuteNonQuery();
+                    }
 
+                    if (p == t.host.email)
+                    {
+                        UpdatePlevel(p, tid, 0);
+                    }
+                }
+
+                //Add matchups for this tournament
+                int numMatches = t.numParticipants - 1;
+                for (int i = 0; i < numMatches; i++)
+                {
+                    using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand("dbo.addMatchup", conn);
+                        cmd.Parameters.AddWithValue("@mid", i);
+                        cmd.Parameters.AddWithValue("@tid", tid);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                }
+
+                int count = numMatches - 1;
+                int switcher = 0;
+
+                foreach (string p in parts)
+                {
+                    using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand("dbo.updateMatchup", conn);
+                        cmd.Parameters.AddWithValue("@mid", count);
+                        cmd.Parameters.AddWithValue("@tid", tid);
+                        cmd.Parameters.AddWithValue("@email", p);
+                        if (switcher == 0)
+                        {
+                            cmd.Parameters.AddWithValue("@player", 1);
+                            switcher = 1;
+                        }
+                        else if (switcher == 1)
+                        {
+                            cmd.Parameters.AddWithValue("@player", 2);
+                            switcher = 0;
+                            count--;
+                        }
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                //foreach (string p in parts)
+                //{
+                //    var fromAddress = new MailAddress("tourneymakerapp@gmail.com", "TourneyMaker");
+                //    var toAddress = new MailAddress("mjvoge02@louisville.edu", "Voges");
+                //    const string fromPassword = "Tourneypass123";
+                //    const string subject = "You've Been Invited to Join TourneyMaker!";
+                //    const string body = "Hello!\n\nSomeone has invited you to join a Tournament on TourneyMaker!\n\n" +
+                //                        "Click Here to register an account.You will automatically be added into your tournament!\n\n" +
+                //                        "tourneymaker.cecsresearch.org\n\n" +
+                //                        "Good Luck, Have Fun!\n\n" +
+                //                        "TourneyMaker Team\n\n\n" +
+                //                        "Tourney Maker is an application that allows you to create, manage, and participate in            tournaments!";
+
+                //    var smtp = new SmtpClient
+                //    {
+                //        Host = "smtp.gmail.com",
+                //        Port = 587,
+                //        EnableSsl = true,
+                //        DeliveryMethod = SmtpDeliveryMethod.Network,
+                //        UseDefaultCredentials = false,
+                //        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                //    };
+                //    var message = new MailMessage(fromAddress, toAddress);
+                //    message.Subject = subject;
+                //    message.Body = body;
+                //    smtp.Send(message);
+                //}
+            }
             DataTable dt = new DataTable();
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
                 cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@username", t.host.username);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -230,6 +268,7 @@ namespace TourneyMaker.Models
         public int tid { get; set; }
         public string tname { get; set; }
         public int numParticipants { get; set; }
+        public int? userPlevel { get; set; }
         public UserInfo host { get; set; }
         public List<UserInfo> managers { get; set; }
         public List<UserInfo> participants { get; set; }
@@ -261,6 +300,11 @@ namespace TourneyMaker.Models
             numParticipants = dr.Field<int>("SIZE");
             tname = dr["NAME"].ToString();
             completed = dr.Field<int>("COMPLETED");
+            userPlevel = dr.Field<int>("plevel");
+            if(userPlevel == null)
+            {
+                userPlevel = 2;
+            }
             SetTourneyUsers();
             GetMatchups();
             GetDisplay();
@@ -373,6 +417,7 @@ namespace TourneyMaker.Models
                     {
                         d.player1 = ml[count].p1.ToString();
                     }
+                    d.score1 = ml[count].p1score;
 
                     if (!string.IsNullOrEmpty(ml[count].p2user))
                     {
@@ -386,6 +431,8 @@ namespace TourneyMaker.Models
                     {
                         d.player2 = ml[count].p2.ToString();
                     }
+                    d.score2 = ml[count].p2score;
+                    d.winner = ml[count].winner;
 
                     if (tracker == 1)
                     {
@@ -429,6 +476,7 @@ namespace TourneyMaker.Models
             {
                 d.player1 = ml[count].p1.ToString();
             }
+            d.score1 = ml[count].p1score;
 
             if (!string.IsNullOrEmpty(ml[count].p2user))
             {
@@ -442,6 +490,8 @@ namespace TourneyMaker.Models
             {
                 d.player2 = ml[count].p2.ToString();
             }
+            d.score2 = ml[count].p2score;
+            d.winner = ml[count].winner;
             final.Add(d);
         }
     }
@@ -510,6 +560,9 @@ namespace TourneyMaker.Models
         public int matchid { get; set; }
         public string player1 { get; set; }
         public string player2 { get; set; }
+        public int score1 { get; set; }
+        public int score2 { get; set; }
+        public int winner { get; set; }
         public Display() { }
     }
 

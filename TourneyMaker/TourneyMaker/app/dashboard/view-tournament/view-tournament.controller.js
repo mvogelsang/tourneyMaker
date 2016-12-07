@@ -1,7 +1,13 @@
 var TourneyMaker;
 (function (TourneyMaker) {
     var ViewTournamentController = (function () {
-        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService) {
+        function ViewTournamentController($scope, $location, $uibModal, bracketService, $log, authService, $routeParams, $cookies) {
+            //bracketService.getBracket().then((data): any => {
+            //    this.bracket = data.data;
+            //}).catch((error): any => {
+            //    this.$log.error("There was an error loading bracket");
+            //    this.$log.error(error);
+            //    });
             var _this = this;
             this.$scope = $scope;
             this.$location = $location;
@@ -9,15 +15,51 @@ var TourneyMaker;
             this.bracketService = bracketService;
             this.$log = $log;
             this.authService = authService;
+            this.$routeParams = $routeParams;
+            this.$cookies = $cookies;
             this.isEditingScore = false;
             this.offset = 50;
-            bracketService.getBracket().then(function (data) {
-                _this.bracket = data.data;
-            }).catch(function (error) {
-                _this.$log.error("There was an error loading bracket");
-                _this.$log.error(error);
+            this.top = new Array();
+            this.bottom = new Array();
+            this.tourney = {
+                tid: 0
+            };
+            this.user = {
+                username: "",
+                password: "",
+                email: ""
+            };
+            this.user.username = this.$cookies.get('uid');
+            this.tourney.tid = this.$routeParams.id;
+            this.bracketService.getTournament(this.user, this.tourney).then(function (data) {
+                _this.tournament = data.data;
+                _this.bracket = _this.tournament.rounds;
+                _this.sort();
             });
         }
+        ViewTournamentController.prototype.updateScores = function (mid, s1, s2, tid) {
+            var matchup = {
+                matchid: mid,
+                score1: s1,
+                score2: s2,
+            };
+            var tournament = {
+                tournamentid: tid,
+            };
+            this.bracketService.updateMatchups(matchup, tournament).then(function (data) {
+            });
+        };
+        ViewTournamentController.prototype.sort = function () {
+            for (var i = 0; i < this.bracket.length; i++) {
+                this.bracket[i].isEditing = false;
+                if (i % 2 == 0) {
+                    this.top.push(this.bracket[i]);
+                }
+                else {
+                    this.bottom.push(this.bracket[i]);
+                }
+            }
+        };
         ViewTournamentController.prototype.openProfile = function (profile) {
             this.$uibModal.open({
                 animation: true,
@@ -41,7 +83,7 @@ var TourneyMaker;
                 this.isEditingScore = true;
             }
         };
-        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService"];
+        ViewTournamentController.$inject = ["$scope", "$location", "$uibModal", "BracketService", "$log", "AuthService", "$routeParams", "$cookies"];
         return ViewTournamentController;
     }());
     TourneyMaker.ViewTournamentController = ViewTournamentController;

@@ -124,7 +124,7 @@
                     }]
                 }
             })
-            .when('/dashboard/:id/view-tournament/:id', {
+            .when('/dashboard/view-tournament/:id', {
                 templateUrl: 'app/dashboard/view-tournament/view-tournament.tpl.html',
                 controller: ViewTournamentController,
                 controllerAs: 'vm',
