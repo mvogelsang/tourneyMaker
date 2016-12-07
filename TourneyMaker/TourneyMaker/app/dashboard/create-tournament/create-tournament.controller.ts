@@ -30,6 +30,8 @@
             this.newName = name;
         }
 
+        private error: boolean = false;
+
         private publishTournament(): void {
             this.publishing = true;
             this.host = this.authService.userLoggedIn;
@@ -38,11 +40,16 @@
 
                 this.publishing = false;
                 this.createdTournament = data.data;
-
-                this.$location.path("dashboard/view-tournament/" + this.createdTournament.tid);
+                if (this.createdTournament.tid != 0) {
+                    this.$location.path("dashboard/view-tournament/" + this.createdTournament.tid);
+                }
+                else {
+                    this.error = true;
+                }
                 //navigate to view tournament 
             }).catch((error) => {
                 //error
+
             });
         }
 
