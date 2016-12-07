@@ -60,7 +60,9 @@ namespace UnitTestProject1
         public void GetDisplayTest()
         {
             Tournament TestTournament = new Tournament();
-            TestTournament.tid = 4;
+            TourneyManager TestTourneyManager = new TourneyManager();
+
+            TestTournament = TestTourneyManager.GetTournament(4);
             TestTournament.GetDisplay();
             //not blowing up means it passed
         }
