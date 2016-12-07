@@ -12,3 +12,4 @@ var TourneyMaker;
             });
         }]);
 })(TourneyMaker || (TourneyMaker = {}));
+//# sourceMappingURL=app.run.js.map
