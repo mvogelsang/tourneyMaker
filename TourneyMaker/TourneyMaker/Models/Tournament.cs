@@ -84,22 +84,18 @@ namespace TourneyMaker.Models
             }
         }
 
-        public void AddManager(string emails, int tid)
+        public void AddManager(string email, int tid)
         {
-            string[] ems = emails.Split(',');
-            foreach (string e in ems)
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
             {
-                using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("dbo.updateManager", conn);
-                    cmd.Parameters.AddWithValue("@email", e);
-                    cmd.Parameters.AddWithValue("@tid", tid);
-                    //All level 1
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
-                }
-            }
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("dbo.updateManager", conn);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                //All level 1
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+            }          
         }
 
         public TournamentList GetAllTourneys(string username)
