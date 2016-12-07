@@ -36,6 +36,8 @@ namespace TourneyMaker.Models
                         ui.uid = Convert.ToInt32(dr["uid"]);
                         ui.password = dr["password"].ToString();
                         ui.username = dr["username"].ToString();
+                        ui.bio = dr["bio"].ToString();
+                        ui.name = dr["name"].ToString();
                     }
                 }
             }
@@ -61,6 +63,8 @@ namespace TourneyMaker.Models
                         ui.password = dr["password"].ToString();
                         ui.username = dr["username"].ToString();
                         ui.email = dr["email"].ToString();
+                        ui.bio = dr["bio"].ToString();
+                        ui.name = dr["name"].ToString();
                     }
                 }
             }
@@ -183,12 +187,16 @@ namespace TourneyMaker.Models
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
+        public string name { get; set; }
+        public string bio { get; set; }
         public UserInfo()
         {
             uid = 0;
             username = "";
             password = "";
             email = "";
+            name = "";
+            bio = "";
         }
     }
 }
