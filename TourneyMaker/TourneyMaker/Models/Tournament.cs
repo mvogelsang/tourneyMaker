@@ -13,7 +13,7 @@ namespace TourneyMaker.Models
     {
         public TourneyManager() {}
 
-        public Tournament GetTournament(int tid)
+        public Tournament GetTournament(string username, int tid)
         {
             DataTable dt = new DataTable();
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["localConnection"].ConnectionString))
@@ -21,6 +21,7 @@ namespace TourneyMaker.Models
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("dbo.getTourney", conn);
                 cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@username", username);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -227,6 +228,7 @@ namespace TourneyMaker.Models
         public int tid { get; set; }
         public string tname { get; set; }
         public int numParticipants { get; set; }
+        public int? userPlevel { get; set; }
         public UserInfo host { get; set; }
         public List<UserInfo> managers { get; set; }
         public List<UserInfo> participants { get; set; }
@@ -258,6 +260,11 @@ namespace TourneyMaker.Models
             numParticipants = dr.Field<int>("SIZE");
             tname = dr["NAME"].ToString();
             completed = dr.Field<int>("COMPLETED");
+            userPlevel = dr.Field<int>("plevel");
+            if(userPlevel == null)
+            {
+                userPlevel = 2;
+            }
             SetTourneyUsers();
             GetMatchups();
             GetDisplay();
