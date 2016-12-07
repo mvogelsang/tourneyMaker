@@ -280,6 +280,7 @@ namespace TourneyMaker.Models
         public string commaDlParts { get; set; }
         public int completed { get; set; }
         public int winner { get; set; }
+        public string winnername { get; set; }
 
         public Tournament()
         {
@@ -390,6 +391,15 @@ namespace TourneyMaker.Models
                 if(completed == 1 && temp.mid == 0)
                 {
                     winner = temp.winner;
+                    if(temp.winner == 1)
+                    {
+                        winnername = temp.p1user;
+                    }
+                    else
+                    {
+                        winnername = temp.p2user;
+                    }
+                    
                 }
             }
         }
